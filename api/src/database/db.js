@@ -1,8 +1,12 @@
 const Sequelize = require("sequelize");
+require('dotenv').config();
+const sequelize = new Sequelize(
+  process.env.db,
+   process.env.user, 
+   process.env.passwd, {
 
-const sequelize = new Sequelize("dbsanitaria", "root", "", {
-  host: "localhost",
-  dialect: "mysql",
+  host: process.env.host,
+  dialect: process.env.dialect ,
 });
 
 module.exports = sequelize;

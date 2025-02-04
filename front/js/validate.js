@@ -62,3 +62,29 @@ function validarSolicitud(event) {
 //LISTENER
 form.addEventListener("submit", validarRegister);
 formSolicitud.addEventListener("submit", validarSolicitud);
+
+
+const loginForm = document.getElementById("loginForm");
+const loginEmailInput = document.getElementById("loginEmail");
+const loginPasswordInput = document.getElementById("loginPassword");
+
+function validarLoginFormulario(event) {
+    event.preventDefault();
+
+    let loginEmail = loginEmailInput.value.trim();
+    let loginPassword = loginPasswordInput.value.trim();
+
+    hideErrors();
+
+    if (!emailRegex.test(loginEmail)) {
+        return showError("error-login-email");
+    }
+
+    if (loginPassword === "") {
+        return showError("error-login-password");
+    }
+
+    loginForm.submit();
+}
+
+loginForm.addEventListener("submit", validarLoginFormulario);
