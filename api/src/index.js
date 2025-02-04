@@ -12,7 +12,7 @@ const apiRoutes = require("./routes/v1.0.0/apiRouter");
 const sequelize = require("./database/db");
 require("./database/associations")
 
-app.use("/", apiRoutes);
+app.use("/v1", apiRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
