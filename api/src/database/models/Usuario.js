@@ -83,7 +83,12 @@ Usuario.init(
         // no se si vamos a seguir manteniendo el centro
 
     },
-    
+    {
+        sequelize,
+        modelName: "Usuarios",
+        freezeTableName: true,
+        timestamps:false,
+    }
 );
 
 module.exports = Usuario;
