@@ -41,7 +41,7 @@ const { Model, DataTypes } = require("sequelize");
               
             },
           },
-          caracteristicas: {
+          tincion: {
             type: DataTypes.STRING,
             allowNull: false,
             validate:{
@@ -51,16 +51,7 @@ const { Model, DataTypes } = require("sequelize");
               
             },
           },
-          organo: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate:{
-                notNull: {
-                    msg: 'Este campo  es requerido'
-                } ,
-              
-            },
-          },
+        
 
           qr_muestra: {
             type: DataTypes.STRING,
