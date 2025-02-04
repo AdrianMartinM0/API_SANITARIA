@@ -1,3 +1,6 @@
+const { Sequelize } = require('sequelize');
+const sequelize = require('./db');
+
 const Cassette = require("./models/Cassette");
 const Imagen = require("./models/Imagen");
 const Muestra = require("./models/Muestra");
@@ -12,4 +15,4 @@ Imagen.belongsTo(Muestra);
 Usuario.hasMany(Cassette);
 Cassette.belongsTo(Usuario);
 
-module.exports = { Cassette, Imagen, Muestra, Usuario };
+module.exports = { sequelize, Cassette, Imagen, Muestra, Usuario };

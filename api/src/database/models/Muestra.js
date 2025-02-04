@@ -1,4 +1,4 @@
-const sequelize = require("../db");
+const sequelize = require("./../db");
 const { Model, DataTypes } = require("sequelize");
  class Muestra extends Model {}
  Muestra.init (
@@ -10,7 +10,6 @@ const { Model, DataTypes } = require("sequelize");
           }, 
           fecha: {
             type: DataTypes.DATE,
-            primaryKey: true,
             allowNull: false,   
             validate:{
                 notNull: {

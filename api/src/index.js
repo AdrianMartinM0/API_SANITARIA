@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
@@ -5,11 +7,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const apiRoutes = require("./src/routes/apiRouter");
+const apiRoutes = require("./routes/v1.0.0/apiRouter");
 
-const sequelize = require("./src/database/db");
-// require("./src/database/associations");
-
+const sequelize = require("./database/db");
+require("./database/associations")
 
 app.use("/", apiRoutes);
 
