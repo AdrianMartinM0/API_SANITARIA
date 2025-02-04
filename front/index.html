@@ -13,7 +13,7 @@
     <!-- REGISTER -->
     <div class="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
         <h2 class="text-2xl font-bold text-center text-blue-400 mb-6">Registro</h2>
-        <form id="registroForm">
+        <form id="registroForm" novalidate>
             <div class="mb-4">
                 <input type="text" id="nombre" placeholder="Nombre"
                     class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
@@ -29,6 +29,8 @@
                     <option disabled selected>Centro</option>
                     <option value="centro1">Centro 1</option>
                     <option value="centro2">Centro 2</option>
+                    <option value="centro2">Centro 3</option>
+                    <option value="centro2">Centro 4</option>
                 </select>
                 <small class="text-red-500 hidden" id="error-centro">Debe seleccionar un centro.</small>
             </div>
@@ -114,22 +116,22 @@
 
     <!-- PASSWORD -->
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <form action="#" method="post" class="space-y-6">
+        <form id="solicitudForm" action="#" method="post" class="space-y-6" novalidate>
             <h2 class="text-2xl font-bold text-center text-blue-400 mb-6">Solicitar Contraseña</h2>
-
+        
             <div class="mb-4">
-                <input type="email" placeholder="Email"
+                <input type="email" id="solicitudEmail" placeholder="Email"
                     class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <small id="error-email-solicitud" class="text-red-500 hidden">Ingrese un email válido.</small>
             </div>
-
+        
             <button type="submit"
                 class="w-full py-3 bg-blue-400 text-white rounded-md font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400">
                 Solicitar Contraseña
             </button>
-
+        
             <p class="text-center text-gray-600 mt-4">Volver a <a href="#"
                 class="text-blue-500">Login</a></p>
-
         </form>
     </div>
 
