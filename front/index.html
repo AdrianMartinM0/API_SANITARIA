@@ -13,7 +13,7 @@
     <!-- REGISTER -->
     <div class="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
         <h2 class="text-2xl font-bold text-center text-blue-400 mb-6">Registro</h2>
-        <form id="registroForm">
+        <form id="registroForm" novalidate>
             <div class="mb-4">
                 <input type="text" id="nombre" placeholder="Nombre"
                     class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
@@ -29,6 +29,8 @@
                     <option disabled selected>Centro</option>
                     <option value="centro1">Centro 1</option>
                     <option value="centro2">Centro 2</option>
+                    <option value="centro2">Centro 3</option>
+                    <option value="centro2">Centro 4</option>
                 </select>
                 <small class="text-red-500 hidden" id="error-centro">Debe seleccionar un centro.</small>
             </div>
@@ -84,52 +86,70 @@
                 class="text-blue-500">Login</a></p>
     </div>
 
-    <!-- LOGIN -->
-    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <form action="#" method="post" class="space-y-6">
-            <h2 class="text-2xl font-bold text-center text-blue-400 mb-6">Login</h2>
+ <!-- LOGIN -->
+<div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <form id="loginForm" action="#" method="post" class="space-y-6" novalidate>
+        <h2 class="text-2xl font-bold text-center text-blue-400 mb-6">Login</h2>
 
-            <div class="mb-4">
-                <input type="email" placeholder="Email"
-                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <!-- Campo de email -->
+        <div class="mb-4">
+            <input type="email" id="loginEmail" placeholder="Email"
+                class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <small class="text-red-500 hidden" id="error-login-email">Ingrese un email válido.</small>
+        </div>
+
+        <!-- Campo de contraseña -->
+        <div class="mb-4">
+            <input type="password" id="loginPassword" placeholder="Contraseña"
+                class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <div class="flex items-center">
+                <label class="lock-checkbox">
+                    <input id="lock" type="checkbox">
+                    <span class="lock-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM8.9 6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2H8.9V6z"></path>
+                        </svg>
+                    </span>
+                </label>
             </div>
-            <div class="mb-2">
-                <input type="password" placeholder="Contraseña"
-                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-            </div>
+            <small class="text-red-500 hidden" id="error-login-password">
+                La contraseña debe tener entre 8-16 caracteres, incluir mayúsculas, minúsculas, números y símbolos.
+            </small>
+        </div>
 
-            <button type="submit"
-                class="w-full py-3 bg-blue-400 text-white rounded-md font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                Entrar
-            </button>
+        <!-- Botón de login -->
+        <button type="submit"
+            class="w-full py-3 bg-blue-400 text-white rounded-md font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            Entrar
+        </button>
 
-            <div class="text-center">
-                <a href="#" class="text-sm text-blue-500 hover:underline">¿Olvidaste tu contraseña?</a>
-            </div>
-            <p class="text-center text-gray-600 mt-4">¿No tienes cuenta? <a href="#"
-                class="text-blue-500">Registro</a></p>
-
-        </form>
-    </div>
+        <!-- Enlaces para recuperar contraseña y registro -->
+        <div class="text-center">
+            <a href="#" class="text-sm text-blue-500 hover:underline">¿Olvidaste tu contraseña?</a>
+        </div>
+        <p class="text-center text-gray-600 mt-4">¿No tienes cuenta? <a href="#"
+            class="text-blue-500">Registro</a></p>
+    </form>
+</div>
 
     <!-- PASSWORD -->
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <form action="#" method="post" class="space-y-6">
+        <form id="solicitudForm" action="#" method="post" class="space-y-6" novalidate>
             <h2 class="text-2xl font-bold text-center text-blue-400 mb-6">Solicitar Contraseña</h2>
-
+        
             <div class="mb-4">
-                <input type="email" placeholder="Email"
+                <input type="email" id="solicitudEmail" placeholder="Email"
                     class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <small id="error-email-solicitud" class="text-red-500 hidden">Ingrese un email válido.</small>
             </div>
-
+        
             <button type="submit"
                 class="w-full py-3 bg-blue-400 text-white rounded-md font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400">
                 Solicitar Contraseña
             </button>
-
+        
             <p class="text-center text-gray-600 mt-4">Volver a <a href="#"
                 class="text-blue-500">Login</a></p>
-
         </form>
     </div>
 
