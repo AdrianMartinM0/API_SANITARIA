@@ -79,9 +79,15 @@ Usuario.init(
                 },
             },
         },
-
-        // no se si vamos a seguir manteniendo el centro
-
+        centro:{
+            type: DataTypes.STRING(100),
+            allowNull: false,
+            validate:{
+                notNull:{
+                    msg: 'El campo del centro es obligatorio',
+                },
+            },
+        },
     },
     {
         sequelize,
