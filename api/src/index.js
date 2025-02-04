@@ -5,13 +5,13 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const apiroutes = require("./src/routes/apiRouter");
+const apiRoutes = require("./src/routes/apiRouter");
 
 const sequelize = require("./src/database/db");
 // require("./src/database/associations");
 
 
-app.use("/concesionario", apiroutes);
+app.use("/", apiRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
