@@ -22,3 +22,13 @@ usuRouter.post('/', async ( req, res ) => {
 }
 });
 
+
+
+usuRouter.get('/', async (req, res) => {
+    try {
+        const cassettes = await Cassette.findAll();
+        res.status(200).send(cassettes);
+    } catch (error) {
+        res.status(500).send({ error: 'Error al obtener los cassettes' });
+    }
+});
