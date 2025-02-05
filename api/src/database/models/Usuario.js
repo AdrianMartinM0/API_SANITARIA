@@ -48,6 +48,7 @@ Usuario.init(
         email:{
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true,
             validate:{
                 notNull:{
                     msg:"El campo es email obligatorio",
