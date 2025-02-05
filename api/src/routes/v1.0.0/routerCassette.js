@@ -38,3 +38,27 @@ usuRouter.get('/', async (req, res) => {
     }
 });
 
+usuRouter.put('/:id', async (req, res) => {
+    try {
+        const cassetteupdate  = await Cassette.findByPk(req.params.id);
+        if (cassetteupdate) {
+            await cassetteupdate.update({
+
+
+
+                fecha: req.body.fecha,
+                observaciones: req.body.observaciones,
+                descripcion: req.body.descripcion,
+                caracteristicas: req.body.caracteristicas,
+                organo: req.body.organo,
+
+                
+            });
+            res.status(200).send(cassetteupdate);
+        } else {
+            res.status(404).send({ error: 'Cassette no encontrado' });
+        }
+    } catch (error) {
+        res.status(500).send({ error: 'Error al actualizar el cassette' });
+    }
+});
