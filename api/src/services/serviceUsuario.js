@@ -1,4 +1,4 @@
-const Usuario = require('../../database/models/Usuario');
+const Usuario = require('./../database/models/Usuario');
 
 const getAllUsers = async () => {
     const usu = await Usuario.findAll();
@@ -14,14 +14,14 @@ const getOneUser = async (email) => {
     return usu;
 }
 
-const createUser = async ({ email, nombre, apellido, password, centro }) => {
+const createUser = async ({ email, nombre, apellidos, password, centro }) => {
     const usu = await Usuario.findOrCreate({
         where: {
             email: email,
         },
         defaults: {
             nombre: nombre,
-            apellido: apellido,
+            apellidos: apellidos,
             password: password,
             centro: centro,
         }
