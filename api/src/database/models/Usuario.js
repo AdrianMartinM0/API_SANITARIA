@@ -1,4 +1,5 @@
 const sequelize = require("./../db");
+const bcrypt = require('bcryptjs');
 
 const { Model, DataTypes } = require('sequelize');
 
@@ -64,18 +65,18 @@ Usuario.init(
             }
         },
         password:{
-            type: DataTypes.STRING(60),
+            type: DataTypes.STRING(36),
             allowNull: false,
             validate:{
                 notNull:{
                     msg:"El campo password es obligatorio",
                 },
                 len:{
-                    args: [8, 60],
-                    msg: "El password debe tener entre 8 y 60 caracteres",
+                    args: [8, 36],
+                    msg: "El password debe tener entre 8 y 36 caracteres",
                 },
                 is: {
-                    args: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,36}$/,
+                    args: /^[A-Za-z\d@$!%*?&]{8,36}$/,
                     msg: "El password debe tener al menos una letra minúscula, una letra mayúscula, un número y un carácter especial",
                 },
             },
@@ -95,7 +96,17 @@ Usuario.init(
         modelName: "Usuarios",
         freezeTableName: true,
         timestamps:false,
-    }
+        hooks: {
+            beforeCreate: async (user) => {
+                user.password = await bcrypt.hash(user.password, 14);
+            },
+            beforeUpdate: async (user) => {
+                if (user.changed('password')) {
+                    user.password = await bcrypt.hash(user.password, 14);
+                }
+            },
+        }
+    },
 );
 
 module.exports = Usuario;

@@ -13,7 +13,7 @@ const getOneUserController = async ( req, res ) => {
 } 
 
 const createUserController = async (req, res) => {
-    req.body.password = bcryptjs.hashSync(req.body.password, 14);
+    // req.body.password = bcryptjs.hashSync(req.body.password, 14);
     console.log(req.body.password)
     const data = {
         email : req.body.email,
@@ -27,13 +27,16 @@ const createUserController = async (req, res) => {
 }
 
 const updateUserController = async ( req, res ) => {
-    const pass = generator.generate({
-        length : 16,
-        numbers : true,
-        symbols : true,
-        uppercase : true,
-    });
-    pass = bcryptjs.hashSync(pass, 14);
+    let pass;
+    do {
+        pass = generator.generate({
+            length: 16,
+            numbers: true,
+            symbols: true,
+        });
+    } while (!/^[A-Za-z\d@$!%*?&]{8,36}$/.test(pass));
+    console.log(pass)
+    // pass = bcryptjs.hashSync(pass, 14);
     const usu = await updateUser(req.params.email, pass);
     res.status(200).send(usu);
 }
