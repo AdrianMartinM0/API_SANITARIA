@@ -5,6 +5,11 @@ const Cassette = require('../../database/models/Cassette');
 usuRouter.post('/', async ( req, res ) => {
     
         try {
+
+            if (!req.body.fecha || !req.body.descripcion || !req.body.observaciones || !req.body.caracteristicas || !req.body.organo) {
+                return res.status(404).send({ error: 'Falta algun campo requerido ' });
+            }
+
     const newcassette = await Cassette.create({
         
        
@@ -32,3 +37,4 @@ usuRouter.get('/', async (req, res) => {
         res.status(500).send({ error: 'Error al obtener los cassettes' });
     }
 });
+
