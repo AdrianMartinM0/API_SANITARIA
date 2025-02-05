@@ -3,42 +3,61 @@ const bcryptjs = require('bcryptjs');
 const generator = require('generate-password');
 
 const getAllUsersController = async ( req, res ) => {
-    const users = await getAllUsers();
-    res.status(200).send(users);
+    try{
+        const users = await getAllUsers();
+        res.status(200).send(users);
+    }catch(error){
+        res.status(500).send({ error: 'Internal Server Error', details: error.message });
+    }
 }
 
 const getOneUserController = async ( req, res ) => {
-    const usu = await getOneUser(req.params.email);
-    res.status(200).send(usu);
+    try{
+        const usu = await getOneUser(req.params.email);
+        if(!usu)
+            return res.status(400).send("El usuario no existe");
+        res.status(200).send(usu); 
+    }catch(error){
+        res.status(500).send({ error: 'Internal Server Error', details: error.message });
+    }
 } 
 
 const createUserController = async (req, res) => {
-    // req.body.password = bcryptjs.hashSync(req.body.password, 14);
-    console.log(req.body.password)
-    const data = {
+    try{
+        const data = {
         email : req.body.email,
         nombre : req.body.nombre,
         apellidos : req.body.apellidos,
         centro : req.body.centro,
         password : req.body.password,
+        }
+        if (!data.email || !data.nombre || !data.apellidos || !data.centro || !data.password) 
+            return res.status(400).send({ error: 'Solicitud Incorrecta', detalles: 'Todos los campos son requeridos' });
+        const usu = await createUser(data);
+        res.status(200).send(usu);
+    }catch(error){
+        res.status(500).send({ error: 'Internal Server Error', details: error.message });
     }
-    const usu = await createUser(req.body, data);
-    res.status(200).send(usu);
 }
 
 const updateUserController = async ( req, res ) => {
-    let pass;
-    do {
-        pass = generator.generate({
-            length: 16,
-            numbers: true,
-            symbols: true,
-        });
-    } while (!/^[A-Za-z\d@$!%*?&]{8,36}$/.test(pass));
-    console.log(pass)
-    // pass = bcryptjs.hashSync(pass, 14);
-    const usu = await updateUser(req.params.email, pass);
-    res.status(200).send(usu);
+    try{
+        const usu = await getOneUser(req.params.email);
+        if(!usu)
+            return res.status(400).send("El usuario no existe");
+        let pass;
+        do {
+            pass = generator.generate({
+                length: 16,
+                numbers: true,
+                symbols: true,
+            });
+        } while (!/^[A-Za-z\d@$!%*?&]{8,36}$/.test(pass));
+        usu = await updateUser(req.params.email, pass);
+        res.status(200).send(usu);
+    }catch(error){
+        res.status(500).send({ error: 'Internal Server Error', details: error.message });
+    }
 }
 
 module.exports={

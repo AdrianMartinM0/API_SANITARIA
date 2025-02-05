@@ -1,5 +1,6 @@
 const usuRouter = require('express').Router();
 const { getAllUsersController, getOneUserController, createUserController, updateUserController } = require('../../controllers/controllerUsuario');
+// const { validationUser } = require('../../middleware/middlewareUsuario');
 
 // IMPORTANTEEEEEE!!!!! FALTA MIDLEWARE
 // MUCHO MAS IMPORTANTEEEEEEEEEEEEE!!!!!!!!!!!!
