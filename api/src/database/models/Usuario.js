@@ -65,19 +65,11 @@ Usuario.init(
             }
         },
         password:{
-            type: DataTypes.STRING(36),
+            type: DataTypes.STRING,
             allowNull: false,
             validate:{
                 notNull:{
                     msg:"El campo password es obligatorio",
-                },
-                len:{
-                    args: [8, 36],
-                    msg: "El password debe tener entre 8 y 36 caracteres",
-                },
-                is: {
-                    args: /^[A-Za-z\d@$!%*?&]{8,36}$/,
-                    msg: "El password debe tener al menos una letra minúscula, una letra mayúscula, un número y un carácter especial",
                 },
             },
         },

@@ -21,7 +21,9 @@ const getOneUserController = async ( req, res, next ) => {
             error.status=400;
             throw error;
         }
+        // console.log(usu)
         const iguales = bcryptjs.compareSync(req.body.password, usu.password);
+        console.log(iguales)
         if(!iguales){
             const error = new Error('La contraseña no es valida');
             error.status=400;
@@ -108,14 +110,11 @@ const deleteUserByEmailController = async ( req, res, next ) => {
 }
 
 const generatePass = () => {
-    let pass;
-    do {
-        pass = generator.generate({
-            length: 16,
-            numbers: true,
-            symbols: true,
-        });
-    } while (!/^[A-Za-z\d@$!%*?&]{8,36}$/.test(pass));
+    let pass = generator.generate({
+        length: 16,
+        numbers: true,
+        symbols: true,
+    });
     return pass;
 }
 
