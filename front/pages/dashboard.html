@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/style.css">
+  <title>Nuevo Cassette</title>
+</head>
+<body>
+  <div class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>Nuevo Cassette</h2>
+      <form>
+        <label for="descripcion">Descripción Corta:</label>
+        <input type="text" id="descripcion" name="descripcion" required>
+
+        <!-- Alineación de "Fecha Órgano" y "Seleccionar Órgano" en la misma línea -->
+        <div class="form-group">
+          <div>
+            <label for="fecha">Fecha Órgano:</label>
+            <input type="date" id="fecha" name="fecha" required>
+          </div>
+          <div>
+            <label for="organo">Seleccionar Órgano:</label>
+            <select id="organo" name="organo" required>
+              <option value="corazon">Corazón</option>
+              <option value="higado">Hígado</option>
+              <option value="riñon">Riñón</option>
+              <option value="pulmon">Pulmón</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="caracteristicas">Características:</label>
+        <textarea id="caracteristicas" name="caracteristicas" rows="4" required></textarea>
+
+        <label for="observaciones">Observaciones:</label>
+        <textarea id="observaciones" name="observaciones" rows="4" required></textarea>
+
+        <button type="submit">Crear Cassette</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
