@@ -61,7 +61,7 @@ const { Model, DataTypes } = require("sequelize");
             },
           },
 
-          qr_casette: {
+          qr_cassette: {
             type: DataTypes.STRING,
             allowNull: false,
             validate:{
