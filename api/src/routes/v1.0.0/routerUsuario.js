@@ -1,5 +1,6 @@
 const usuRouter = require('express').Router();
-const { getAllUsersController, getOneUserController, createUserController, updateUserController } = require('../../controllers/controllerUsuario');
+const { getAllUsersController, getOneUserController, createUserController, updateUserController, deleteUserController, deleteUserByEmailController } = require('../../controllers/controllerUsuario');
+const { checkToken } = require('../../middleware/checkToken');
 // const { validationUser } = require('../../middleware/middlewareUsuario');
 
 // IMPORTANTEEEEEE!!!!! FALTA MIDLEWARE
@@ -15,5 +16,8 @@ usuRouter.post('/', createUserController);
 
 usuRouter.put('/:email', updateUserController);
 
+usuRouter.delete('/:email', deleteUserByEmailController);
+
+usuRouter.delete('/', checkToken, deleteUserController);
 
 module.exports = usuRouter;

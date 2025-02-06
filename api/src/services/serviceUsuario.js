@@ -14,6 +14,15 @@ const getOneUser = async (email) => {
     return usu;
 }
 
+const getOneUserById = async (id) => {
+    const usu = await Usuario.findOne({
+        where:{
+            id: id,
+        }
+    });
+    return usu;
+}
+
 const createUser = async ({ email, nombre, apellidos, password, centro }) => {
     const usu = await Usuario.findOrCreate({
         where: {
@@ -43,10 +52,30 @@ const updateUser = async (email, password) => {
     return usu;
 }
 
+const deleteUser = async (id) => {
+    const usu = await Usuario.destroy({
+        where: {
+            id: id
+        }
+    });
+    return usu;
+}
+
+const deleteUserByEmail = async (email) => {
+    const usu = await Usuario.destroy({
+        where: {
+            email: email,
+        }
+    });
+    return usu;
+}
+
 module.exports = {
     getAllUsers,
     getOneUser,
+    getOneUserById,
     createUser,
     updateUser,
-
+    deleteUser,
+    deleteUserByEmail,
 }
