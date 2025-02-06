@@ -60,3 +60,5 @@ usuRouter.put('/:id', async (req, res) => {
         res.status(500).send({ error: 'Error al actualizar la muestra ' });
     }
 });
+
+module.exports = usuRouter;
