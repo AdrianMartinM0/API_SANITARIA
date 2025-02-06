@@ -54,7 +54,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.4); /* Fondo oscuro semi-transparente */
+  background-color: rgba(0, 0, 0, 0.4); 
   z-index: 1000; /* Asegura que el modal esté encima de otros contenidos */
 }
 
@@ -62,16 +62,16 @@ body {
 .modal-content {
   position: relative;
   background-color: #ffffff; /* Fondo blanco */
-  width: 50%;  /* Establecer un ancho fijo, puedes ajustarlo a lo que desees */
-  max-width: 700px; /* Máximo ancho */
+  width: 50%;  
+  max-width: 700px; 
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  border: 1px solid #b3e5fc; /* Borde azul claro */
-  color: #60a5fa; /* Azul claro para el texto */
-  box-sizing: border-box; /* Asegura que el padding no se sume al ancho */
-  max-height: 80%; /* Limita la altura máxima del modal */
-  overflow-y: auto; /* Añade scroll si el contenido es muy largo */
+  border: 1px solid #b3e5fc;
+  color: #60a5fa; 
+  box-sizing: border-box; 
+  max-height: 80%; 
+  overflow-y: auto; 
 }
 
 /* Estilo para el botón de cerrar dentro del modal-content */
@@ -151,4 +151,48 @@ form button {
 
 form button:hover {
   background-color: #60a5fa; /* Azul oscuro al pasar el cursor */
+}
+
+/*Modal ELIMINAR*/
+/* Estilo para el contenedor del modal de Confirmación de Eliminación */
+.modal-delete {
+  position: relative;
+  background-color: #ffffff;
+  width: 30%;  
+  max-width: 500px; 
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid #b3e5fc; 
+  color: #60a5fa;
+  box-sizing: border-box;
+  max-height: 80%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+/* Estilo para los mensajes de confirmación */
+.modal-delete p {
+  color: #60a5fa; 
+  margin-bottom: 20px;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* Estilo del botón de eliminar */
+.modal-delete button {
+  padding: 10px;
+  background-color: #60a5fa; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.modal-delete button:hover {
+  background-color: #01579b; /* Azul oscuro al pasar el cursor */
 }
