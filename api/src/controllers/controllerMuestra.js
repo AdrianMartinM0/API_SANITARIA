@@ -3,8 +3,8 @@ const { newMuestra, getAllMuestra, updateMuestra, deleteMuestra , getoneMuestra}
 
 const newMuestracontroller = async(req , res , next)=>{
     try {
-        if (req.body.fecha ||req.body.observaciones || req.body.descripcion || req.body.tincion  ){
-        let muestra = await newMuestra(req.body.fecha, req.body.observaciones, req.body.descripcion, req.body.tincion);
+        if (req.body.fecha ||req.body.observaciones || req.body.descripcion || req.body.tincion || req.body.CassetteId  ){
+        let muestra = await newMuestra(req.body.fecha, req.body.observaciones, req.body.descripcion, req.body.tincion , req.body.CassetteId);
         res.status(200).send(muestra);
         }else{
             const error = new Error('Todos los campos son obligatorios');

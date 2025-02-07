@@ -10,6 +10,7 @@ const newMuestra  = async (fecha_param , observaciones_param ,descripcion_param 
         descripcion: descripcion_param,
         tincion: tincion_param,
         qr_muestra: qr_muestra_param,
+        CassetteId: CassetteId_param
     })
     
     return muestra;
