@@ -196,3 +196,7 @@ form button:hover {
 .modal-delete button:hover {
   background-color: #01579b; /* Azul oscuro al pasar el cursor */
 }
+
+.d-none{
+  display: none;
+}
