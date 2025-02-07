@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+  <title>Cassettes</title>
+</head>
+<body>
+    
+       
+   
+    
+<!-- Modal para Nuevo Cassette -->
+
+  <div class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>Nuevo Cassette</h2>
+      <form>
+        <label for="descripcion">Descripción Corta:</label>
+        <input type="text" id="descripcion" name="descripcion" required>
+        <div class="form-group">
+          <div>
+            <label for="fecha">Fecha Órgano:</label>
+            <input type="date" id="fecha" name="fecha" required>
+          </div>
+          <div>
+            <label for="organo">Seleccionar Órgano:</label>
+            <select id="organo" name="organo" required>
+              <option value="corazon">Corazón</option>
+              <option value="higado">Hígado</option>
+              <option value="riñon">Riñón</option>
+              <option value="pulmon">Pulmón</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="caracteristicas">Características:</label>
+        <textarea id="caracteristicas" name="caracteristicas" rows="4" required></textarea>
+
+        <label for="observaciones">Observaciones:</label>
+        <textarea id="observaciones" name="observaciones" rows="4" required></textarea>
+
+        <button type="submit">Crear Cassette</button>
+      </form>
+    </div>
+  </div>
+
+
+
+   <!-- Modal para confirmación de eliminación -->
+   <div class="modal">
+    <div class="modal-delete">
+      <span class="close-btn">&times;</span>
+      <h2>Eliminar Cassette</h2>
+      <p>¿Desea Eliminar el Cassette?</p>
+        <p>Al eliminar el cassette se eliminarán también todas sus muestras.</p>
+      <button type="button">Eliminar</button>
+    </div>
+  </div>
+
+     <!-- Modal para Modificar Cassette -->
+     <div class="modal">
+        <div class="modal-content">
+          <span class="close-btn">&times;</span>
+          <h2>Modificar Cassette</h2>
+          <form>
+            <label for="descripcion">Descripción Corta:</label>
+            <input type="text" id="descripcion" name="descripcion" required>
+            <div class="form-group">
+              <div>
+                <label for="fecha">Fecha Órgano:</label>
+                <input type="date" id="fecha" name="fecha" required>
+              </div>
+              <div>
+                <label for="organo">Seleccionar Órgano:</label>
+                <select id="organo" name="organo" required>
+                  <option value="corazon">Corazón</option>
+                  <option value="higado">Hígado</option>
+                  <option value="riñon">Riñón</option>
+                  <option value="pulmon">Pulmón</option>
+                </select>
+              </div>
+            </div>
+    
+            <label for="caracteristicas">Características:</label>
+            <textarea id="caracteristicas" name="caracteristicas" rows="4" required></textarea>
+    
+            <label for="observaciones">Observaciones:</label>
+            <textarea id="observaciones" name="observaciones" rows="4" required></textarea>
+    
+            <button type="submit">Crear Cassette</button>
+          </form>
+        </div>
+      </div>
+
+     <!-- Modal para Nueva Muestra -->
+<div class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>Nueva Muestra</h2>
+      <form>
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" name="descripcion" required>
+  
+        <div class="form-group">
+          <div>
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha" required>
+          </div>
+          <div>
+            <label for="tincion">Tinción:</label>
+            <select id="tincion" name="tincion" required>
+              <option value="hematoxilina_eosina">Hematoxilina-Eosina</option>
+              <option value="tricomico">Tricómico</option>
+              <option value="gram">Gram</option>
+              <option value="grocott">Grocott</option>
+            </select>
+          </div>
+        </div>
+  
+        <label for="observaciones">Observaciones:</label>
+        <textarea id="observaciones" name="observaciones" rows="4" required></textarea>
+  
+        <label for="imagen">Imagen:</label>
+        <input type="file" id="imagen" name="imagen" accept="image/*" required>
+  
+        <button type="submit">Crear Nueva Muestra</button>
+      </form>
+    </div>
+  </div>
+  <!-- Modal para Eliminar Muestra -->
+<div class="modal" id="delete-sample-modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>Eliminar Muestra</h2>
+      <p>¿Seguro que deseas eliminar esta muestra? Esta acción no se puede deshacer.</p>
+      <button id="confirm-delete">Eliminar</button>
+      <button id="cancel-delete">Cancelar</button>
+    </div>
+  </div>
+  
+  <!-- Modal para Modificar Muestra -->
+  <div class="modal" id="edit-sample-modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>Modificar Muestra</h2>
+      <form>
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" name="descripcion" required>
+        
+        <div class="form-group">
+          <div>
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha" required>
+          </div>
+          <div>
+            <label for="tincion">Tinción:</label>
+            <select id="tincion" name="tincion" required>
+              <option value="hematoxilina_eosina">Hematoxilina-Eosina</option>
+              <option value="tricomico">Tricómico</option>
+              <option value="gram">Gram</option>
+              <option value="grocott">Grocott</option>
+            </select>
+          </div>
+        </div>
+  
+        <label for="observaciones">Observaciones:</label>
+        <textarea id="observaciones" name="observaciones" rows="4" required></textarea>
+  
+        <label for="imagen">Imagen:</label>
+        <input type="file" id="imagen" name="imagen" accept="image/*" required>
+  
+        <button type="submit">Modificar Muestra</button>
+      </form>
+  
+      <!-- Modal para Detalle Muestra -->
+<div class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>Detalle Muestra</h2>
+  
+      <div class="action-buttons">
+        <button id="create-new" title="Crear nueva muestra">+</button>
+        <button id="delete-sample" title="Eliminar muestra">
+          <i class="fas fa-trash-alt"></i> 
+        </button>
+        <button id="edit-sample" title="Modificar muestra">
+          <i class="fas fa-pencil-alt"></i> 
+        </button>
+      </div>
+  
+      
+      <div class="sample-details">
+        <p><strong>Descripción:</strong> Descripción de la muestra.</p>
+        <p><strong>Fecha:</strong> 2025-02-06</p>
+        <p><strong>Tinción:</strong> Hematoxilina-Eosina</p>
+        <p><strong>Observaciones:</strong> Observaciones de la muestra.</p>
+  
+       
+        <div class="sample-images">
+          <img src="image1.jpg" alt="Imagen 1" />
+          <img src="image2.jpg" alt="Imagen 2" />
+          <button class="add-image-btn">Añadir Imagen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>
