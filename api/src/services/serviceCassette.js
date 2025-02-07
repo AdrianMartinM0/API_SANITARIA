@@ -46,11 +46,7 @@ const updateCassette = async (idCassette_param, fecha_param, observaciones_param
 const deleteCassete = async (idCassette) => {
     const cassette = await Cassette.destroy({
         where: {
-<<<<<<< HEAD
              id:idCassette
-=======
-            id: idCassette
->>>>>>> d222b077535b32343852e71725f5685440c19b05
         }
     });
     return cassette;

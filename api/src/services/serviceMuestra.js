@@ -2,7 +2,7 @@ const Muestra = require('../database/models/Muestra');
 
 
 
-const newMuestra  = async (fecha_param , observaciones_param ,descripcion_param , tincion_param , qr_muestra_param = null) =>{
+const newMuestra  = async (fecha_param , observaciones_param ,descripcion_param , tincion_param , qr_muestra_param ) =>{
 
     const muestra = await Muestra.create({
         fecha: fecha_param,

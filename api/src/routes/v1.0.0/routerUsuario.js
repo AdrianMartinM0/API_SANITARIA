@@ -1,5 +1,5 @@
 const usuRouter = require('express').Router();
-const { getAllUsersController, getOneUserController, createUserController, updateUserController, deleteUserController, deleteUserByEmailController } = require('../../controllers/controllerUsuario');
+const { getAllUsersController, getOneUserController, createUserController, updateUserController, deleteUserController, deleteUserByEmailController } = require('./../../controllers/controllerUsuario');
 const { checkToken } = require('../../middleware/checkToken');
 // const { validationUser } = require('../../middleware/middlewareUsuario');
 
