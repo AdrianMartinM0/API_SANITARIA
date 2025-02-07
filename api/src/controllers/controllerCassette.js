@@ -66,11 +66,30 @@ if (idcassette) {
     }
 }
 
+const getonecassettecontroller = async(req , res , next)=>{
+try {
+    
+    let cassette = await getoneCassetteById(req.params.id);
+    if (cassette) {
+        res.status(200).send(cassette);
+    }else{
+        const error = new Error('El Cassete no existe');
+    error.status=400;
+    throw error;
+    }
+  
+} catch (error) {
+    next(error); 
+}
+
+}
+
 
 module.exports={
     deleteCassetecontroller,
     updateCassettecontroller,
     getAllCassettecontroller,
     newCassetecontroller,
+    getonecassettecontroller
   
 }
