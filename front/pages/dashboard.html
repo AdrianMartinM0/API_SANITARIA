@@ -154,6 +154,31 @@
       </div>
     </div>
 
+    <!-- Tabla de Muestras -->
+    <div class="w-full bg-white shadow-md rounded-lg overflow-hidden p-4 h-64 text-sm">
+      <div class="px-3 py-1 bg-blue-100 text-blue-900 font-semibold flex items-center justify-between">
+        <p>MUESTRAS</p>
+        <svg class="h-5 w-5 text-blue-400 hover:text-blue-900" fill="none" viewBox="0 0 23 23" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+      </div>
+      <table class="w-full border-collapse">
+        <thead>
+          <tr class="bg-blue-200 text-blue-900">
+            <th class="p-1 text-left">Fecha</th>
+            <th class="p-1 text-left">Descripción</th>
+            <th class="p-1 text-left">Tinción</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <tr class="border-b hover:bg-blue-50">
+            <td class="p-1 text-red-500" colspan="3">No se ha encontrado ninguna muestra</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <!-- Modal para Nuevo Cassette -->
     <div class="modal d-none">
       <div class="modal-content">
