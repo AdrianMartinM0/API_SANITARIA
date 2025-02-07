@@ -71,6 +71,10 @@ Usuario.init(
                 notNull:{
                     msg:"El campo password es obligatorio",
                 },
+                is: {
+                    args: /^[A-Za-z\d@$!%*?&]{8,36}$/,
+                    msg: "El password debe tener al menos una letra minúscula, una letra mayúscula, un número y un carácter especial. Su tamaño debe ser entre 8 y 36 caracteres",
+                },
             },
         },
         centro:{
@@ -82,6 +86,17 @@ Usuario.init(
                 },
             },
         },
+        admin:{
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
+            validate:{
+                notNull:{
+                    msg: 'El campo del admin es obligatorio',
+                }
+
+            }
+        }
     },
     {
         sequelize,
