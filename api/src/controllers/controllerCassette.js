@@ -53,8 +53,8 @@ const deleteCassetecontroller = async (req , res , next)=>{
     try {
         let idcassette = await getoneCassetteById(req.params.id);
 if (idcassette) {
-   let cassette = await deleteCassete(req.params.id);
-    res.status(200).send(cassette);
+    await deleteCassete(req.params.id);
+    res.status(200).send('Cassette eliminado con existo');
     
 }else{
     const error = new Error('El Cassete no existe');
