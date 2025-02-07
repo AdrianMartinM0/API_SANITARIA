@@ -110,11 +110,16 @@ const deleteUserByEmailController = async ( req, res, next ) => {
 }
 
 const generatePass = () => {
-    let pass = generator.generate({
-        length: 16,
-        numbers: true,
-        symbols: true,
-    });
+    let pass;
+    const regex = /^[A-Za-z\d@$!%*?&]{8,36}$/;
+    do {
+        pass = generator.generate({
+            length: 16,
+            numbers: true,
+            symbols: true,
+        });
+    } while (!regex.test(pass));
+    
     return pass;
 }
 

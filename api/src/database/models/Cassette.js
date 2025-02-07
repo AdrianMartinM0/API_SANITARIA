@@ -63,13 +63,13 @@ const { Model, DataTypes } = require("sequelize");
 
           qr_cassette: {
             type: DataTypes.STRING,
-            allowNull: false,
-            validate:{
-                notNull: {
-                    msg: 'Este campo  es requerido'
-                } ,
+            allowNull: true,
+            // validate:{
+            //     notNull: {
+            //         msg: 'Este campo  es requerido'
+            //     } ,
               
-            },
+            // },
           },
 
 
