@@ -4,7 +4,7 @@ const { newCassete, getAllCassette, updateCassette, deleteCassete , getoneCasset
 const newCassetecontroller  = async(req , res , next)=>{
     try {
 if (req.body.fecha ||req.body.observaciones || req.body.descripcion || req.body.caracteristicas || req.body.organo ){
-let cassette = await newCassete(req.body.fecha, req.body.observaciones, req.body.descripcion, req.body.caracteristicas, req.body.organo);
+let cassette = await newCassete(req.body.fecha, req.body.observaciones, req.body.descripcion, req.body.caracteristicas, req.body.organo , req.id);
 res.status(200).send(cassette);
 }else{
     const error = new Error('Todos los campos son obligatorios');
