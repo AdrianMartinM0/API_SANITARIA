@@ -1,13 +1,12 @@
 const muestraRouter = require('express').Router();
-const Muestra = require('../../database/models/Muestra');
-const {  newMuestracontroller , getAllMuestracontroller , updateMuestracontroller , deleteMuestracontroller} = require('../../controllers/controllerMuestra');
+const {  newMuestraController , getAllMuestraByCassetteController , updateMuestraController , deleteMuestraController} = require('./../../controllers/controllerMuestra');
 
+muestraRouter.post('/',  newMuestraController);
 
-muestraRouter.post('/',  newMuestracontroller);
+muestraRouter.get('/:id', getAllMuestraByCassetteController );
 
-muestraRouter.get('/', getAllMuestracontroller );
+muestraRouter.put('/:id', updateMuestraController);
 
-muestraRouter.put('/:id', updateMuestracontroller);
+muestraRouter.delete('/:id', deleteMuestraController );
 
-muestraRouter.delete('/:id', deleteMuestracontroller );
 module.exports = muestraRouter;

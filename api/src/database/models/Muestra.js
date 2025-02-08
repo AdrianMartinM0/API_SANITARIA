@@ -55,7 +55,6 @@ const { Model, DataTypes } = require("sequelize");
           qr_muestra: {
             type: DataTypes.STRING,
             allowNull: false,
-            defaultValue : 'dasda',
             validate:{
                 notNull: {
                     msg: 'Este campo qr_muestra es requerido'

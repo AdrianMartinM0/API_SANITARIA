@@ -2,52 +2,53 @@ const Muestra = require('../database/models/Muestra');
 
 
 
-const newMuestra  = async (fecha_param , observaciones_param ,descripcion_param , tincion_param , qr_muestra_param ) =>{
+const newMuestra  = async (data) =>{
 
     const muestra = await Muestra.create({
-        fecha: fecha_param,
-        observaciones: observaciones_param,
-        descripcion: descripcion_param,
-        tincion: tincion_param,
-        qr_muestra: qr_muestra_param,
-        CassetteId: CassetteId_param
+        fecha: data.fecha,
+        observaciones: data.observaciones,
+        descripcion: data.descripcion,
+        tincion: data.tincion,
+        qr_muestra: data.qr_muestra,
+        CassetteId: data.CassetteId
     })
     
     return muestra;
 };
 
-const getAllMuestra = async ()=>{
-    const muestra = await Muestra.findAll();
-    return muestra;
-
-};
-
-const updateMuestra = async (idmuestra_param , fecha_param , observaciones_param ,descripcion_param , tincion_param , qr_muestra_param = null  )=>{
-const muestraupdate  =   await Muestra.update({
-        fecha: fecha_param,
-        observaciones: observaciones_param,
-        descripcion: descripcion_param,
-        tincion : tincion_param ,
-        qr_muestra : qr_muestra_param
-    },{
-        where :{
-            id : idmuestra_param
+const getAllMuestraByCassette = async (id)=>{
+    const muestra = await Muestra.findAll({
+        where:{
+            CassetteId: id,
         }
     });
-    return muestraupdate;
-
+    return muestra;
 };
 
-const deleteMuestra = async (idmuestra)=>{
-    const muestra = await Muestra.destroy({
-where :{
-    id : idmuestra
-}
+const updateMuestra = async (data)=>{
+    const muestraUpdate = await Muestra.update({
+        fecha: data.fecha,
+        observaciones: data.observaciones,
+        descripcion: data.descripcion,
+        tincion : data.tincion,
+        qr_muestra : data.qr_muestra
+    },{
+        where :{
+            id : data.id,
+        }
     });
-    return muestra;
+    return muestraUpdate;
+};
+
+const deleteMuestra = async (id)=>{
+    await Muestra.destroy({
+        where :{
+            id : id,
+        }
+    });
 }
 
-const getoneMuestra = async (idmuestra)=>{
+const getOneMuestra = async (idmuestra)=>{
     const muestra = await Muestra.findOne({
         where:{
             id: idmuestra,
@@ -61,8 +62,6 @@ module.exports = {
     updateMuestra,
     deleteMuestra,
     newMuestra,
-    getAllMuestra,
-    getoneMuestra
-   
-  
+    getAllMuestraByCassette,
+    getOneMuestra
 }

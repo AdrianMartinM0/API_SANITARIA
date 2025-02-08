@@ -76,12 +76,11 @@ const deleteUser = async (id) => {
 }
 
 const deleteUserByEmail = async (email) => {
-    const usu = await Usuario.destroy({
+    await Usuario.destroy({
         where: {
             email: email,
         }
     });
-    return usu;
 }
 
 module.exports = {

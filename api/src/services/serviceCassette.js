@@ -2,59 +2,51 @@ const Cassette = require('../database/models/Cassette');
 
 
 
-const newCassete = async (fecha_param, observaciones_param, descripcion_param, caracteristicas_param, organo_param , qr_param ,identintificador_param,  id_param ) => {
-
+const newCassete = async (data, id ) => {
     const cassette = await Cassette.create({
-        fecha: fecha_param,
-        observaciones: observaciones_param,
-        descripcion: descripcion_param,
-        caracteristicas: caracteristicas_param,
-        organo: organo_param,
-        qr_cassette : qr_param ,
-        identificador_cassete : identintificador_param , 
-        UsuarioId : id_param
-        
-    })
-
+        fecha: data.fecha,
+        observaciones: data.observaciones,
+        descripcion: data.descripcion,
+        caracteristicas: data.caracteristicas,
+        organo: data.organo,
+        qr_cassette : data.qr_cassette,
+        identificador_cassete : data.identificador_cassete, 
+        UsuarioId : id
+    });
     return cassette;
 };
 
 const getAllCassette = async () => {
     const cassette = await Cassette.findAll();
     return cassette;
-
 };
 
-const updateCassette = async (idCassette_param, fecha_param, observaciones_param, descripcion_param, caracteristicas_param, organo_param) => {
-  
-  
-   const  cassettetoupdate  =    await Cassette.update({
-            fecha: fecha_param,
-            observaciones: observaciones_param,
-            descripcion: descripcion_param,
-            caracteristicas: caracteristicas_param,
-            organo: organo_param,
-        },{
-            where : {
-                id: idCassette_param
-            }
+const updateCassette = async (data, id) => {
+   const cassette = await Cassette.update({
+        fecha: data.fecha,
+        observaciones: data.observaciones,
+        descripcion: data.descripcion,
+        caracteristicas: deleteCassete.caracteristicas,
+        organo: data.organo,
+        identificador_cassette: data.identificador_cassete,
+    },{
+        where : {
+            id: id,
         }
+    }
     );
-
-        return cassettetoupdate;
-  
+    return cassette;
 };
 
-const deleteCassete = async (idCassette) => {
-    const cassette = await Cassette.destroy({
+const deleteCassete = async (id) => {
+    await Cassette.destroy({
         where: {
-             id:idCassette
+             id:id,
         }
     });
-    return cassette;
 }
 
-const getoneCassetteById = async (id) => {
+const getOneCassetteById = async (id) => {
     const cassette = await Cassette.findOne({
         where:{
             id: id,
@@ -68,7 +60,5 @@ module.exports = {
     updateCassette,
     getAllCassette,
     newCassete,
-    getoneCassetteById
-
-
+    getOneCassetteById
 }
