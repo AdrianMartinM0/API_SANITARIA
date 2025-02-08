@@ -1,4 +1,4 @@
-const { getAllUsers, getOneUser, createUser, updateUser, deleteUser, getOneUserById, deleteUserByEmail } = require('./../services/serviceUsuario');
+const { getAllUsers, getOneUser, createUser, updateUser, updateRolUser, deleteUser, getOneUserById, deleteUserByEmail } = require('./../services/serviceUsuario');
 const bcryptjs = require('bcryptjs');
 const generator = require('generate-password');
 const moment = require('moment');
@@ -6,6 +6,11 @@ const jwt = require('jwt-simple');
 
 const getAllUsersController = async ( req, res, next ) => {
     try{
+        if(!req.admin){
+            const error = new Error('No tienes permisos de administrador');
+            error.status=400;
+            throw error;
+        }
         const users = await getAllUsers();
         res.status(200).send(users);
     }catch(error){
@@ -78,9 +83,28 @@ const updateUserController = async ( req, res, next ) => {
     }
 }
 
+const updateRolController = async ( req, res, next ) => {
+    try{
+        let usu = await getOneUser(req.params.email);
+        if(!usu){
+            const error = new Error('El usuario no existe');
+            error.status=400;
+            throw error;
+        }
+        usu = await updateRolUser(req.params.email);
+        res.status(200).send(usu);
+    }catch(error){
+        next(error);
+    }
+}
+
 const deleteUserController = async (req, res, next ) => {
     try{
-        console.log('User ID from Request:', req.id);
+        if(!req.admin){
+            const error = new Error('No tienes permisos de administrador');
+            error.status=400;
+            throw error;
+        }
         let usu = await getOneUserById(req.id);
         if(!usu){
             const error = new Error('El usuario no existe');
@@ -126,8 +150,9 @@ const generatePass = () => {
 const generateJWT = (usu) => {
     const payload = {
         id: usu.id,
-        createdAt: moment().unix(),
-        expiredAt: moment().add(2, 'months').unix(),
+        admin: usu.admin,
+        createdAt: dayjs().unix(),
+        expiredAt: dayjs().add(12, 'hours').unix(),
     }
     return jwt.encode(payload, process.env.FRASE_TOKEN);
 }
@@ -137,6 +162,7 @@ module.exports={
     getOneUserController,
     createUserController,
     updateUserController,
+    updateRolController,
     deleteUserController,
     deleteUserByEmailController,
 }

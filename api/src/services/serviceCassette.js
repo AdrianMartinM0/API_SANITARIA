@@ -49,8 +49,6 @@ const deleteCassete = async (idCassette) => {
     const cassette = await Cassette.destroy({
         where: {
              id:idCassette
-
-          
         }
     });
     return cassette;

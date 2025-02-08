@@ -52,6 +52,20 @@ const updateUser = async (email, password) => {
     return usu;
 }
 
+const updateRolUser = async (email) => {
+    const usu = await Usuario.update(
+        {
+            admin: true 
+        },
+        { 
+            where: { 
+                email: email 
+            } 
+        }
+    );
+    return usu;
+}
+
 const deleteUser = async (id) => {
     const usu = await Usuario.destroy({
         where: {
@@ -76,6 +90,7 @@ module.exports = {
     getOneUserById,
     createUser,
     updateUser,
+    updateRolUser,
     deleteUser,
     deleteUserByEmail,
 }
