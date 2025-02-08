@@ -3,11 +3,11 @@ const { newCassete, getAllCassette, updateCassette, deleteCassete , getoneCasset
 
 const newCassetecontroller  = async(req , res , next)=>{
     try {
-if (req.body.fecha ||req.body.observaciones || req.body.descripcion || req.body.caracteristicas || req.body.organo ){
-let cassette = await newCassete(req.body.fecha, req.body.observaciones, req.body.descripcion, req.body.caracteristicas, req.body.organo , req.id);
+if (req.body.fecha ||req.body.observaciones || req.body.descripcion || req.body.caracteristicas || req.body.organo  ||  req.body.qr_cassette || req.body.identificador_cassete ){
+let cassette = await newCassete(req.body.fecha, req.body.observaciones, req.body.descripcion, req.body.caracteristicas, req.body.organo , req.body.qr_cassette ,req.body.identificador_cassete , req.id);
 res.status(200).send(cassette);
 }else{
-    const error = new Error('Todos los campos son obligatorios');
+    const error = new Error('Todos los campos son obligatorios');                       
     error.status=400;
     throw error;
 }
