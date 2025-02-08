@@ -13,7 +13,7 @@ const { Model, DataTypes } = require("sequelize");
             allowNull: false,   
             validate:{
                 notNull: {
-                    msg: 'la fecha campo  es requerido'
+                    msg: 'El campo fecha es requerido'
                 } , 
                 isDate: {
                     msg: 'Este campo debe ser una fecha valida'
@@ -25,7 +25,7 @@ const { Model, DataTypes } = require("sequelize");
             allowNull: false,
             validate:{
                 notNull: {
-                    msg: 'la observacion  es requerida'
+                    msg: 'El campo observaciones es requerido'
                 } ,
               
             },
@@ -35,7 +35,7 @@ const { Model, DataTypes } = require("sequelize");
             allowNull: false,
             validate:{
                 notNull: {
-                    msg: 'La descripcion   es requerida'
+                    msg: 'El campo descripcion es requerido'
                 } ,
               
             },
@@ -45,7 +45,7 @@ const { Model, DataTypes } = require("sequelize");
             allowNull: false,
             validate:{
                 notNull: {
-                    msg: 'la caracteriustica  es requerida'
+                    msg: 'El campo caracteristicas es requerido'
                 } ,
               
             },
@@ -55,7 +55,7 @@ const { Model, DataTypes } = require("sequelize");
             allowNull: false,
             validate:{
                 notNull: {
-                    msg: 'El organo   es requerida'
+                    msg: 'El campo órgano es requerido'
                 } ,
               
             },
@@ -66,7 +66,7 @@ const { Model, DataTypes } = require("sequelize");
             allowNull: false,
             validate:{
                notNull: {
-                     msg: 'El cassete  es requerida'
+                     msg: 'El campo qr_cassette es requerido'
                  } ,
               
              },
@@ -76,7 +76,7 @@ const { Model, DataTypes } = require("sequelize");
             allowNull: false,
              validate:{
                 notNull: {
-                    msg: 'El identificador   es requerida'
+                    msg: 'El campo identificador_cassette es requerido'
             } ,
               
            },
