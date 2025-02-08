@@ -10,7 +10,7 @@ const newCassete = async (fecha_param, observaciones_param, descripcion_param, c
         descripcion: descripcion_param,
         caracteristicas: caracteristicas_param,
         organo: organo_param,
-        qr_cassette : qr_param, 
+        qr_cassette : qr_param ,
         identificador_cassete : identintificador_param , 
         UsuarioId : id_param
         
