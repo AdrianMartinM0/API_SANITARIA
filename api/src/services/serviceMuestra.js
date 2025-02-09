@@ -52,7 +52,8 @@ const getOneMuestra = async (idmuestra)=>{
     const muestra = await Muestra.findOne({
         where:{
             id: idmuestra,
-        }
+        },
+        include:['Imagenes']
     });
     return muestra;
 }
