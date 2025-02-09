@@ -7,9 +7,10 @@ const getAllUsers = async () => {
 
 const getOneUser = async (email) => {
     const usu = await Usuario.findOne({
-        where:{
+        where: {
             email: email,
-        }
+        },
+        include: ['Cassettes']
     });
     return usu;
 }

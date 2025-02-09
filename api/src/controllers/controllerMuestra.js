@@ -26,11 +26,6 @@ const newMuestraController = async(req , res , next)=>{
 const getAllMuestraByCassetteController = async(req , res , next)=>{
     try {
         const muestra = await getAllMuestraByCassette(req.params.id);
-        if(!muestra){
-            const error = new Error('No existen muestras');
-            error.status=400;
-            throw error;
-        }
         res.status(200).send(muestra);  
     }catch(error){
         next(error); 

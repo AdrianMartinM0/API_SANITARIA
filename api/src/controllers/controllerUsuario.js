@@ -26,7 +26,20 @@ const getOneUserController = async ( req, res, next ) => {
             error.status=400;
             throw error;
         }
-        // console.log(usu)
+        res.status(200).send(usu); 
+    }catch(error){
+        next(error);
+    }
+} 
+
+const loginController = async ( req, res, next ) => {
+    try{
+        const usu = await getOneUser(req.params.email);
+        if(!usu){
+            const error = new Error('El usuario no existe');
+            error.status=400;
+            throw error;
+        }
         const iguales = bcryptjs.compareSync(req.body.password, usu.password);
         console.log(iguales)
         if(!iguales){
@@ -151,8 +164,8 @@ const generateJWT = (usu) => {
     const payload = {
         id: usu.id,
         admin: usu.admin,
-        createdAt: dayjs().unix(),
-        expiredAt: dayjs().add(12, 'hours').unix(),
+        createdAt: moment().unix(),
+        expiredAt: moment().add(12, 'hours').unix(),
     }
     return jwt.encode(payload, process.env.FRASE_TOKEN);
 }
@@ -160,6 +173,7 @@ const generateJWT = (usu) => {
 module.exports={
     getAllUsersController,
     getOneUserController,
+    loginController,
     createUserController,
     updateUserController,
     updateRolController,

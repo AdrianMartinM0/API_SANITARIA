@@ -1,9 +1,9 @@
 const cassetteRouter = require('express').Router();
-const { newCasseteController, getAllCassetteController, updateCassetteController, deleteCasseteController, getOneCassetteController } = require('../../controllers/controllerCassette');
+const { newCasseteController, getAllCassetteByUserController, updateCassetteController, deleteCasseteController, getOneCassetteController } = require('../../controllers/controllerCassette');
 
 cassetteRouter.post('/', newCasseteController);
 
-cassetteRouter.get('/', getAllCassetteController);
+cassetteRouter.get('/', getAllCassetteByUserController);
 
 cassetteRouter.put('/:id',  updateCassetteController);
 

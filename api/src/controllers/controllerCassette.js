@@ -1,4 +1,4 @@
-const { newCassete, getAllCassette, updateCassette, deleteCassete , getOneCassetteById} = require('../services/serviceCassette');
+const { newCassete, getAllCassetteByUser, updateCassette, deleteCassete , getOneCassetteById} = require('../services/serviceCassette');
 
 
 const newCasseteController  = async(req , res , next)=>{
@@ -27,9 +27,9 @@ const newCasseteController  = async(req , res , next)=>{
     }
 }
 
-const getAllCassetteController = async(req , res , next)=>{
+const getAllCassetteByUserController = async(req , res , next)=>{
     try {
-        const cassette = await getAllCassette();
+        const cassette = await getAllCassetteByUser(req.id);
         res.status(200).send(cassette);
     }catch(error){
         next(error); 
@@ -87,7 +87,7 @@ const deleteCasseteController = async (req , res , next)=>{
 
 const getOneCassetteController = async(req , res , next)=>{
     try {
-        let cassette = await getoneCassetteById(req.params.id);
+        let cassette = await getOneCassetteById(req.params.id);
         if (!cassette) {
             const error = new Error('El Cassete no existe');
             error.status=400;
@@ -103,7 +103,7 @@ const getOneCassetteController = async(req , res , next)=>{
 module.exports={
     deleteCasseteController,
     updateCassetteController,
-    getAllCassetteController,
+    getAllCassetteByUserController,
     newCasseteController,
     getOneCassetteController
 }

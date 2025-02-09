@@ -1,7 +1,5 @@
 const Cassette = require('../database/models/Cassette');
 
-
-
 const newCassete = async (data, id ) => {
     const cassette = await Cassette.create({
         fecha: data.fecha,
@@ -16,8 +14,12 @@ const newCassete = async (data, id ) => {
     return cassette;
 };
 
-const getAllCassette = async () => {
-    const cassette = await Cassette.findAll();
+const getAllCassetteByUser = async (id) => {
+    const cassette = await Cassette.findAll({
+        where:{
+            UsuarioId: id,
+        }
+    });
     return cassette;
 };
 
@@ -50,7 +52,8 @@ const getOneCassetteById = async (id) => {
     const cassette = await Cassette.findOne({
         where:{
             id: id,
-        }
+        },
+        include: ['Muestras']
     });
     return cassette;
 }
@@ -58,7 +61,7 @@ const getOneCassetteById = async (id) => {
 module.exports = {
     deleteCassete,
     updateCassette,
-    getAllCassette,
+    getAllCassetteByUser,
     newCassete,
     getOneCassetteById
 }

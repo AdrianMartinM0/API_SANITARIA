@@ -1,10 +1,12 @@
 const usuRouter = require('express').Router();
-const { getAllUsersController, getOneUserController, createUserController, updateUserController, updateRolController, deleteUserController, deleteUserByEmailController } = require('./../../controllers/controllerUsuario');
+const { getAllUsersController, getOneUserController, loginController, createUserController, updateUserController, updateRolController, deleteUserController, deleteUserByEmailController } = require('./../../controllers/controllerUsuario');
 const { checkToken } = require('../../middleware/checkToken');
 
 usuRouter.get('/', checkToken, getAllUsersController);
 
 usuRouter.get('/:email', getOneUserController);
+
+usuRouter.get('/login/:email', loginController);
 
 usuRouter.post('/', createUserController);
 
