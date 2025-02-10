@@ -1,4 +1,4 @@
-const { getAllUsers, getOneUser, createUser, updateUser, deleteUser, getOneUserById, deleteUserByEmail } = require('./../services/serviceUsuario');
+const { getAllUsers, getOneUser, createUser, updateUser, updateRolUser, deleteUser, getOneUserById, deleteUserByEmail } = require('./../services/serviceUsuario');
 const bcryptjs = require('bcryptjs');
 const generator = require('generate-password');
 const moment = require('moment');
@@ -6,6 +6,11 @@ const jwt = require('jwt-simple');
 
 const getAllUsersController = async ( req, res, next ) => {
     try{
+        if(!req.admin){
+            const error = new Error('No tienes permisos de administrador');
+            error.status=400;
+            throw error;
+        }
         const users = await getAllUsers();
         res.status(200).send(users);
     }catch(error){
@@ -21,7 +26,20 @@ const getOneUserController = async ( req, res, next ) => {
             error.status=400;
             throw error;
         }
-        // console.log(usu)
+        res.status(200).send(usu); 
+    }catch(error){
+        next(error);
+    }
+} 
+
+const loginController = async ( req, res, next ) => {
+    try{
+        const usu = await getOneUser(req.params.email);
+        if(!usu){
+            const error = new Error('El usuario no existe');
+            error.status=400;
+            throw error;
+        }
         const iguales = bcryptjs.compareSync(req.body.password, usu.password);
         console.log(iguales)
         if(!iguales){
@@ -78,9 +96,28 @@ const updateUserController = async ( req, res, next ) => {
     }
 }
 
+const updateRolController = async ( req, res, next ) => {
+    try{
+        let usu = await getOneUser(req.params.email);
+        if(!usu){
+            const error = new Error('El usuario no existe');
+            error.status=400;
+            throw error;
+        }
+        usu = await updateRolUser(req.params.email);
+        res.status(200).send(usu);
+    }catch(error){
+        next(error);
+    }
+}
+
 const deleteUserController = async (req, res, next ) => {
     try{
-        console.log('User ID from Request:', req.id);
+        if(!req.admin){
+            const error = new Error('No tienes permisos de administrador');
+            error.status=400;
+            throw error;
+        }
         let usu = await getOneUserById(req.id);
         if(!usu){
             const error = new Error('El usuario no existe');
@@ -110,19 +147,25 @@ const deleteUserByEmailController = async ( req, res, next ) => {
 }
 
 const generatePass = () => {
-    let pass = generator.generate({
-        length: 16,
-        numbers: true,
-        symbols: true,
-    });
+    let pass;
+    const regex = /^[A-Za-z\d@$!%*?&]{8,36}$/;
+    do {
+        pass = generator.generate({
+            length: 16,
+            numbers: true,
+            symbols: true,
+        });
+    } while (!regex.test(pass));
+    
     return pass;
 }
 
 const generateJWT = (usu) => {
     const payload = {
         id: usu.id,
+        admin: usu.admin,
         createdAt: moment().unix(),
-        expiredAt: moment().add(2, 'months').unix(),
+        expiredAt: moment().add(12, 'hours').unix(),
     }
     return jwt.encode(payload, process.env.FRASE_TOKEN);
 }
@@ -130,8 +173,10 @@ const generateJWT = (usu) => {
 module.exports={
     getAllUsersController,
     getOneUserController,
+    loginController,
     createUserController,
     updateUserController,
+    updateRolController,
     deleteUserController,
     deleteUserByEmailController,
 }

@@ -7,9 +7,10 @@ const getAllUsers = async () => {
 
 const getOneUser = async (email) => {
     const usu = await Usuario.findOne({
-        where:{
+        where: {
             email: email,
-        }
+        },
+        include: ['Cassettes']
     });
     return usu;
 }
@@ -52,6 +53,20 @@ const updateUser = async (email, password) => {
     return usu;
 }
 
+const updateRolUser = async (email) => {
+    const usu = await Usuario.update(
+        {
+            admin: true 
+        },
+        { 
+            where: { 
+                email: email 
+            } 
+        }
+    );
+    return usu;
+}
+
 const deleteUser = async (id) => {
     const usu = await Usuario.destroy({
         where: {
@@ -62,12 +77,11 @@ const deleteUser = async (id) => {
 }
 
 const deleteUserByEmail = async (email) => {
-    const usu = await Usuario.destroy({
+    await Usuario.destroy({
         where: {
             email: email,
         }
     });
-    return usu;
 }
 
 module.exports = {
@@ -76,6 +90,7 @@ module.exports = {
     getOneUserById,
     createUser,
     updateUser,
+    updateRolUser,
     deleteUser,
     deleteUserByEmail,
 }

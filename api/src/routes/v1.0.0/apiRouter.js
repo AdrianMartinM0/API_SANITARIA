@@ -2,15 +2,15 @@ const apiRouter = require("express").Router();
 
 const { checkToken } = require("./../../middleware/checkToken");
 
-const CassetteRouter = require("./routerCassette");
-const Imagerouter =  require("./routerImagen");
+const cassetteRouter = require("./routerCassette");
+const imageRouter =  require("./routerImagen");
 const muestraRouter =  require("./routerMuestra");
-const Usuariorouter = require("./routerUsuario");
+const usuarioRouter = require("./routerUsuario");
 
-apiRouter.use("/cassette" , checkToken, CassetteRouter);
-// apiRouter.use("/imagen" , checkToken, Imagerouter);
+apiRouter.use("/cassette" , checkToken, cassetteRouter);
+apiRouter.use("/imagen" , checkToken, imageRouter);
 apiRouter.use("/muestra" , checkToken, muestraRouter);
-apiRouter.use("/usuario" , Usuariorouter);
+apiRouter.use("/usuario" , usuarioRouter);
 
 
 module.exports = apiRouter;

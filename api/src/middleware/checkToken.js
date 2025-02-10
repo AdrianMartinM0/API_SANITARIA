@@ -17,6 +17,7 @@ const checkToken = ( req, res, next ) => {
         return  res.status(400).send('El token ha expirado');
 
     req.id = payload.id;
+    req.admin = payload.admin;
 
     next();
 }

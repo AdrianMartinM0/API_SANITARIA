@@ -1,14 +1,14 @@
-const CassetteRouter = require('express').Router();
-const Cassette = require('../../database/models/Cassette');
-const { deleteCassetecontroller ,  updateCassettecontroller , getAllCassettecontroller , newCassetecontroller } = require('../../controllers/controllerCassette');
+const cassetteRouter = require('express').Router();
+const { newCasseteController, getAllCassetteByUserController, updateCassetteController, deleteCasseteController, getOneCassetteController } = require('../../controllers/controllerCassette');
 
+cassetteRouter.post('/', newCasseteController);
 
-CassetteRouter.post('/', newCassetecontroller);
+cassetteRouter.get('/', getAllCassetteByUserController);
 
-CassetteRouter.get('/', getAllCassettecontroller);
+cassetteRouter.put('/:id',  updateCassetteController);
 
-CassetteRouter.put('/:id',  updateCassettecontroller);
+cassetteRouter.delete('/:id', deleteCasseteController );
 
-CassetteRouter.delete('/:id', deleteCassetecontroller );
+cassetteRouter.get('/:id', getOneCassetteController);
 
-module.exports = CassetteRouter;
+module.exports = cassetteRouter;

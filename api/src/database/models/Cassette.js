@@ -13,7 +13,7 @@ const { Model, DataTypes } = require("sequelize");
             allowNull: false,   
             validate:{
                 notNull: {
-                    msg: 'Este campo  es requerido'
+                    msg: 'El campo fecha es requerido'
                 } , 
                 isDate: {
                     msg: 'Este campo debe ser una fecha valida'
@@ -25,7 +25,7 @@ const { Model, DataTypes } = require("sequelize");
             allowNull: false,
             validate:{
                 notNull: {
-                    msg: 'Este campo  es requerido'
+                    msg: 'El campo observaciones es requerido'
                 } ,
               
             },
@@ -35,7 +35,7 @@ const { Model, DataTypes } = require("sequelize");
             allowNull: false,
             validate:{
                 notNull: {
-                    msg: 'Este campo  es requerido'
+                    msg: 'El campo descripcion es requerido'
                 } ,
               
             },
@@ -45,7 +45,7 @@ const { Model, DataTypes } = require("sequelize");
             allowNull: false,
             validate:{
                 notNull: {
-                    msg: 'Este campo  es requerido'
+                    msg: 'El campo caracteristicas es requerido'
                 } ,
               
             },
@@ -55,7 +55,7 @@ const { Model, DataTypes } = require("sequelize");
             allowNull: false,
             validate:{
                 notNull: {
-                    msg: 'Este campo  es requerido'
+                    msg: 'El campo órgano es requerido'
                 } ,
               
             },
@@ -65,11 +65,21 @@ const { Model, DataTypes } = require("sequelize");
             type: DataTypes.STRING,
             allowNull: false,
             validate:{
-                notNull: {
-                    msg: 'Este campo  es requerido'
-                } ,
+               notNull: {
+                     msg: 'El campo qr_cassette es requerido'
+                 } ,
               
-            },
+             },
+          },
+          identificador_cassete: {
+            type: DataTypes.STRING,
+            allowNull: false,
+             validate:{
+                notNull: {
+                    msg: 'El campo identificador_cassette es requerido'
+            } ,
+              
+           },
           },
 
 
