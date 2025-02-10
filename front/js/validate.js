@@ -80,11 +80,56 @@ function validarLoginFormulario(event) {
         return showError("error-login-email");
     }
 
-    if (loginPassword === "") {
+    if (!passwordRegex.test(loginPassword)) {
         return showError("error-login-password");
     }
 
-    loginForm.submit();
+    
 }
+let getloginendpoint  = async (email)=>{
+    let info = await fetch(`localhost:3000/v1/usuario/login/${email}`)
+.then((data) => data);
+return info;
+}
+
+let getLoginEndpoint = async (email, passwd) => {
+    let data = await fetch(`http://localhost:3000/v1/usuario/login/${email}?password=${encodeURIComponent(passwd)}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    let text = await data.text();
+    return {
+        status: data.status,
+        text: text
+    };
+};
+
+// Uso de la función:
+getLoginEndpoint("lo1l@gmail.com", "Puesto70**").then(data => {
+    console.log(data.status); // Estado de la respuesta (200, 404, etc.)
+    console.log(data.text); // Texto de la respuesta
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let textlogin = (email , passwd)=>{
+
+}
+
 
 loginForm.addEventListener("submit", validarLoginFormulario);
