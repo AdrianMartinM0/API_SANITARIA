@@ -26,17 +26,17 @@ const closeModal = (event) => {
 
 
 //LISTENER
-new__cassette.addEventListener("click", showModal);
-close__btn.addEventListener("click", closeModal);
+// new__cassette.addEventListener("click", showModal);
+// close__btn.addEventListener("click", closeModal);
 
-delete__cassette.addEventListener("click", showModal);
-close__btn__delete.addEventListener("click", closeModal);
+// delete__cassette.addEventListener("click", showModal);
+// close__btn__delete.addEventListener("click", closeModal);
 
-edit__cassette.addEventListener("click", showModal);
-close__btn__edit.addEventListener("click", closeModal);
+// edit__cassette.addEventListener("click", showModal);
+// close__btn__edit.addEventListener("click", closeModal);
 
-new__muestra.addEventListener("click", showModal);
-close__btn__newMuestra.addEventListener("click", closeModal);
+// new__muestra.addEventListener("click", showModal);
+// close__btn__newMuestra.addEventListener("click", closeModal);
 
 
 document.addEventListener('DOMContentLoaded', function() {
