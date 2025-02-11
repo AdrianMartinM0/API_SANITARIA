@@ -63,31 +63,29 @@ const { Model, DataTypes } = require("sequelize");
 
           qr_cassette: {
             type: DataTypes.STRING,
-            allowNull: false,
-            validate:{
-               notNull: {
-                     msg: 'El campo qr_cassette es requerido'
-                 } ,
-              
-             },
+            
           },
-          identificador_cassete: {
+          identificador_cassette: {
             type: DataTypes.STRING,
             allowNull: false,
              validate:{
                 notNull: {
                     msg: 'El campo identificador_cassette es requerido'
-            } ,
-              
+                }, 
            },
           },
 
 
     },{
-         sequelize, 
-            modelName: "Cassettes", 
-            freezeTableName: true,
-             timestamps: false 
+        sequelize, 
+        modelName: "Cassettes", 
+        freezeTableName: true,
+        timestamps: false,
+        hooks: {
+            afterCreate: async (cassette) => {
+                cassette.qr_cassette = `C_${cassette.id}`;
+            }
+        }
     }
  );
  module.exports = Cassette;

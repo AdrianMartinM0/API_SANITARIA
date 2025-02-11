@@ -9,7 +9,6 @@ const newMuestra  = async (data) =>{
         observaciones: data.observaciones,
         descripcion: data.descripcion,
         tincion: data.tincion,
-        qr_muestra: data.qr_muestra,
         CassetteId: data.CassetteId
     })
     
@@ -31,7 +30,6 @@ const updateMuestra = async (data)=>{
         observaciones: data.observaciones,
         descripcion: data.descripcion,
         tincion : data.tincion,
-        qr_muestra : data.qr_muestra
     },{
         where :{
             id : data.id,

@@ -1,6 +1,5 @@
 const { getAllImagenByMuestra, getOneImagen, createImagen, deleteImagen } = require('./../services/serviceImagen');
 
-
 const getAllImagenByMuestraController = async ( req, res, next ) => {
     try {
         const imagen = await getAllImagenByMuestra(req.id);
@@ -13,13 +12,18 @@ const getAllImagenByMuestraController = async ( req, res, next ) => {
 
 const createImagenController = async ( req, res, next ) => {
     try {
-        if(!req.body.imagen){
+        if(!req.body.MuestraId){
+            const error = new Error('El id de la muestra es obligatorio');
+            error.status=400;
+            throw error;
+        }
+        if(!req.file){
             const error = new Error('No se ha recibido ninguna Imagen');
             error.status=400;
             throw error;
         }
-        const imagen = await createImagen(req.body.imagen);
-        res.status(200).send(usu);
+        const imagen = await createImagen(req.file.buffer, req.body.MuestraId);
+        res.status(200).send(imagen);
     } catch (error) {
         next(error);
     }
