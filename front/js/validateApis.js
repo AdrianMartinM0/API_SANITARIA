@@ -1,13 +1,11 @@
 let getUser = async (email) => {
   try {
-    let response = await fetch(`http://localhost:3000/v1/usuario/${email}`, {
-      method: "GET"
-    });
-    if (response.status === 200) {
-      return true;
-    } else {
+    let response = await fetch(`http://localhost:3000/v1/usuario/${email}`);
+    if (response.status != 200) 
       return false;
-    }
+
+    return true;
+    
   } catch (error) {
     console.error("Error fetching user:", error);
     return false;
@@ -46,15 +44,9 @@ export let getinforegister = async ({email_param, nombre_param, apellidos_param,
   }
 };
 
+export let testlogin = async (email , passwd )=>{
 
+}
 
 
   
-
-
-
-
-//export let insertUser = (json)=>{
-
-//}
-
