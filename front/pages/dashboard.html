@@ -17,7 +17,69 @@
     <div class="w-full bg-blue-200 p-4 shadow-md fixed top-0 left-0 right-0 z-10">
       <div class="max-w-7xl mx-auto flex flex-wrap gap-2 justify-between">
         <select class="text-blue-900 p-2 border rounded-lg w-full sm:w-auto hover:bg-blue-50">
-          <option>Seleccionar un Órgano</option>
+          <option disabled selected>Seleccionar un Órgano</option>
+          <option value="*">Todos</option>
+          <optgroup label="Sistema Nervioso">
+            <option>Encéfalo</option>
+            <option>Médula Espinal</option>
+            <option>Nervio</option>
+            <option>Ganglio Nervios</option>
+          </optgroup>
+
+          <optgroup label="Tegumento">
+            <option>Piel</option>
+            <option>Uña</option>
+            <option>Pelo</option>
+          </optgroup>
+
+          <optgroup label="Cardiovascular">
+            <option>Corazón</option>
+            <option>Venas</option>
+            <option>Arteria</option>
+          </optgroup>
+
+          <optgroup label="Linfático">
+            <option>Ganglio Linfático</option>
+            <option>Timo</option>
+            <option>Bazo</option>
+          </optgroup>
+
+          <optgroup label="Sistema Digestivo">
+            <option>Lengua</option>
+            <option>Esófago</option>
+            <option>Estómago</option>
+            <option>Intestino Delgado</option>
+            <option>Intestino Grueso</option>
+            <option>Diente</option>
+            <option>Glándula Salivar</option>
+            <option>Páncrea</option>
+            <option>Hígado</option>
+          </optgroup>
+
+          <optgroup label="Aparato Excretor">
+            <option>Riñón</option>
+            <option>Vejiga</option>
+          </optgroup>
+
+          <optgroup label="Respiratorio">
+            <option>Tránquea</option>
+            <option>Bronquios</option>
+            <option>Tejido Respiratorio</option>
+          </optgroup>
+
+          <optgroup label="Endocrino">
+            <option>Tiroides</option>
+            <option>Parótidas</option>
+            <option>Suprarrenales</option>
+            <option>Ovario</option>
+            <option>Testículo</option>
+          </optgroup>
+
+          <optgroup label="Locomotor">
+            <option>Hueso</option>
+            <option>Musculo Esquelético</option>
+          </optgroup>
+          <option>Otros</option>
         </select>
         <button
           class="flex justify-between items-center gap-4 bg-white p-2 border rounded-lg w-full sm:w-auto text-blue-900 hover:bg-blue-50">
@@ -70,16 +132,20 @@
           <div class="px-3 py-1 bg-blue-100 text-blue-900 font-semibold text-sm flex items-center justify-between">
             <p>CASSETTES</p>
             <div class="flex space-x-2">
-              <svg class="h-5 w-5 text-blue-400 hover:text-blue-800" fill="none" viewBox="0 0 23 23"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              <svg class="h-5 w-5 text-blue-400 hover:text-blue-900" fill="none" viewBox="0 0 23 23"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
-              </svg>
+              <button>
+                <svg id="new__cassette" class="h-5 w-5 text-blue-400 hover:text-blue-800" fill="none"
+                  viewBox="0 0 23 23" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </button>
+              <button>
+                <svg class="h-5 w-5 text-blue-400 hover:text-blue-900" fill="none" viewBox="0 0 23 23"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                </svg>
+              </button>
             </div>
           </div>
           <table class="w-full border-collapse text-sm">
@@ -96,7 +162,7 @@
                 <td class="p-1">21-02-2025</td>
                 <td class="p-1">ADFIASDF</td>
                 <td class="p-1">Bazo</td>
-                <td class="p-1 text-right">
+                <td class="p-1 text-left">
                   <button>
                     <svg class="h-5 w-5 text-blue-400 hover:text-blue-900" viewBox="0 0 23 23" fill="none"
                       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -118,27 +184,33 @@
           <div class="text-blue-900 font-semibold text-sm pb-1 mb-1 flex items-center justify-between">
             <p>DETALLE CASSETTE</p>
             <div class="flex space-x-2">
-              <svg class="h-5 w-5 text-blue-400 hover:text-blue-900" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="7" height="7" />
-                <rect x="14" y="3" width="7" height="7" />
-                <rect x="14" y="14" width="7" height="7" />
-                <rect x="3" y="14" width="7" height="7" />
-              </svg>
-              <svg class="h-5 w-5 text-blue-400 hover:text-blue-900" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="3 6 5 6 21 6" />
-                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-                <line x1="10" y1="11" x2="10" y2="17" />
-                <line x1="14" y1="11" x2="14" y2="17" />
-              </svg>
-              <svg class="h-5 w-5 text-blue-400 hover:text-blue-900" viewBox="0 0 24 24" stroke-width="2"
-                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
-                <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
-                <line x1="16" y1="5" x2="19" y2="8" />
-              </svg>
+              <button>
+                <svg class="h-5 w-5 text-blue-400 hover:text-blue-900" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="7" height="7" />
+                  <rect x="14" y="3" width="7" height="7" />
+                  <rect x="14" y="14" width="7" height="7" />
+                  <rect x="3" y="14" width="7" height="7" />
+                </svg>
+              </button>
+              <button>
+                <svg id="delete__cassette" class="h-5 w-5 text-blue-400 hover:text-blue-900" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="3 6 5 6 21 6" />
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                  <line x1="10" y1="11" x2="10" y2="17" />
+                  <line x1="14" y1="11" x2="14" y2="17" />
+                </svg>
+              </button>
+              <button>
+                <svg id="edit__cassette" class="h-5 w-5 text-blue-400 hover:text-blue-900" viewBox="0 0 24 24"
+                  stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" />
+                  <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
+                  <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
+                  <line x1="16" y1="5" x2="19" y2="8" />
+                </svg>
+              </button>
             </div>
           </div>
           <p class="text-gray-700 font-semibold border-b text-sm">DESCRIPCIÓN: <span class="font-normal"></span></p>
@@ -158,10 +230,13 @@
     <div class="w-full bg-white shadow-md rounded-lg overflow-hidden p-4 h-64 text-sm">
       <div class="px-3 py-1 bg-blue-100 text-blue-900 font-semibold flex items-center justify-between">
         <p>MUESTRAS</p>
-        <svg class="h-5 w-5 text-blue-400 hover:text-blue-900" fill="none" viewBox="0 0 23 23" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
+        <button>
+          <svg id="new__muestra" class="h-5 w-5 text-blue-400 hover:text-blue-900" fill="none" viewBox="0 0 23 23"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+        </button>
       </div>
       <table class="w-full border-collapse">
         <thead>
@@ -169,36 +244,113 @@
             <th class="p-1 text-left">Fecha</th>
             <th class="p-1 text-left">Descripción</th>
             <th class="p-1 text-left">Tinción</th>
+            <th></th>
           </tr>
         </thead>
         <tbody class="text-gray-700">
           <tr class="border-b hover:bg-blue-50">
-            <td class="p-1 text-red-500" colspan="3">No se ha encontrado ninguna muestra</td>
+            <td class="p-1 text-red-500 hidden" colspan="3">No se ha encontrado ninguna muestra</td>
+          </tr>
+          <tr class="border-b hover:bg-blue-50">
+            <td class="p-1">21-02-2025</td>
+            <td class="p-1">ADFIASDF</td>
+            <td class="p-1">Amarilla</td>
+            <td class="p-1 text-left">
+              <button>
+                <svg id="detail__muestra" class="h-5 w-5 text-blue-400 hover:text-blue-900" viewBox="0 0 23 23"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                  <polyline points="10 9 9 9 8 9" />
+                </svg>
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <!-- Modal para Nuevo Cassette -->
-    <div class="modal d-none">
+    <div id="new__cassetteModal" class="modal d-none">
       <div class="modal-content">
-        <span class="close-btn">&times;</span>
+        <span id="close__btn" class="close-btn">&times;</span>
         <h2>Nuevo Cassette</h2>
         <form>
           <label for="descripcion">Descripción Corta:</label>
           <input type="text" id="descripcion" name="descripcion" required>
-          <div class="form-group">
-            <div>
+          <div class="flex items-center justify-between">
+            <div class="flex flex-col">
               <label for="fecha">Fecha Órgano:</label>
               <input type="date" id="fecha" name="fecha" required>
             </div>
-            <div>
+            <div class="flex flex-col">
               <label for="organo">Seleccionar Órgano:</label>
               <select id="organo" name="organo" required>
-                <option value="corazon">Corazón</option>
-                <option value="higado">Hígado</option>
-                <option value="riñon">Riñón</option>
-                <option value="pulmon">Pulmón</option>
+                <option disabled selected>Seleccionar un Órgano</option>
+                <option value="*">Todos</option>
+                <optgroup label="Sistema Nervioso">
+                  <option>Encéfalo</option>
+                  <option>Médula Espinal</option>
+                  <option>Nervio</option>
+                  <option>Ganglio Nervios</option>
+                </optgroup>
+
+                <optgroup label="Tegumento">
+                  <option>Piel</option>
+                  <option>Uña</option>
+                  <option>Pelo</option>
+                </optgroup>
+
+                <optgroup label="Cardiovascular">
+                  <option>Corazón</option>
+                  <option>Venas</option>
+                  <option>Arteria</option>
+                </optgroup>
+
+                <optgroup label="Linfático">
+                  <option>Ganglio Linfático</option>
+                  <option>Timo</option>
+                  <option>Bazo</option>
+                </optgroup>
+
+                <optgroup label="Sistema Digestivo">
+                  <option>Lengua</option>
+                  <option>Esófago</option>
+                  <option>Estómago</option>
+                  <option>Intestino Delgado</option>
+                  <option>Intestino Grueso</option>
+                  <option>Diente</option>
+                  <option>Glándula Salivar</option>
+                  <option>Páncrea</option>
+                  <option>Hígado</option>
+                </optgroup>
+
+                <optgroup label="Aparato Excretor">
+                  <option>Riñón</option>
+                  <option>Vejiga</option>
+                </optgroup>
+
+                <optgroup label="Respiratorio">
+                  <option>Tránquea</option>
+                  <option>Bronquios</option>
+                  <option>Tejido Respiratorio</option>
+                </optgroup>
+
+                <optgroup label="Endocrino">
+                  <option>Tiroides</option>
+                  <option>Parótidas</option>
+                  <option>Suprarrenales</option>
+                  <option>Ovario</option>
+                  <option>Testículo</option>
+                </optgroup>
+
+                <optgroup label="Locomotor">
+                  <option>Hueso</option>
+                  <option>Musculo Esquelético</option>
+                </optgroup>
+                <option>Otros</option>
               </select>
             </div>
           </div>
@@ -216,9 +368,9 @@
     </div>
 
     <!-- Modal para confirmación de eliminación -->
-    <div class="modal d-none">
+    <div id="delete__cassetteModal" class="modal d-none">
       <div class="modal-delete">
-        <span class="close-btn">&times;</span>
+        <span id="close__btn__delete" class="close-btn">&times;</span>
         <h2>Eliminar Cassette</h2>
         <p>¿Desea Eliminar el Cassette?</p>
         <p>Al eliminar el cassette se eliminarán también todas sus muestras.</p>
@@ -227,25 +379,84 @@
     </div>
 
     <!-- Modal para Modificar Cassette -->
-    <div class="modal d-none">
+    <div id="edit__cassetteModal" class="modal d-none">
       <div class="modal-content">
-        <span class="close-btn">&times;</span>
+        <span id="close__btn__edit" class="close-btn">&times;</span>
         <h2>Modificar Cassette</h2>
         <form>
           <label for="descripcion">Descripción Corta:</label>
           <input type="text" id="descripcion" name="descripcion" required>
-          <div class="form-group">
-            <div>
+          <div class="flex items-center justify-between">
+            <div class="flex flex-col">
               <label for="fecha">Fecha Órgano:</label>
               <input type="date" id="fecha" name="fecha" required>
             </div>
-            <div>
+            <div class="flex flex-col">
               <label for="organo">Seleccionar Órgano:</label>
               <select id="organo" name="organo" required>
-                <option value="corazon">Corazón</option>
-                <option value="higado">Hígado</option>
-                <option value="riñon">Riñón</option>
-                <option value="pulmon">Pulmón</option>
+                <option disabled selected>Seleccionar un Órgano</option>
+                <option value="*">Todos</option>
+                <optgroup label="Sistema Nervioso">
+                  <option>Encéfalo</option>
+                  <option>Médula Espinal</option>
+                  <option>Nervio</option>
+                  <option>Ganglio Nervios</option>
+                </optgroup>
+
+                <optgroup label="Tegumento">
+                  <option>Piel</option>
+                  <option>Uña</option>
+                  <option>Pelo</option>
+                </optgroup>
+
+                <optgroup label="Cardiovascular">
+                  <option>Corazón</option>
+                  <option>Venas</option>
+                  <option>Arteria</option>
+                </optgroup>
+
+                <optgroup label="Linfático">
+                  <option>Ganglio Linfático</option>
+                  <option>Timo</option>
+                  <option>Bazo</option>
+                </optgroup>
+
+                <optgroup label="Sistema Digestivo">
+                  <option>Lengua</option>
+                  <option>Esófago</option>
+                  <option>Estómago</option>
+                  <option>Intestino Delgado</option>
+                  <option>Intestino Grueso</option>
+                  <option>Diente</option>
+                  <option>Glándula Salivar</option>
+                  <option>Páncrea</option>
+                  <option>Hígado</option>
+                </optgroup>
+
+                <optgroup label="Aparato Excretor">
+                  <option>Riñón</option>
+                  <option>Vejiga</option>
+                </optgroup>
+
+                <optgroup label="Respiratorio">
+                  <option>Tránquea</option>
+                  <option>Bronquios</option>
+                  <option>Tejido Respiratorio</option>
+                </optgroup>
+
+                <optgroup label="Endocrino">
+                  <option>Tiroides</option>
+                  <option>Parótidas</option>
+                  <option>Suprarrenales</option>
+                  <option>Ovario</option>
+                  <option>Testículo</option>
+                </optgroup>
+
+                <optgroup label="Locomotor">
+                  <option>Hueso</option>
+                  <option>Musculo Esquelético</option>
+                </optgroup>
+                <option>Otros</option>
               </select>
             </div>
           </div>
@@ -262,9 +473,9 @@
     </div>
 
     <!-- Modal para Nueva Muestra -->
-    <div class="modal d-none">
+    <div id="new__muestraModal" class="modal d-none">
       <div class="modal-content">
-        <span class="close-btn">&times;</span>
+        <span id="close__btn__newMuestra" class="close-btn">&times;</span>
         <h2>Nueva Muestra</h2>
         <form>
           <label for="descripcion">Descripción:</label>
@@ -278,10 +489,12 @@
             <div>
               <label for="tincion">Tinción:</label>
               <select id="tincion" name="tincion" required>
-                <option value="hematoxilina_eosina">Hematoxilina-Eosina</option>
-                <option value="tricomico">Tricómico</option>
-                <option value="gram">Gram</option>
-                <option value="grocott">Grocott</option>
+                <option disabled selected>Seleccionar Tición</option>
+                <option>Hematoxilina Eosina (HE)</option>
+                <option>Giemsa</option>
+                <option>Gram</option>
+                <option>Azul de Metileno</option>
+                <option>Papanicolau</option>
               </select>
             </div>
           </div>
@@ -296,10 +509,74 @@
         </form>
       </div>
     </div>
-    <!-- Modal para Eliminar Muestra -->
-    <div class="modal d-none" id="delete-sample-modal">
+
+    <!-- Modal para Detalle Muestra -->
+    <div id="detail__muestraModal" class="modal d-none">
       <div class="modal-content">
-        <span class="close-btn">&times;</span>
+        <span id="close__btn__detailMuestra" class="close-btn">&times;</span>
+        <h2>Detalle Muestra</h2>
+
+        <div class="action-buttons flex items-center">
+          <button>
+            <svg class="h-6 w-6 text-blue-400 hover:text-blue-900" width="24" height="24" viewBox="0 0 24 24"
+              stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" />
+              <rect x="4" y="4" width="6" height="6" rx="1" />
+              <line x1="7" y1="17" x2="7" y2="17.01" />
+              <rect x="14" y="4" width="6" height="6" rx="1" />
+              <line x1="7" y1="7" x2="7" y2="7.01" />
+              <rect x="4" y="14" width="6" height="6" rx="1" />
+              <line x1="17" y1="7" x2="17" y2="7.01" />
+              <line x1="14" y1="14" x2="17" y2="14" />
+              <line x1="20" y1="14" x2="20" y2="14.01" />
+              <line x1="14" y1="14" x2="14" y2="17" />
+              <line x1="14" y1="20" x2="17" y2="20" />
+              <line x1="17" y1="17" x2="20" y2="17" />
+              <line x1="20" y1="17" x2="20" y2="20" />
+            </svg>
+          </button>
+          <button title="Eliminar muestra">
+            <svg id="delete__muestra" id="delete__cassette" class="h-5 w-5 text-blue-400 hover:text-blue-900"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <polyline points="3 6 5 6 21 6" />
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+              <line x1="10" y1="11" x2="10" y2="17" />
+              <line x1="14" y1="11" x2="14" y2="17" />
+            </svg>
+          </button>
+          <button title="Modificar muestra">
+            <svg id="edit__muestra" class="h-5 w-5 text-blue-400 hover:text-blue-900" viewBox="0 0 24 24"
+              stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" />
+              <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
+              <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
+              <line x1="16" y1="5" x2="19" y2="8" />
+            </svg>
+          </button>
+        </div>
+
+
+        <div class="sample-details">
+          <p><strong>Descripción:</strong> Descripción de la muestra.</p>
+          <p><strong>Fecha:</strong> 2025-02-06</p>
+          <p><strong>Tinción:</strong> Hematoxilina Eosina</p>
+          <p><strong>Observaciones:</strong> Observaciones de la muestra.</p>
+
+
+          <div class="sample-images">
+            <img src="" alt="Imagen 1" />
+            <img src="" alt="Imagen 2" />
+            <button class="add-image-btn">Añadir Imagen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para Eliminar Muestra -->
+    <div id="delete__muestraModal" class="modal d-none" id="delete-sample-modal">
+      <div class="modal-content">
+        <span id="close__btn__deleteMuestra" class="close-btn">&times;</span>
         <h2>Eliminar Muestra</h2>
         <p>¿Seguro que deseas eliminar esta muestra? Esta acción no se puede deshacer.</p>
         <button id="confirm-delete">Eliminar</button>
@@ -308,9 +585,9 @@
     </div>
 
     <!-- Modal para Modificar Muestra -->
-    <div class="modal d-none" id="edit-sample-modal">
+    <div id="edit__muestraModal" class="modal d-none" id="edit-sample-modal">
       <div class="modal-content">
-        <span class="close-btn">&times;</span>
+        <span id="close__btn__editMuestra" class="close-btn">&times;</span>
         <h2>Modificar Muestra</h2>
         <form>
           <label for="descripcion">Descripción:</label>
@@ -324,10 +601,12 @@
             <div>
               <label for="tincion">Tinción:</label>
               <select id="tincion" name="tincion" required>
-                <option value="hematoxilina_eosina">Hematoxilina-Eosina</option>
-                <option value="tricomico">Tricómico</option>
-                <option value="gram">Gram</option>
-                <option value="grocott">Grocott</option>
+                <option disabled selected>Seleccionar Tición</option>
+                <option>Hematoxilina Eosina (HE)</option>
+                <option>Giemsa</option>
+                <option>Gram</option>
+                <option>Azul de Metileno</option>
+                <option>Papanicolau</option>
               </select>
             </div>
           </div>
@@ -340,40 +619,9 @@
 
           <button type="submit">Modificar Muestra</button>
         </form>
-
-        <!-- Modal para Detalle Muestra -->
-        <div class="modal d-none">
-          <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h2>Detalle Muestra</h2>
-
-            <div class="action-buttons">
-              <button id="create-new" title="Crear nueva muestra">+</button>
-              <button id="delete-sample" title="Eliminar muestra">
-                <i class="fas fa-trash-alt"></i>
-              </button>
-              <button id="edit-sample" title="Modificar muestra">
-                <i class="fas fa-pencil-alt"></i>
-              </button>
-            </div>
-
-
-            <div class="sample-details">
-              <p><strong>Descripción:</strong> Descripción de la muestra.</p>
-              <p><strong>Fecha:</strong> 2025-02-06</p>
-              <p><strong>Tinción:</strong> Hematoxilina-Eosina</p>
-              <p><strong>Observaciones:</strong> Observaciones de la muestra.</p>
-
-
-              <div class="sample-images">
-                <img src="image1.jpg" alt="Imagen 1" />
-                <img src="image2.jpg" alt="Imagen 2" />
-                <button class="add-image-btn">Añadir Imagen</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <script src="script.js"></script>
+      </div>
+    </div>
+    <script src="./../js/funcionalities.js"></script>
 </body>
 
 </html>
