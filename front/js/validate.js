@@ -14,6 +14,7 @@ const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,16}$/;
 const formSolicitud = document.getElementById("solicitudForm");
 const emailInputSolicitud = document.getElementById("solicitudEmail");
 const emailErrorSolicitud = document.getElementById("error-email-solicitud");
+import { console } from "inspector";
 import {getinforegister  , testlogin} from "./validateApis.js";
 
 
@@ -100,8 +101,8 @@ let  validarLoginFormulario = async (event)=> {
     if (!passwordRegex.test(loginPassword)) {
         return showError("error-login-password");
     }
-    let res = await textlogin(loginEmail , loginPassword);
-    
+    //let res = await textlogin(loginEmail , loginPassword);
+    //console.log(res); 
     //console.log(loginEmail , loginPassword);
 }
 

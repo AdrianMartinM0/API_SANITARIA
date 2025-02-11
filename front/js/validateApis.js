@@ -45,8 +45,27 @@ export let getinforegister = async ({email_param, nombre_param, apellidos_param,
 };
 
 export let testlogin = async (email , passwd )=>{
+  try {
 
+let json = {
+  password : passwd
+}
+    let response = await fetch(`http://localhost:3000/v1/usuario/login/${email}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json"},
+      body: JSON.stringify(json),
+    }) 
+  //  let data = await response.json();
+
+    return data;
+  
+ 
+  } catch (error) {
+ 
+   
+  }
 }
 
 
-  
+let a = await testlogin("lolgerwtr@gmail.com" , "Puesto70**" )
+console.log(a); 
