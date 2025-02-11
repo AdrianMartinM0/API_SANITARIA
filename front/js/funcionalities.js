@@ -14,6 +14,19 @@ const new__muestra = document.getElementById ("new__muestra");
 const new__muestraModal = document.getElementById ("new__muestraModal");
 const close__btn__newMuestra = document.getElementById ("close__btn__newMuestra");
 
+const detail__muestra = document.getElementById ("detail__muestra");
+const detail__muestraModal = document.getElementById ("detail__muestraModal");
+const close__btn__detailMuestra = document.getElementById ("close__btn__detailMuestra");
+
+const delete__muestra = document.getElementById ("delete__muestra");
+const delete__muestraModal = document.getElementById ("delete__muestraModal");
+const close__btn__deleteMuestra = document.getElementById ("close__btn__deleteMuestra");
+
+const edit__muestra = document.getElementById ("edit__muestra");
+const edit__muestraModal = document.getElementById ("edit__muestraModal");
+const close__btn__editMuestra = document.getElementById ("close__btn__editMuestra");
+
+
 const showModal = (event) => {
     const modalId = event.target.id + "Modal";
     document.getElementById(modalId).classList.remove("d-none");
@@ -37,6 +50,15 @@ const closeModal = (event) => {
 
 // new__muestra.addEventListener("click", showModal);
 // close__btn__newMuestra.addEventListener("click", closeModal);
+
+detail__muestra.addEventListener("click", showModal);
+close__btn__detailMuestra.addEventListener("click", closeModal);
+
+delete__muestra .addEventListener("click", showModal);
+close__btn__deleteMuestra.addEventListener("click", closeModal);
+
+edit__muestra.addEventListener("click", showModal);
+close__btn__editMuestra.addEventListener("click", closeModal);
 
 
 document.addEventListener('DOMContentLoaded', function() {
