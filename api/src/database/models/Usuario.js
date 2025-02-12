@@ -107,10 +107,9 @@ Usuario.init(
             beforeCreate: async (user) => {
                 user.password = await bcrypt.hash(user.password, 14);
             },
-            beforeUpdate: async (user) => {
-                if (user.changed('password')) {
-                    user.password = await bcrypt.hash(user.password, 14);
-                }
+            beforeUpdate: async (user, options) => {
+                options.validate = false;
+                user.password = await bcrypt.hash(user.password, 14);
             },
         }
     },
