@@ -90,7 +90,7 @@ const updateUserController = async ( req, res, next ) => {
         }
         const pass = generatePass();
         usu = await updateUser(req.params.email, pass);
-        res.status(200).send(usu);
+        res.status(200).send({password : pass});
     }catch(error){
         next(error);
     }
