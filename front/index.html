@@ -7,6 +7,16 @@
     <title>SANITARIA</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+    (function(){
+        emailjs.init({
+            publicKey: "4ycfmOAujm31vZBNE",
+        });
+    })();
+    </script>
 </head>
 
 <body class="flex items-center justify-center min-h-screen bg-gray-100">
@@ -159,6 +169,7 @@
 <script  type="module"   src="./js/validate.js"></script>
 <script  type="module"   src="./js/validateApis.js"></script>
 <script src="./js/funcionalities.js"></script>
+<script src="./js/solicitudPass.js"></script>
 
 </html>
 </head>
