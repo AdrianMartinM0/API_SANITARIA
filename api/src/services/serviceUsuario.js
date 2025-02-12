@@ -40,7 +40,7 @@ const createUser = async ({ email, nombre, apellidos, password, centro }) => {
 }
 
 const updateUser = async (email, password) => {
-    const usu = await Usuario.update(
+    await Usuario.update(
         {
             password: password 
         },
@@ -50,7 +50,6 @@ const updateUser = async (email, password) => {
             } 
         }
     );
-    return usu;
 }
 
 const updateRolUser = async (email) => {
