@@ -57,7 +57,7 @@ let json = {
     }) 
   //  let data = await response.json();
 
-    return data;
+    return response.text();
   
  
   } catch (error) {
@@ -67,5 +67,5 @@ let json = {
 }
 
 
-let a = await testlogin("lolgerwtr@gmail.com" , "Puesto70**" )
-console.log(a); 
+let a = await testlogin("lola@gmail.com" , "Puesto70**" )
+console.log( "esto : " , a); 
