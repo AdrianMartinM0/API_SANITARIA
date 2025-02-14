@@ -7,7 +7,7 @@ const centroInput = document.getElementById("centro");
 const emailInput = document.getElementById("email");
 const passregister = document.getElementById("passregister");
 const confirmpassregister = document.getElementById("confirmpassregister");
-
+const register = document.getElementById("register"); 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,16}$/;
 
@@ -107,17 +107,12 @@ let  validarLoginFormulario = async (event)=> {
 }
 
 
-
-
-    
-    
-
-
-
-
-let textlogin = (email , passwd)=>{
-
+let changetoregister = ()=>{
+    loginContainer.setAttribute("class" , "d-none" )
+    registerContainer.setAttribute("class" , "block" )
 }
 
+    
+register.addEventListener("click" , changetoregister);
 
 loginForm.addEventListener("submit", validarLoginFormulario);
