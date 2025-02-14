@@ -1,4 +1,4 @@
-// const { console } = require("inspector");
+//const { console } = require("inspector");
 
 const form = document.getElementById("registroForm");
 const nombreInput = document.getElementById("nombre");
@@ -10,12 +10,12 @@ const confirmpassregister = document.getElementById("confirmpassregister");
 const register = document.getElementById("register"); 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,16}$/;
-
+let errorEmail = document.getElementById("error-gmaildoesnotexist"); 
 const formSolicitud = document.getElementById("solicitudForm");
 const emailInputSolicitud = document.getElementById("solicitudEmail");
 const emailErrorSolicitud = document.getElementById("error-email-solicitud");
-import { console } from "inspector";
-import {getinforegister  , testlogin} from "./validateApis.js";
+
+import {getinforegister  , getUser , testlogin} from "./validateApis.js";
 
 
 function showError(id) {
@@ -64,17 +64,25 @@ console.log(mi)
 
 }
 
-function validarSolicitud(event) {
+let   validarSolicitud = async (event)=> {
     event.preventDefault();
 
     let email = emailInputSolicitud.value.trim();
+    let gmail = await getUser(email);
+    console.log(gmail)
+    if (gmail){
+        hideErrors();
 
-    hideErrors();
+        if (!emailRegex.test(email)) return showError("error-email-solicitud");
+    
+        alert ("Solicitud enviada con éxito");
+        // formSolicitud.submit();
+    }else{
 
-    if (!emailRegex.test(email)) return showError("error-email-solicitud");
-
-    alert ("Solicitud enviada con éxito");
-    // formSolicitud.submit();
+         showError("error-gmaildoesnotexist");
+    }
+  
+    
 }
 
 //LISTENER
@@ -101,9 +109,11 @@ let  validarLoginFormulario = async (event)=> {
     if (!passwordRegex.test(loginPassword)) {
         return showError("error-login-password");
     }
-    //let res = await textlogin(loginEmail , loginPassword);
-    //console.log(res); 
-    //console.log(loginEmail , loginPassword);
+    let res = await testlogin(loginEmail , loginPassword);
+    console.log(res)
+
+
+
 }
 
 

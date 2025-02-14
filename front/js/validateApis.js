@@ -1,13 +1,16 @@
-let getUser = async (email) => {
+export let getUser = async (email) => {
   try {
     let response = await fetch(`http://localhost:3000/v1/usuario/${email}`);
-    if (response.status != 200) 
+    console.log(response)
+    if (response.ok) {
+      return true;
+    }else{
       return false;
-
-    return true;
+    }
+    
+   
     
   } catch (error) {
-    console.error("Error fetching user:", error);
     return false;
   }
 };
@@ -46,7 +49,8 @@ export let getinforegister = async ({email_param, nombre_param, apellidos_param,
 
 export let testlogin = async (email , passwd )=>{
   try {
-
+    let testemail = await getUser(email);
+if(testemail){
 let json = {
   password : passwd
 }
@@ -58,7 +62,9 @@ let json = {
   //  let data = await response.json();
 
     return response.text();
-  
+}else{
+  console.log("gmail inexistente ")
+}
  
   } catch (error) {
  
@@ -67,5 +73,6 @@ let json = {
 }
 
 
-let a = await testlogin("lola@gmail.com" , "Puesto70**" )
-console.log( "esto : " , a); 
+//let a = await testlogin("lola@gmail.com" , "Puesto70**" )
+//console.log( "esto : " , a); 
+

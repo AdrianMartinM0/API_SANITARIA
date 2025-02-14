@@ -97,7 +97,7 @@
 
  <!-- LOGIN -->
 <div id="loginContainer" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md ">
-    <form id="loginForm" action="#" method="post" class="space-y-6" novalidate>
+    <form id="loginForm" action="./pages/dashboard.html" method="post" class="space-y-6" novalidate>
         <h2 class="text-2xl font-bold text-center text-blue-400 mb-6">Login</h2>
 
         <!-- Campo de email -->
@@ -159,7 +159,7 @@
                 class="w-full py-3 bg-blue-400 text-white rounded-md font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400">
                 Solicitar Contraseña
             </button>
-        
+        <span   class="text-red-500 hidden" id="error-gmaildoesnotexist"> Email inexistente </span>
             <p class="text-center text-gray-600 mt-4">Volver a <a href="#"  id="backToLoginLink"
                 class="text-blue-500">Login</a></p>
         </form>
