@@ -79,7 +79,7 @@ let   validarSolicitud = async (event)=> {
         if (!emailRegex.test(email)) return showError("error-email-solicitud");
     
         alert ("Solicitud enviada con éxito");
-        // formSolicitud.submit();
+        
     }else{
 
          showError("error-gmaildoesnotexist");
@@ -119,8 +119,9 @@ if (!res) {
     showError("error-userdoesnotexist");
 }else{
     sessionStorage.setItem("user-token", res);
-    window.location.haref = './pages/dashboard.html'; 
-    //console.log(res); 
+    
+    window.location.href = './pages/dashboard.html'; 
+  
 }
 
 

@@ -86,7 +86,7 @@
                 </div>
                 <small class="text-red-500 hidden" id="error-confirm-password">Las contraseñas no coinciden.</small>
             </div>
-            <span   class="text-red-500 hidden" id="error-gmailexist"> Email existente , registrate con otro .  </span>
+            <small   class="text-red-500 hidden" id="error-gmailexist"> Email existente , registrate con otro .  </small>
 
             <button type="submit" class="w-full bg-blue-400 text-white p-3 rounded-lg hover:bg-blue-500 transition">
                 Registro
@@ -130,7 +130,7 @@
                 La contraseña debe tener entre 8-16 caracteres, incluir mayúsculas, minúsculas, números y símbolos.
             </small>
         </div>
-        <span   class="text-red-500 hidden" id="error-userdoesnotexist">Usuario inexistente , registrate o inicia session con un Usuario existente .  </span>
+        <small   class="text-red-500 hidden" id="error-userdoesnotexist">Usuario inexistente , registrate o inicia session con un Usuario existente .  </small>
 
         <!-- Botón de login -->
         <button type="submit"
@@ -157,12 +157,12 @@
                     class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
                 <small id="error-email-solicitud" class="text-red-500 hidden">Ingrese un email válido.</small>
             </div>
-        
+            <small   class="text-red-500 hidden" id="error-gmaildoesnotexist"> Email inexistente </small>
+
             <button type="submit"
                 class="w-full py-3 bg-blue-400 text-white rounded-md font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400">
                 Solicitar Contraseña
             </button>
-        <span   class="text-red-500 hidden" id="error-gmaildoesnotexist"> Email inexistente </span>
             <p class="text-center text-gray-600 mt-4">Volver a <a href="#"  id="backToLoginLink"
                 class="text-blue-500">Login</a></p>
         </form>
