@@ -113,8 +113,15 @@ let  validarLoginFormulario = async (event)=> {
         return showError("error-login-password");
     }
     let res = await testlogin(loginEmail , loginPassword);
-    console.log(res)
-
+   
+if (!res) {
+    
+    showError("error-userdoesnotexist");
+}else{
+    sessionStorage.setItem("user-token", res);
+    window.location.haref = './pages/dashboard.html'; 
+    //console.log(res); 
+}
 
 
 }

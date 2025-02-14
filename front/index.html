@@ -99,7 +99,7 @@
 
  <!-- LOGIN -->
 <div id="loginContainer" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md ">
-    <form id="loginForm" action="./pages/dashboard.html" method="post" class="space-y-6" novalidate>
+    <form id="loginForm" action="#" method="POST" class="space-y-6" novalidate>
         <h2 class="text-2xl font-bold text-center text-blue-400 mb-6">Login</h2>
 
         <!-- Campo de email -->
@@ -130,6 +130,7 @@
                 La contraseña debe tener entre 8-16 caracteres, incluir mayúsculas, minúsculas, números y símbolos.
             </small>
         </div>
+        <span   class="text-red-500 hidden" id="error-userdoesnotexist">Usuario inexistente , registrate o inicia session con un Usuario existente .  </span>
 
         <!-- Botón de login -->
         <button type="submit"
