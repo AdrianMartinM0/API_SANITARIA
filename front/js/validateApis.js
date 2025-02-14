@@ -4,8 +4,6 @@ export let getUser = async (email) => {
     console.log(response)
     if (response.ok) {
       return true;
-    }else{
-      return false;
     }
     
    
@@ -35,7 +33,8 @@ export let getinforegister = async ({email_param, nombre_param, apellidos_param,
       });
     
         return true;
-     
+
+    
    
     } catch (error) {
    
@@ -43,6 +42,7 @@ export let getinforegister = async ({email_param, nombre_param, apellidos_param,
     }
   
   } else {
+   
     return false;
   }
 };
@@ -63,7 +63,7 @@ let json = {
 
     return response.text();
 }else{
-  console.log("gmail inexistente ")
+ return false;
 }
  
   } catch (error) {
@@ -73,6 +73,6 @@ let json = {
 }
 
 
-//let a = await testlogin("lola@gmail.com" , "Puesto70**" )
-//console.log( "esto : " , a); 
+let a = await getUser("prueba@gmail.com")
+console.log( a); 
 

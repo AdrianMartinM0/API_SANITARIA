@@ -55,12 +55,15 @@ let data =  {
    password_param :  confirmPassword , 
 }
 
-let mi   = await  getinforegister(data);
+let isregister   = await  getinforegister(data);
+if (isregister) {
+alert ("Usuario registrado correctamente !");
+}else{
+    showError("error-gmailexist");
+   
+}
 
-console.log(mi)
-
-//alert ("Solicitud enviada con éxito");
-   //  form.submit();
+   //form.submit();
 
 }
 
