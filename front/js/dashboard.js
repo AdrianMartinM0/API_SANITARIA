@@ -8,7 +8,7 @@ let identificador_cassette = document.getElementById("identificador_cassette");
 let tbodycassetes = document.getElementById("tbodycassetes"); 
 
 const user_token = sessionStorage.getItem('user-token');
-import {postCassette} from "./dashboardApis.js"
+import {postCassette , GetallCassetesFromUser} from "./dashboardApis.js"
 console.log(user_token)
 let insertnewCassete =  async (event)=>{
    
@@ -32,7 +32,12 @@ let insertnewCassete =  async (event)=>{
 
 }
 
-let printAllCassetes = () => {
+let printAllCassetes =  async () => {
+
+    let array = await GetallCassetesFromUser();
+array.forEach(element => {
+    
+
     let fragment = document.createDocumentFragment();
 
     let tr = document.createElement("tr");
@@ -40,15 +45,16 @@ let printAllCassetes = () => {
 
     let td1 = document.createElement("td");
     td1.setAttribute("class", "p-1");
-    td1.textContent = "21-02-2025";
+    td1.textContent = element.descripcion;
 
     let td2 = document.createElement("td");
     td2.setAttribute("class", "p-1");
-    td2.textContent = "ADFIASDF";
+    let fecha = element.fecha.split("T")[0];
+    td2.textContent = fecha;
 
     let td3 = document.createElement("td");
     td3.setAttribute("class", "p-1");
-    td3.textContent = "Bazo";
+    td3.textContent = element.organo;
 
     let td4 = document.createElement("td");
     td4.setAttribute("class", "p-1 text-left");
@@ -59,6 +65,7 @@ let printAllCassetes = () => {
 
 
     button.innerHTML =    svg;
+    button.setAttribute("value" , "lol");
     td4.appendChild(button);
 
     tr.appendChild(td1);
@@ -67,8 +74,9 @@ let printAllCassetes = () => {
     tr.appendChild(td4);
 
     fragment.appendChild(tr);
-
     tbodycassetes.appendChild(fragment);
+});
+    
 };
 
 let create_svg = () => {
