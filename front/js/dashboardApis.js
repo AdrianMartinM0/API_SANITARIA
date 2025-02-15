@@ -85,3 +85,32 @@ export let DeleteCasseteById = async (id)=>{
         return false;
       }
 }
+
+
+
+
+export let EditCasseteById = async (id , data)=>{
+    //  http://localhost:3000/v1/cassette/1 
+  
+      try {
+          let response = await fetch(`http://localhost:3000/v1/cassette/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" , 
+                         "user-token":  sessionStorage.getItem('user-token')
+          },
+          body: JSON.stringify(data),
+        });
+        
+            if (response.ok) {
+              return true;
+            }else{
+              return false;
+            }
+      
+        
+       
+        } catch (error) {
+       
+          return false;
+        }
+  }

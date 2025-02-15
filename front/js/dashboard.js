@@ -11,9 +11,17 @@ let fech = document.getElementById("fech");
 let iden = document.getElementById("iden");
 let carac = document.getElementById("carac");
 let obs = document.getElementById("obs");
+let desc = document.getElementById("desc")
 let deletebutton = document.getElementById("deletebutton");
 const user_token = sessionStorage.getItem('user-token');
-import {postCassette , GetallCassetesFromUser , GetOneCassetteById  , DeleteCasseteById} from "./dashboardApis.js"
+let observaciones_edit = document.getElementById("observaciones_edit");
+let caracteristicas_edit = document.getElementById("caracteristicas_edit");
+let organo_edit  = document.getElementById("organo_edit");
+let fecha_edit = document.getElementById("fecha_edit");
+let identificador_edit  = document.getElementById("identificador_edit");
+let descripcion_edit  = document.getElementById("descripcion_edit");
+let editform = document.getElementById("editform");
+import {postCassette , GetallCassetesFromUser , GetOneCassetteById  , EditCasseteById,  DeleteCasseteById} from "./dashboardApis.js"
 console.log(user_token)
 let insertnewCassete =  async (event)=>{
    
@@ -124,15 +132,32 @@ let imprimirdetalles = async (id)=>{
     iden.textContent = "";
     carac.textContent = "";
     obs.textContent = "";
+    desc.textContent = "";
+    //
+     observaciones_edit.value = "";
+ caracteristicas_edit.value = "";
+ organo_edit.value  ="";
+fecha_edit.value = "";
+identificador_edit.value  = "";
+ descripcion_edit.value  = "";
     let element = await GetOneCassetteById(num)
      org.textContent = element.organo;
      fech.textContent = element.fecha.split("T")[0]
      iden.textContent = element.identificador_cassette;
      carac.textContent = element.caracteristicas;
      obs.textContent = element.observaciones;
+     desc.textContent = element.descripcion;
+
+     //
+     observaciones_edit.value = element.observaciones;
+     caracteristicas_edit.value = element.caracteristicas;
+     organo_edit.value  = element.organo;
+    fecha_edit.value = element.fecha.split("T")[0];
+    identificador_edit.value  = element.identificador_cassette;
+     descripcion_edit.value  =  element.descripcion;
 }
 
-let deletecassete = async ()=>{
+let DeleteCassete = async ()=>{
     let cassete = localStorage.getItem('cassette');
 let response = await DeleteCasseteById(cassete);
 if (response) {
@@ -140,7 +165,28 @@ if (response) {
 }
 printAllCassetes()
 }
+
+
+
+let  EditCassette = async (event )=>{
+    event.preventDefault(); 
+    let cassete = localStorage.getItem('cassette');
+    let data = {
+        observaciones : observaciones_edit.value ,
+        caracteristicas :  caracteristicas_edit.value,
+        organo :  organo_edit.value  ,
+        fecha :  fecha_edit.value ,
+        identificador_cassete :  identificador_edit.value,  
+        descripcion : descripcion_edit.value ,
+    }
+    console.log(data)
+  let response = await  EditCasseteById( cassete, data );
+  console.log(response)
+    printAllCassetes()
+   imprimirdetalles(cassete)
+}
 printAllCassetes()
-deletebutton.addEventListener("click" , deletecassete)
+editform.addEventListener("submit" ,EditCassette );
+deletebutton.addEventListener("click" , DeleteCassete)
 tbodycassetes.addEventListener("click" , printDetailsCassette )
 createCassette.addEventListener("submit" , insertnewCassete)
