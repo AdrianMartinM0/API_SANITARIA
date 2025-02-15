@@ -6,19 +6,12 @@ let caracteristicas = document.getElementById("caracteristicas");
 let observaciones = document.getElementById("observaciones");
 let identificador_cassette = document.getElementById("identificador_cassette");
 const user_token = sessionStorage.getItem('user-token');
+import {postCassette} from "./dashboardApis.js"
 console.log(user_token)
-let insertnewCassete = (event)=>{
+let insertnewCassete =  async (event)=>{
    
     event.preventDefault(); 
-    console.log(descripcion.value)
-
-    console.log(fecha.value)
-
-    console.log(organo.value)
-
-    console.log(caracteristicas.value)
-
-    console.log(observaciones.value)
+  
     let data = {
         descripcion : descripcion.value,
         fecha : fecha.value , 
@@ -26,7 +19,12 @@ let insertnewCassete = (event)=>{
         caracteristicas : caracteristicas.value , 
         observaciones : observaciones.value , 
         identificador_cassette :  identificador_cassette.value ,
-        user_token : user_token
+      
+    }
+
+    let response = await postCassette(data);
+    if (response){
+        alert ("Cassette registrado correctamente !");
     }
 
 
