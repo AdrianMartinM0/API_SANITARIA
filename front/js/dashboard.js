@@ -6,9 +6,13 @@ let caracteristicas = document.getElementById("caracteristicas");
 let observaciones = document.getElementById("observaciones");
 let identificador_cassette = document.getElementById("identificador_cassette");
 let tbodycassetes = document.getElementById("tbodycassetes"); 
-
+let org = document.getElementById("org");
+let fech = document.getElementById("fech");
+let iden = document.getElementById("iden");
+let carac = document.getElementById("carac");
+let obs = document.getElementById("obs");
 const user_token = sessionStorage.getItem('user-token');
-import {postCassette , GetallCassetesFromUser} from "./dashboardApis.js"
+import {postCassette , GetallCassetesFromUser , GetOneCassetteById} from "./dashboardApis.js"
 console.log(user_token)
 let insertnewCassete =  async (event)=>{
    
@@ -33,7 +37,7 @@ let insertnewCassete =  async (event)=>{
 }
 
 let printAllCassetes =  async () => {
-
+    tbodycassetes.innerHTML =""; 
     let array = await GetallCassetesFromUser();
 array.forEach(element => {
     
@@ -42,15 +46,15 @@ array.forEach(element => {
 
     let tr = document.createElement("tr");
     tr.setAttribute("class", "border-b hover:bg-blue-50");
-
+    let fecha = element.fecha.split("T")[0];
     let td1 = document.createElement("td");
     td1.setAttribute("class", "p-1");
-    td1.textContent = element.descripcion;
+    td1.textContent = fecha;
 
     let td2 = document.createElement("td");
     td2.setAttribute("class", "p-1");
-    let fecha = element.fecha.split("T")[0];
-    td2.textContent = fecha;
+  
+    td2.textContent = element.descripcion;
 
     let td3 = document.createElement("td");
     td3.setAttribute("class", "p-1");
@@ -65,7 +69,10 @@ array.forEach(element => {
 
 
     button.innerHTML =    svg;
-    button.setAttribute("value" , "lol");
+    button.setAttribute("value" , element.id);
+    button.setAttribute("id" , "button_details");
+   
+    
     td4.appendChild(button);
 
     tr.appendChild(td1);
@@ -80,7 +87,7 @@ array.forEach(element => {
 };
 
 let create_svg = () => {
-    let svg = `<svg class="h-5 w-5 text-blue-400 hover:text-blue-900" viewBox="0 0 23 23" fill="none"
+    let svg = `<svg class="h-5 w-11 text-blue-400 hover:text-blue-900" stroke-width="5" viewBox="0 0 23 23" fill="none"
     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
     <polyline points="14 2 14 8 20 8" />
@@ -92,13 +99,37 @@ let create_svg = () => {
     return svg;
 }
 
+let printDetailsCassette = async (event)=>{
+    
+    let  numero ;
+    if (event.target.parentElement.parentElement.tagName == "BUTTON") {
+     numero  = event.target.parentElement.parentElement.getAttribute("value"); 
+
+     await imprimirdetalles(numero);
+    }
+    
 
 
 
+} ; 
 
 
+let imprimirdetalles = async (id)=>{
+    let num = Number(id)
+    org.textContent = "";
+    fech.textContent = "";
+    iden.textContent = "";
+    carac.textContent = "";
+    obs.textContent = "";
+    let element = await GetOneCassetteById(num)
+     org.textContent = element.organo;
+     fech.textContent = element.fecha.split("T")[0]
+     iden.textContent = element.identificador_cassette;
+     carac.textContent = element.caracteristicas;
+     obs.textContent = element.observaciones;
+}
 
 printAllCassetes(); 
 
-
+tbodycassetes.addEventListener("click" , printDetailsCassette )
 createCassette.addEventListener("submit" , insertnewCassete)
