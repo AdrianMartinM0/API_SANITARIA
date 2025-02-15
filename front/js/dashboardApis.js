@@ -63,7 +63,7 @@ export let GetOneCassetteById = async (id)=>{
 
 
 export let DeleteCasseteById = async (id)=>{
-    http://localhost:3000/v1/cassette/1 
+  //  http://localhost:3000/v1/cassette/1 
 
     try {
         let response = await fetch(`http://localhost:3000/v1/cassette/${id}`, {
