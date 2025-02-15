@@ -11,8 +11,9 @@ let fech = document.getElementById("fech");
 let iden = document.getElementById("iden");
 let carac = document.getElementById("carac");
 let obs = document.getElementById("obs");
+let deletebutton = document.getElementById("deletebutton");
 const user_token = sessionStorage.getItem('user-token');
-import {postCassette , GetallCassetesFromUser , GetOneCassetteById} from "./dashboardApis.js"
+import {postCassette , GetallCassetesFromUser , GetOneCassetteById  , DeleteCasseteById} from "./dashboardApis.js"
 console.log(user_token)
 let insertnewCassete =  async (event)=>{
    
@@ -31,6 +32,7 @@ let insertnewCassete =  async (event)=>{
     let response = await postCassette(data);
     if (response){
         alert ("Cassette registrado correctamente !");
+        printAllCassetes()
     }
 
 
@@ -116,6 +118,7 @@ let printDetailsCassette = async (event)=>{
 
 let imprimirdetalles = async (id)=>{
     let num = Number(id)
+    localStorage.setItem('cassette', id);
     org.textContent = "";
     fech.textContent = "";
     iden.textContent = "";
@@ -129,7 +132,15 @@ let imprimirdetalles = async (id)=>{
      obs.textContent = element.observaciones;
 }
 
-printAllCassetes(); 
-
+let deletecassete = async ()=>{
+    let cassete = localStorage.getItem('cassette');
+let response = await DeleteCasseteById(cassete);
+if (response) {
+    alert ("Cassette eliminado  correctamente !");
+}
+printAllCassetes()
+}
+printAllCassetes()
+deletebutton.addEventListener("click" , deletecassete)
 tbodycassetes.addEventListener("click" , printDetailsCassette )
 createCassette.addEventListener("submit" , insertnewCassete)

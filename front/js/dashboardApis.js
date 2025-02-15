@@ -60,3 +60,28 @@ export let GetOneCassetteById = async (id)=>{
         return false;
       }
 }
+
+
+export let DeleteCasseteById = async (id)=>{
+    http://localhost:3000/v1/cassette/1 
+
+    try {
+        let response = await fetch(`http://localhost:3000/v1/cassette/${id}`, {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" , 
+                       "user-token":  sessionStorage.getItem('user-token')
+        }    });
+      
+          if (response.ok) {
+            return true;
+          }else{
+            return false;
+          }
+    
+      
+     
+      } catch (error) {
+     
+        return false;
+      }
+}

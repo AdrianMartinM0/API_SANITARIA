@@ -68,7 +68,7 @@ const updateCassetteController = async(req , res , next)=>{
 
 const deleteCasseteController = async (req , res , next)=>{
     try {
-        let idcassette = await getoneCassetteById(req.params.id);
+        let idcassette = await getOneCassetteById(req.params.id);
         if (!idcassette) {
             const error = new Error('El Cassete no existe');
             error.status=400;
