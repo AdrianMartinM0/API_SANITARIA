@@ -183,7 +183,7 @@ let  EditCassette = async (event )=>{
   let response = await  EditCasseteById( cassete, data );
   console.log(response)
     printAllCassetes()
-   imprimirdetalles(cassete)      
+   imprimirdetalles(cassete)
 }
 printAllCassetes()
 editform.addEventListener("submit" ,EditCassette );
