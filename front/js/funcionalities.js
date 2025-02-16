@@ -134,6 +134,20 @@ close__btn__editMuestra.addEventListener("click", closeModal);
 //         registerContainer.classList.remove('d-none');
 //     });
 
+    //Volver al formulario de login
+  /*  backToLoginRegister.addEventListener('click', function(event){
+        event.preventDefault();
+        registerContainer.classList.add('d-none');
+        loginContainer.classList.remove('d-none');
+    });
+});
+
+
+
+
+
+
+
 //     //Volver al formulario de login
 //     backToLoginRegister.addEventListener('click', function(event){
 //         event.preventDefault();

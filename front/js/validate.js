@@ -137,3 +137,10 @@ let changetoregister = ()=>{
 register.addEventListener("click" , changetoregister);
 
 loginForm.addEventListener("submit", validarLoginFormulario);
+
+
+
+
+
+
+
