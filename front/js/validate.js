@@ -133,3 +133,10 @@ let textlogin = (email , passwd)=>{
 
 
 loginForm.addEventListener("submit", validarLoginFormulario);
+
+
+
+
+
+
+
