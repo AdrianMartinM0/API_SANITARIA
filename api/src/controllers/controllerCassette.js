@@ -9,16 +9,13 @@ const newCasseteController  = async(req , res , next)=>{
             descripcion: req.body.descripcion,
             caracteristicas: req.body.caracteristicas,
             organo: req.body.organo,
-            qr_cassette: req.body.qr_cassette,
-            identificador_cassete: req.body.identificador_cassete,
+            identificador_cassette: req.body.identificador_cassette,
         }
-
-        if (!data.fecha ||!data.observaciones || !data.descripcion || !data.caracteristicas || !data.organo  || !data.qr_cassette || !data.identificador_cassete ){
+        if (!data.fecha ||!data.observaciones || !data.descripcion || !data.caracteristicas || !data.organo || !data.identificador_cassette ){
             const error = new Error('Todos los campos son obligatorios');                       
             error.status=400;
             throw error;
         }
-
         let cassette = await newCassete(data, req.id);
         res.status(200).send(cassette);
 
@@ -52,11 +49,10 @@ const updateCassetteController = async(req , res , next)=>{
             descripcion: req.body.descripcion,
             caracteristicas: req.body.caracteristicas,
             organo: req.body.organo,
-            qr_cassette: req.body.qr_cassette,
             identificador_cassete: req.body.identificador_cassete,
         }
 
-        if (!data.fecha ||!data.observaciones || !data.descripcion || !data.caracteristicas || !data.organo  || !data.qr_cassette || !data.identificador_cassete ){
+        if (!data.fecha ||!data.observaciones || !data.descripcion || !data.caracteristicas || !data.organo || !data.identificador_cassete ){
             const error = new Error('Todos los campos son obligatorios');                       
             error.status=400;
             throw error;
@@ -72,7 +68,7 @@ const updateCassetteController = async(req , res , next)=>{
 
 const deleteCasseteController = async (req , res , next)=>{
     try {
-        let idcassette = await getoneCassetteById(req.params.id);
+        let idcassette = await getOneCassetteById(req.params.id);
         if (!idcassette) {
             const error = new Error('El Cassete no existe');
             error.status=400;

@@ -1,14 +1,13 @@
 const Cassette = require('../database/models/Cassette');
 
-const newCassete = async (data, id ) => {
+const newCassete = async (data, id) => {
     const cassette = await Cassette.create({
         fecha: data.fecha,
         observaciones: data.observaciones,
         descripcion: data.descripcion,
         caracteristicas: data.caracteristicas,
         organo: data.organo,
-        qr_cassette : data.qr_cassette,
-        identificador_cassete : data.identificador_cassete, 
+        identificador_cassette : data.identificador_cassette, 
         UsuarioId : id
     });
     return cassette;

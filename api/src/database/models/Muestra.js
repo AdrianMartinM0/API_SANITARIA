@@ -54,20 +54,19 @@ const { Model, DataTypes } = require("sequelize");
 
           qr_muestra: {
             type: DataTypes.STRING,
-            allowNull: false,
-            validate:{
-                notNull: {
-                    msg: 'Este campo qr_muestra es requerido'
-                } ,
-            },
           },
 
 
     },{
-         sequelize, 
-            modelName: "Muestras", 
-            freezeTableName: true,
-             timestamps: false 
+        sequelize, 
+        modelName: "Muestras", 
+        freezeTableName: true,
+        timestamps: false,
+        hooks: {
+            afterCreate: async (muestra) => {
+                muestra.qr_muestra = `M_${muestra.id}`;
+            }
+        }
     }
  );
  module.exports = Muestra;

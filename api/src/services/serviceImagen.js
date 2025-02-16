@@ -17,9 +17,10 @@ const getOneImagen = async (id) => {
     });
 }
 
-const createImagen = async (img) => {
+const createImagen = async (img, id) => {
     const imagen = await Imagen.create({
         imagen: img,
+        MuestraId: id
     });
     return imagen;
 }

@@ -8,7 +8,6 @@ const newMuestraController = async(req , res , next)=>{
             observaciones: req.body.observaciones,
             descripcion: req.body.descripcion,
             tincion: req.body.tincion,
-            qr_muestra: req.body.qr_muestra,
             CassetteId: req.body.CassetteId  
         }
         if (!data.fecha ||!data.observaciones || !data.descripcion || !data.tincion || !data.CassetteId  ){
@@ -34,7 +33,7 @@ const getAllMuestraByCassetteController = async(req , res , next)=>{
 
 const updateMuestraController = async(req , res , next)=>{
     try {
-        if (!req.params.id || !req.body.fecha || !req.body.observaciones || !req.body.descripcion || !req.body.tincion || !req.body.qr_muestra || !req.body.CassetteId ) {
+        if (!req.params.id || !req.body.fecha || !req.body.observaciones || !req.body.descripcion || !req.body.tincion || !req.body.CassetteId ) {
             const error = new Error('Todos los campos son obligatorios');
             error.status=400;
             throw error;
@@ -45,7 +44,6 @@ const updateMuestraController = async(req , res , next)=>{
             observaciones: req.body.observaciones,
             descripcion: req.body.descripcion,
             tincion: req.body.tincion,
-            qr_muestra: req.body.qr_muestra,
             CassetteId: req.body.CassetteId  
         }
         let idmuestra = await getOneMuestra(req.params.id);

@@ -40,17 +40,11 @@ const createUser = async ({ email, nombre, apellidos, password, centro }) => {
 }
 
 const updateUser = async (email, password) => {
-    const usu = await Usuario.update(
-        {
-            password: password 
-        },
-        { 
-            where: { 
-                email: email 
-            } 
-        }
-    );
-    return usu;
+    const user = await Usuario.findOne({ where: { email: email } });
+    if (user) {
+        user.password = password;
+        await user.save();
+    }
 }
 
 const updateRolUser = async (email) => {

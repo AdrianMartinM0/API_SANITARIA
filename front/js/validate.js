@@ -1,17 +1,22 @@
+//const { console } = require("inspector");
+
 const form = document.getElementById("registroForm");
 const nombreInput = document.getElementById("nombre");
 const apellidosInput = document.getElementById("apellidos");
 const centroInput = document.getElementById("centro");
 const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-const confirmPasswordInput = document.getElementById("confirm-password");
-
+const passregister = document.getElementById("passregister");
+const confirmpassregister = document.getElementById("confirmpassregister");
+const register = document.getElementById("register"); 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,16}$/;
-
+let errorEmail = document.getElementById("error-gmaildoesnotexist"); 
 const formSolicitud = document.getElementById("solicitudForm");
 const emailInputSolicitud = document.getElementById("solicitudEmail");
 const emailErrorSolicitud = document.getElementById("error-email-solicitud");
+
+import {getinforegister  , getUser , testlogin} from "./validateApis.js";
+
 
 function showError(id) {
     document.getElementById(id).classList.remove("hidden");
@@ -23,15 +28,15 @@ function hideErrors() {
     errorElements.forEach(error => error.classList.add("hidden"));
 }
 
-function validarRegister(event) {
+let  validarRegister = async (event) =>{
     event.preventDefault();
 
     let nombre = nombreInput.value.trim();
     let apellidos = apellidosInput.value.trim();
     let centro = centroInput.value;
     let email = emailInput.value.trim();
-    let password = passwordInput.value;
-    let confirmPassword = confirmPasswordInput.value;
+    let password = passregister.value;
+    let confirmPassword = confirmpassregister.value;
 
     hideErrors();
 
@@ -42,21 +47,45 @@ function validarRegister(event) {
     if (!passwordRegex.test(password)) return showError("error-password");
     if (password !== confirmPassword) return showError("error-confirm-password");
 
-    alert ("Solicitud enviada con éxito");
-    // form.submit();
+let data =  {
+   email_param :  email , 
+   nombre_param :  nombre , 
+   apellidos_param :  apellidos , 
+   centro_param :  centro , 
+   password_param :  confirmPassword , 
 }
 
-function validarSolicitud(event) {
+let isregister   = await  getinforegister(data);
+if (isregister) {
+alert ("Usuario registrado correctamente !");
+}else{
+    showError("error-gmailexist");
+   
+}
+
+   //form.submit();
+
+}
+
+let   validarSolicitud = async (event)=> {
     event.preventDefault();
 
     let email = emailInputSolicitud.value.trim();
+    let gmail = await getUser(email);
+    console.log(gmail)
+    if (gmail){
+        hideErrors();
 
-    hideErrors();
+        if (!emailRegex.test(email)) return showError("error-email-solicitud");
+    
+        alert ("Solicitud enviada con éxito");
+        
+    }else{
 
-    if (!emailRegex.test(email)) return showError("error-email-solicitud");
-
-    alert ("Solicitud enviada con éxito");
-    // formSolicitud.submit();
+         showError("error-gmaildoesnotexist");
+    }
+  
+    
 }
 
 //LISTENER
@@ -68,7 +97,7 @@ const loginForm = document.getElementById("loginForm");
 const loginEmailInput = document.getElementById("loginEmail");
 const loginPasswordInput = document.getElementById("loginPassword");
 
-function validarLoginFormulario(event) {
+let  validarLoginFormulario = async (event)=> {
     event.preventDefault();
 
     let loginEmail = loginEmailInput.value.trim();
@@ -83,54 +112,29 @@ function validarLoginFormulario(event) {
     if (!passwordRegex.test(loginPassword)) {
         return showError("error-login-password");
     }
+    let res = await testlogin(loginEmail , loginPassword);
+   
+if (!res) {
+    
+    showError("error-userdoesnotexist");
+}else{
+    sessionStorage.setItem("user-token", res);
+    
+    window.location.href = './pages/dashboard.html'; 
+  
+}
+
+
+}
+
+
+let changetoregister = ()=>{
+    loginContainer.setAttribute("class" , "d-none" )
+    registerContainer.setAttribute("class" , "block" )
+}
 
     
-}
-let getloginendpoint  = async (email)=>{
-    let info = await fetch(`localhost:3000/v1/usuario/login/${email}`)
-.then((data) => data);
-return info;
-}
-
-let getLoginEndpoint = async (email, passwd) => {
-    let data = await fetch(`http://localhost:3000/v1/usuario/login/${email}?password=${encodeURIComponent(passwd)}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
-
-    let text = await data.text();
-    return {
-        status: data.status,
-        text: text
-    };
-};
-
-// Uso de la función:
-getLoginEndpoint("lo1l@gmail.com", "Puesto70**").then(data => {
-    console.log(data.status); // Estado de la respuesta (200, 404, etc.)
-    console.log(data.text); // Texto de la respuesta
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-let textlogin = (email , passwd)=>{
-
-}
-
+register.addEventListener("click" , changetoregister);
 
 loginForm.addEventListener("submit", validarLoginFormulario);
 

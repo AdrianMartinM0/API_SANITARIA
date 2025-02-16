@@ -7,11 +7,21 @@
     <title>SANITARIA</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+    (function(){
+        emailjs.init({
+            publicKey: "4ycfmOAujm31vZBNE",
+        });
+    })();
+    </script>
 </head>
 
 <body class="flex items-center justify-center min-h-screen bg-gray-100">
     <!-- REGISTER -->
-    <div id="registerContainer" class="w-full max-w-md bg-white p-6 rounded-lg shadow-md d-none">
+    <div id="registerContainer" class="w-full max-w-md bg-white p-6 rounded-lg shadow-md  d-none">
         <h2 class="text-2xl font-bold text-center text-blue-400 mb-6">Registro</h2>
         <form id="registroForm" novalidate>
             <div class="mb-4">
@@ -27,10 +37,10 @@
             <div class="mb-4">
                 <select id="centro" class="w-full p-3 border rounded-lg text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400">
                     <option disabled selected>Centro</option>
-                    <option value="centro1">Centro 1</option>
-                    <option value="centro2">Centro 2</option>
-                    <option value="centro2">Centro 3</option>
-                    <option value="centro2">Centro 4</option>
+                    <option value="centro1">Instituto Bonanova Formación Profesional Sanitaria</option>
+                    <option value="centro2">IES Ramón y Cajal</option>
+                    <option value="centro2">IES Carlos Castilla Del Pino</option>
+                    <option value="centro2">IES Ribera Del Tajo</option>
                 </select>
                 <small class="text-red-500 hidden" id="error-centro">Debe seleccionar un centro.</small>
             </div>
@@ -41,7 +51,7 @@
             </div>
             <div class="mb-4">
                 <div class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 flex justify-between">
-                    <input type="password" id="loginPassword" placeholder="Contraseña" class="w-full border-none outline-none">
+                    <input type="password" id="passregister" placeholder="Contraseña" class="w-full border-none outline-none">
                     
                     <div class="flex items-center">
                         <label class="lock-checkbox">
@@ -61,7 +71,7 @@
             </div>
             <div class="mb-4">
                 <div class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 flex justify-between">
-                    <input type="password" id="loginPassword" placeholder="Contraseña" class="w-full border-none outline-none">
+                    <input type="password" id="confirmpassregister" placeholder="Confirmar Contraseña" class="w-full border-none outline-none">
                     
                     <div class="flex items-center">
                         <label class="lock-checkbox">
@@ -76,6 +86,8 @@
                 </div>
                 <small class="text-red-500 hidden" id="error-confirm-password">Las contraseñas no coinciden.</small>
             </div>
+            <small   class="text-red-500 hidden" id="error-gmailexist"> Email existente , registrate con otro .  </small>
+
             <button type="submit" class="w-full bg-blue-400 text-white p-3 rounded-lg hover:bg-blue-500 transition">
                 Registro
             </button>
@@ -86,8 +98,8 @@
     </div>
 
  <!-- LOGIN -->
-<div id="loginContainer" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-    <form id="loginForm" action="#" method="post" class="space-y-6" novalidate>
+<div id="loginContainer" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md ">
+    <form id="loginForm" action="#" method="POST" class="space-y-6" novalidate>
         <h2 class="text-2xl font-bold text-center text-blue-400 mb-6">Login</h2>
 
         <!-- Campo de email -->
@@ -118,6 +130,7 @@
                 La contraseña debe tener entre 8-16 caracteres, incluir mayúsculas, minúsculas, números y símbolos.
             </small>
         </div>
+        <small   class="text-red-500 hidden" id="error-userdoesnotexist">Usuario inexistente , registrate o inicia session con un Usuario existente .  </small>
 
         <!-- Botón de login -->
         <button type="submit"
@@ -144,20 +157,22 @@
                     class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
                 <small id="error-email-solicitud" class="text-red-500 hidden">Ingrese un email válido.</small>
             </div>
-        
+            <small   class="text-red-500 hidden" id="error-gmaildoesnotexist"> Email inexistente </small>
+
             <button type="submit"
                 class="w-full py-3 bg-blue-400 text-white rounded-md font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400">
                 Solicitar Contraseña
             </button>
-        
             <p class="text-center text-gray-600 mt-4">Volver a <a href="#"  id="backToLoginLink"
                 class="text-blue-500">Login</a></p>
         </form>
     </div>
 
 </body>
-<script src="./js/validate.js"></script>
+<script  type="module"   src="./js/validate.js"></script>
+<script  type="module"   src="./js/validateApis.js"></script>
 <script src="./js/funcionalities.js"></script>
+<script src="./js/solicitudPass.js"></script>
 
 </html>
 </head>
