@@ -84,26 +84,26 @@ const closeModal = (event) => {
 // forgotPasswordLink.addEventListener('click', mostrarSoli)
 
 
-new__cassette.addEventListener("click", showModal);
-close__btn.addEventListener("click", closeModal);
+// new__cassette.addEventListener("click", showModal);
+// close__btn.addEventListener("click", closeModal);
 
-delete__cassette.addEventListener("click", showModal);
-close__btn__delete.addEventListener("click", closeModal);
+// delete__cassette.addEventListener("click", showModal);
+// close__btn__delete.addEventListener("click", closeModal);
 
-edit__cassette.addEventListener("click", showModal);
-close__btn__edit.addEventListener("click", closeModal);
+// edit__cassette.addEventListener("click", showModal);
+// close__btn__edit.addEventListener("click", closeModal);
 
-new__muestra.addEventListener("click", showModal);
-close__btn__newMuestra.addEventListener("click", closeModal);
+// new__muestra.addEventListener("click", showModal);
+// close__btn__newMuestra.addEventListener("click", closeModal);
 
-detail__muestra.addEventListener("click", showModal);
-close__btn__detailMuestra.addEventListener("click", closeModal);
+// detail__muestra.addEventListener("click", showModal);
+// close__btn__detailMuestra.addEventListener("click", closeModal);
 
-delete__muestra .addEventListener("click", showModal);
-close__btn__deleteMuestra.addEventListener("click", closeModal);
+// delete__muestra .addEventListener("click", showModal);
+// close__btn__deleteMuestra.addEventListener("click", closeModal);
 
-edit__muestra.addEventListener("click", showModal);
-close__btn__editMuestra.addEventListener("click", closeModal);
+// edit__muestra.addEventListener("click", showModal);
+// close__btn__editMuestra.addEventListener("click", closeModal);
 
 
 // document.addEventListener('DOMContentLoaded', function() {
