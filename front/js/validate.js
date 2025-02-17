@@ -14,7 +14,9 @@ let errorEmail = document.getElementById("error-gmaildoesnotexist");
 const formSolicitud = document.getElementById("solicitudForm");
 const emailInputSolicitud = document.getElementById("solicitudEmail");
 const emailErrorSolicitud = document.getElementById("error-email-solicitud");
-
+const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+const backToLoginRegister = document.getElementById('backToLoginRegister');
+const backToLoginLink = document.getElementById("backToLoginLink");
 import {getinforegister  , getUser , testlogin} from "./validateApis.js";
 
 
@@ -127,13 +129,36 @@ if (!res) {
 
 }
 
-
-let changetoregister = ()=>{
-    loginContainer.setAttribute("class" , "d-none" )
-    registerContainer.setAttribute("class" , "block" )
+let backlogin = ()=>{
+    registerContainer.setAttribute("class" , "hidden" )
+    loginContainer.removeAttribute("class" , "hidden" )
+    
+    solicitudContainer.setAttribute("class" , "hidden" )
+}
+let backtopasswd = ()=>{
+    registerContainer.setAttribute("class" , "hidden" )
+    loginContainer.setAttribute("class" , "hidden" )
+    
+    solicitudContainer.removeAttribute("class" , "hidden" )
 }
 
+let backtoregister = ()=>{
+    registerContainer.removeAttribute("class" , "hidden" )
+    loginContainer.setAttribute("class" , "hidden" )
     
-register.addEventListener("click" , changetoregister);
+    solicitudContainer.setAttribute("class" , "hidden" )
+}
 
+
+
+backToLoginLink //login
+
+
+
+backToLoginRegister.addEventListener("click" , backlogin)
+
+forgotPasswordLink.addEventListener("click" , backtopasswd)
+
+register.addEventListener("click" ,  backtoregister)
+backToLoginLink.addEventListener("click" , backlogin)
 loginForm.addEventListener("submit", validarLoginFormulario);
