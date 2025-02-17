@@ -1,4 +1,4 @@
-const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+
 const backToLoginLink = document.getElementById('backToLoginLink');
 const loginContainer = document.getElementById('loginContainer');
 const solicitudContainer = document.getElementById('solicitudContainer');
@@ -33,6 +33,9 @@ const close__btn__deleteMuestra = document.getElementById ("close__btn__deleteMu
 const edit__muestra = document.getElementById ("edit__muestra");
 const edit__muestraModal = document.getElementById ("edit__muestraModal");
 const close__btn__editMuestra = document.getElementById ("close__btn__editMuestra");
+
+
+
 
 
 const showModal = (event) => {
