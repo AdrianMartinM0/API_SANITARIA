@@ -23,9 +23,9 @@ Usuario.init(
                     args: [1, 40],
                     msg: "El nombre debe tener entre 1 y 40 caracteres",
                 },
-                isAlpha:{
-                    args:true,
-                    msg:"El campo solo permite valores alfabeticos",
+                is: {
+                    args: [/^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$/],
+                    msg: 'El apellido solo puede contener letras y espacios',
                 },
             },
         },
@@ -40,9 +40,9 @@ Usuario.init(
                     args: [1, 90],
                     msg: "El apellido debe tener entre 1 y 90 caracteres",
                 },
-                isAlpha:{
-                    args:true,
-                    msg:"El campo solo permite valores alfabeticos",
+                is: {
+                    args: [/^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$/],
+                    msg: 'El apellido solo puede contener letras y espacios',
                 },
             }
         },

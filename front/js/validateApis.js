@@ -1,7 +1,7 @@
 export let getUser = async (email) => {
   try {
     let response = await fetch(`http://localhost:3000/v1/usuario/${email}`);
-    console.log(response)
+    
     if (response.ok) {
       return true;
     }
@@ -31,7 +31,8 @@ export let getinforegister = async ({email_param, nombre_param, apellidos_param,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(json),
       });
-    
+      const data = await response.json();
+        console.log(data)
         return true;
 
     
@@ -73,6 +74,6 @@ let json = {
 }
 
 
-let a = await getUser("prueba@gmail.com")
-console.log( a); 
+// let a = await getUser("prueba@gmail.com")
+// console.log( a); 
 
