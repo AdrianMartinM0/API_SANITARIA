@@ -23,7 +23,7 @@ const recuperarPass = async (event) => {
 const generarNewPass = async (email) => {
     const response = await fetch(`http://localhost:3000/v1/usuario/${email}`,{
         method:"PUT",
-        headers: {"Content-Type" : "applcation/json"}
+        headers: {"Content-Type" : "application/json"}
     });
     const data = await response.json();
     return data;
