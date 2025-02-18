@@ -9,7 +9,7 @@ export let postCassette = async (data)=>{
           body: JSON.stringify(data),
         });
       
-          return true;
+          return response;
   
       
      
