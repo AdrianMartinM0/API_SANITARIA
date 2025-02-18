@@ -21,7 +21,7 @@ const { Model, DataTypes } = require("sequelize");
             },
           },
           observaciones: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false,
             validate:{
                 notNull: {

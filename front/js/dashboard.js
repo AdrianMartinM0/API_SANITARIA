@@ -21,17 +21,8 @@ let fecha_edit = document.getElementById("fecha_edit");
 let identificador_edit  = document.getElementById("identificador_edit");
 let descripcion_edit  = document.getElementById("descripcion_edit");
 let editform = document.getElementById("editform");
-let formnewmuestra = document.getElementById("formnewmuestra")
-
-let descripcion_m = document.getElementById("descripcion_m");
-let fecha_m = document.getElementById("fecha_m");
-let tincion_m = document.getElementById("tincion_m");
-let observaciones_m = document.getElementById("observaciones_m");
-
-
-
+const logout = document.getElementById('logOut');
 import {postCassette , GetallCassetesFromUser , GetOneCassetteById  , EditCasseteById,  DeleteCasseteById} from "./dashboardApis.js"
-import { } from "./dashboardApisMuestra.js"
 
 let insertnewCassete =  async (event)=>{
    
@@ -181,13 +172,21 @@ const initializeFilters = () => {
     const selectOrgano = document.querySelector("select");
     const fechaInicioInput = document.querySelectorAll("input[type='date']")[0];
     const fechaFinInput = document.querySelectorAll("input[type='date']")[1];
+    let noUsable = true;
+    fechaFinInput.disabled = noUsable;
 
     selectOrgano.addEventListener("change", async () => {
         let selectedOrgano = selectOrgano.value;
+        noUsable = true;
+        fechaFinInput.disabled = noUsable;
+        fechaInicioInput.value = "";
+        fechaFinInput.value = "";
         printFilteredCassetesByOrgano(selectedOrgano);
     });
 
     fechaInicioInput.addEventListener("change", async () => {
+        noUsable = false;
+        fechaFinInput.disabled = noUsable;
         let fechaInicio = fechaInicioInput.value;
         let fechaFin = fechaFinInput.value;
         selectOrgano.selectedIndex = 0;
@@ -201,6 +200,11 @@ const initializeFilters = () => {
         printFilteredCassetesByDate(fechaInicio, fechaFin);
     });
 };
+
+const logOut = () => {
+    sessionStorage.removeItem('user-token');
+    location.reload();
+}
 
 let create_svg = () => {
     let svg = `<svg class="h-5 w-11 text-blue-400 hover:text-blue-900" stroke-width="5" viewBox="0 0 23 23" fill="none"
@@ -294,30 +298,14 @@ let  EditCassette = async (event)=>{
     }
 }
 
-//muestras 
-let CreateNewMuestra = (event)=>{
-    event.preventDefault(); 
- 
-
-
-let data = {
-    fecha : fecha_m.value ,
-    observaciones  : observaciones_m.value , 
-    descripcion : descripcion_m.value , 
-    tincion : tincion_m.value ,
-    CassetteId : num
-
-
-}
-console.log(data);
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     printAllCassetes();
     initializeFilters();
 });
-deletebutton.addEventListener("click" , DeleteCassete)
-tbodycassetes.addEventListener("click" , printDetailsCassette )
+
+
+logout.addEventListener("click", logOut);
+deletebutton.addEventListener("click" , DeleteCassete);
+tbodycassetes.addEventListener("click" , printDetailsCassette);
 editform.addEventListener("submit" ,EditCassette );
-createCassette.addEventListener("submit" , insertnewCassete)
-formnewmuestra.addEventListener("submit" , CreateNewMuestra)
+createCassette.addEventListener("submit" , insertnewCassete);
