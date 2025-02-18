@@ -219,19 +219,21 @@ let create_svg = () => {
     return svg;
 }
 
-let num;
+
 let printDetailsCassette = async (event)=>{
     
     if (event.target.parentElement.parentElement.tagName == "BUTTON") {
-     num = event.target.parentElement.parentElement.getAttribute("value"); 
+        
+     let num = event.target.parentElement.parentElement.getAttribute("value"); 
+     localStorage.setItem('cassette', num);
      await imprimirdetalles();
     }
 
 } ; 
 
-
+let cassete = localStorage.getItem('cassette');
 let imprimirdetalles = async ()=>{
-    // localStorage.setItem('cassette', id);
+ 
     org.textContent = "";
     fech.textContent = "";
     iden.textContent = "";
@@ -245,7 +247,7 @@ let imprimirdetalles = async ()=>{
     fecha_edit.value = "";
     identificador_edit.value  = "";
     descripcion_edit.value  = "";
-    let element = await GetOneCassetteById(num)
+    let element = await GetOneCassetteById(cassete)
     org.textContent = element.organo;
     fech.textContent = element.fecha.split("T")[0]
     iden.textContent = element.identificador_cassette;
@@ -262,8 +264,8 @@ let imprimirdetalles = async ()=>{
 }
 
 let DeleteCassete = async ()=>{
-    // let cassete = localStorage.getItem('cassette');
-    let response = await DeleteCasseteById(num);
+   
+    let response = await DeleteCasseteById(cassete);
     if (response) 
         document.getElementById('delete__cassetteModal').classList.add('d-none');
     org.textContent = "";
@@ -272,7 +274,7 @@ let DeleteCassete = async ()=>{
     carac.textContent = "";
     obs.textContent = "";
     desc.textContent = "";
-    num = null;
+    localStorage.setItem('cassette', null);
     printAllCassetes()
 }
 
@@ -280,7 +282,7 @@ let DeleteCassete = async ()=>{
 
 let  EditCassette = async (event)=>{
     event.preventDefault(); 
-    // let cassete = localStorage.getItem('cassette');
+   
     let data = {
         observaciones : observaciones_edit.value ,
         caracteristicas :  caracteristicas_edit.value,
@@ -290,7 +292,7 @@ let  EditCassette = async (event)=>{
         descripcion : descripcion_edit.value ,
     }
     
-    let response = await EditCasseteById( num, data );
+    let response = await EditCasseteById( cassete, data );
     if(response){
         document.getElementById('edit__cassetteModal').classList.add('d-none');
         printAllCassetes()
