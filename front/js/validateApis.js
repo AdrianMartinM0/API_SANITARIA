@@ -1,16 +1,11 @@
 export let getUser = async (email) => {
-  try {
     let response = await fetch(`http://localhost:3000/v1/usuario/${email}`);
     
     if (response.ok) {
       return true;
     }
     
-   
-    
-  } catch (error) {
     return false;
-  }
 };
 
 export let getinforegister = async ({email_param, nombre_param, apellidos_param, centro_param, password_param}) => {
@@ -48,32 +43,34 @@ export let getinforegister = async ({email_param, nombre_param, apellidos_param,
   }
 };
 
-export let testlogin = async (email , passwd )=>{
+export let testlogin = async (email, passwd) => {
   try {
     let testemail = await getUser(email);
-if(testemail){
-let json = {
-  password : passwd
-}
-    let response = await fetch(`http://localhost:3000/v1/usuario/login/${email}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json"},
-      body: JSON.stringify(json),
-    }) 
-  //  let data = await response.json();
+    if (testemail) {
+      let json = {
+        password: passwd
+      };
+      let response = await fetch(`http://localhost:3000/v1/usuario/login/${email}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(json),
+      });
 
-    return response.text();
-}else{
- return false;
-}
- 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      console.log(response);
+      return response.text();
+    } else {
+      return false;
+    }
   } catch (error) {
- 
-   
+    console.log(`Error during login: ${error.message}`);
+    return false;
   }
-}
-
+};
 
 // let a = await getUser("prueba@gmail.com")
-// console.log( a); 
+// console.log( a);
 

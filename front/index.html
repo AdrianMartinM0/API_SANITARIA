@@ -21,18 +21,15 @@
 
 <body class="flex items-center justify-center min-h-screen bg-gray-100">
     <!-- REGISTER -->
-    <div id="registerContainer" class="w-full max-w-md bg-white p-6 rounded-lg shadow-md  hidden">
+    <div id="registerContainer" class="w-full max-w-md bg-white p-6 rounded-lg shadow-md d-none">
         <h2 class="text-2xl font-bold text-center text-blue-400 mb-6">Registro</h2>
         <form id="registroForm" novalidate>
             <div class="mb-4">
-                <input type="text" id="nombre" placeholder="Nombre"
-                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-                <small class="text-red-500 hidden" id="error-nombre">El nombre es obligatorio.</small>
+                <input type="text" id="nombre" placeholder="Nombre" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
             </div>
             <div class="mb-4">
                 <input type="text" id="apellidos" placeholder="Apellidos"
                     class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-                <small class="text-red-500 hidden" id="error-apellidos">Los apellidos son obligatorios.</small>
             </div>
             <div class="mb-4">
                 <select id="centro" class="w-full p-3 border rounded-lg text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400">
@@ -40,9 +37,8 @@
                     <option value="Instituto Bonanova Formación Profesional Sanitaria">Instituto Bonanova Formación Profesional Sanitaria</option>
                     <option value="IES Ramón y Cajal">IES Ramón y Cajal</option>
                     <option value="IES Carlos Castilla Del Pino">IES Carlos Castilla Del Pino</option>
-                    <option value="IES Ribera Del Tajo">IES Ribera Del Tajo</option>
+                    <option value="IES Ribera del Tajo">IES Ribera del Tajo</option>
                 </select>
-                <small class="text-red-500 hidden" id="error-centro">Debe seleccionar un centro.</small>
             </div>
             <div class="mb-4">
                 <input type="email" id="email" placeholder="Email"
@@ -51,11 +47,11 @@
             </div>
             <div class="mb-4">
                 <div class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 flex justify-between">
-                    <input type="password" id="passregister" placeholder="Contraseña" class="w-full border-none outline-none">
+                    <input type="password" id="registerPassword" placeholder="Contraseña" class="w-full border-none outline-none">
                     
                     <div class="flex items-center">
                         <label class="lock-checkbox">
-                            <input id="lockRegister" type="checkbox">
+                            <input class="lock" id="lockRegister" type="checkbox">
                             <span class="lock-icon">
                                 <svg viewBox="0 0 24 24">
                                     <path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM8.9 6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2H8.9V6z"></path>
@@ -71,11 +67,11 @@
             </div>
             <div class="mb-4">
                 <div class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 flex justify-between">
-                    <input type="password" id="confirmpassregister" placeholder="Confirmar Contraseña" class="w-full border-none outline-none">
+                    <input type="password" id="registerPassword2" placeholder="Contraseña" class="w-full border-none outline-none">
                     
                     <div class="flex items-center">
                         <label class="lock-checkbox">
-                            <input id="lockRegister2" type="checkbox">
+                            <input class="lock" id="lockRegister2" type="checkbox">
                             <span class="lock-icon">
                                 <svg viewBox="0 0 24 24">
                                     <path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM8.9 6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2H8.9V6z"></path>
@@ -86,20 +82,19 @@
                 </div>
                 <small class="text-red-500 hidden" id="error-confirm-password">Las contraseñas no coinciden.</small>
             </div>
-            <small   class="text-red-500 hidden" id="error-gmailexist"> Email existente , registrate con otro .  </small>
-
+            <small class="text-red-500 hidden mt-2 text-center" id="error-register">Todos los campos son obligatorios.</small>
             <button type="submit" class="w-full bg-blue-400 text-white p-3 rounded-lg hover:bg-blue-500 transition">
                 Registro
             </button>
         </form>
 
-        <p class="text-center text-gray-600 mt-4">Si ya tienes te has registrado anteriormente <a  id="backToLoginRegister"
+        <p class="text-center text-gray-600 mt-4">Si ya tienes te has registrado anteriormente <a href="#" id="backToLoginRegister"
                 class="text-blue-500">Login</a></p>
     </div>
 
  <!-- LOGIN -->
-<div id="loginContainer" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md  ">
-    <form id="loginForm" action="#" method="POST" class="space-y-6" novalidate>
+<div id="loginContainer" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <form id="loginForm" action="#" method="post" class="space-y-6" novalidate>
         <h2 class="text-2xl font-bold text-center text-blue-400 mb-6">Login</h2>
 
         <!-- Campo de email -->
@@ -116,7 +111,7 @@
                 
                 <div class="flex items-center">
                     <label class="lock-checkbox">
-                        <input id="lockLogin" type="checkbox">
+                        <input class="lock" id="lockLogin" type="checkbox">
                         <span class="lock-icon">
                             <svg viewBox="0 0 24 24">
                                 <path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM8.9 6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2H8.9V6z"></path>
@@ -129,8 +124,10 @@
             <small class="text-red-500 hidden" id="error-login-password">
                 La contraseña debe tener entre 8-16 caracteres, incluir mayúsculas, minúsculas, números y símbolos.
             </small>
+            <small class="text-red-500 hidden" id="error-login">
+                Usuario o contraseña incorrecto
+            </small>
         </div>
-        <small   class="text-red-500 hidden" id="error-userdoesnotexist">Usuario inexistente , registrate o inicia session con un Usuario existente .  </small>
 
         <!-- Botón de login -->
         <button type="submit"
@@ -140,15 +137,15 @@
 
         <!-- Enlaces para recuperar contraseña y registro -->
         <div class="text-center">
-            <a   id="forgotPasswordLink" class="text-sm text-blue-500 hover:underline">¿Olvidaste tu contraseña?</a>
+            <a href="#"  id="forgotPasswordLink" class="text-sm text-blue-500 hover:underline">¿Olvidaste tu contraseña?</a>
         </div>
-        <p class="text-center text-gray-600 mt-4">¿No tienes cuenta? <a  id="register"
+        <p class="text-center text-gray-600 mt-4">¿No tienes cuenta? <a href="#" id="register"
             class="text-blue-500">Registro</a></p>
     </form>
 </div>
 
     <!-- PASSWORD -->
-    <div id="solicitudContainer" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md hidden">
+    <div id="solicitudContainer" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md d-none">
         <form id="solicitudForm" action="#" method="post" class="space-y-6" novalidate>
             <h2 class="text-2xl font-bold text-center text-blue-400 mb-6">Solicitar Contraseña</h2>
         
@@ -157,22 +154,20 @@
                     class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
                 <small id="error-email-solicitud" class="text-red-500 hidden">Ingrese un email válido.</small>
             </div>
-            <small   class="text-red-500 hidden" id="error-gmaildoesnotexist"> Email inexistente </small>
-
+        
             <button type="submit"
                 class="w-full py-3 bg-blue-400 text-white rounded-md font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400">
                 Solicitar Contraseña
             </button>
-            <p class="text-center text-gray-600 mt-4">Volver a <a   id="backToLoginLink"
+        
+            <p class="text-center text-gray-600 mt-4">Volver a <a href="#"  id="backToLoginLink"
                 class="text-blue-500">Login</a></p>
         </form>
     </div>
 
+    <script src="./js/funcinalitiesIndex.js"></script>
+    <script src="./js/login.js"></script>
+    <script src="./js/register.js"></script>
+    <script src="./js/solicitudPass.js"></script>
 </body>
-<script  type="module"   src="./js/validate.js"></script>
-<script  type="module"   src="./js/validateApis.js"></script>
-<script src="./js/funcionalities.js"></script>
-<script src="./js/solicitudPass.js"></script>
-
 </html>
-</head>

@@ -41,13 +41,15 @@ const loginController = async ( req, res, next ) => {
             throw error;
         }
         const iguales = bcryptjs.compareSync(req.body.password, usu.password);
-        console.log(iguales)
         if(!iguales){
             const error = new Error('La contraseña no es valida');
             error.status=400;
             throw error;
         }
-        res.status(200).send(generateJWT(usu)); 
+        const token = {
+            token: generateJWT(usu)
+        }
+        res.status(200).send(token); 
     }catch(error){
         next(error);
     }

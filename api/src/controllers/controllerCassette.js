@@ -49,10 +49,10 @@ const updateCassetteController = async(req , res , next)=>{
             descripcion: req.body.descripcion,
             caracteristicas: req.body.caracteristicas,
             organo: req.body.organo,
-            identificador_cassete: req.body.identificador_cassete,
+            identificador_cassette: req.body.identificador_cassette,
         }
-
-        if (!data.fecha ||!data.observaciones || !data.descripcion || !data.caracteristicas || !data.organo || !data.identificador_cassete ){
+        
+        if (!data.fecha ||!data.observaciones || !data.descripcion || !data.caracteristicas || !data.organo || !data.identificador_cassette ){
             const error = new Error('Todos los campos son obligatorios');                       
             error.status=400;
             throw error;

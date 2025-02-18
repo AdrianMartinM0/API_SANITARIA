@@ -22,7 +22,7 @@ let identificador_edit  = document.getElementById("identificador_edit");
 let descripcion_edit  = document.getElementById("descripcion_edit");
 let editform = document.getElementById("editform");
 import {postCassette , GetallCassetesFromUser , GetOneCassetteById  , EditCasseteById,  DeleteCasseteById} from "./dashboardApis.js"
-console.log(user_token)
+
 let insertnewCassete =  async (event)=>{
    
     event.preventDefault(); 
@@ -34,66 +34,161 @@ let insertnewCassete =  async (event)=>{
         caracteristicas : caracteristicas.value , 
         observaciones : observaciones.value , 
         identificador_cassette :  identificador_cassette.value ,
-      
     }
 
     let response = await postCassette(data);
     if (response){
-        alert ("Cassette registrado correctamente !");
+        document.getElementById('new__cassetteModal').classList.add('d-none');
+        descripcion.value = '';
+        fecha.value = '';
+        organo.value = '';
+        caracteristicas.value = '';
+        observaciones.value = '';
+        identificador_cassette.value = '';
         printAllCassetes()
     }
-
-
 }
 
 let printAllCassetes =  async () => {
     tbodycassetes.innerHTML =""; 
     let array = await GetallCassetesFromUser();
-array.forEach(element => {
+    array.forEach(element => {
+
+        let fragment = document.createDocumentFragment();
+
+        let tr = document.createElement("tr");
+        tr.setAttribute("class", "border-b hover:bg-blue-50");
+        let fecha = element.fecha.split("T")[0];
+        let td1 = document.createElement("td");
+        td1.setAttribute("class", "p-1");
+        td1.textContent = fecha;
+
+        let td2 = document.createElement("td");
+        td2.setAttribute("class", "p-1");
     
+        td2.textContent = element.descripcion;
 
-    let fragment = document.createDocumentFragment();
+        let td3 = document.createElement("td");
+        td3.setAttribute("class", "p-1");
+        td3.textContent = element.organo;
 
-    let tr = document.createElement("tr");
-    tr.setAttribute("class", "border-b hover:bg-blue-50");
-    let fecha = element.fecha.split("T")[0];
-    let td1 = document.createElement("td");
-    td1.setAttribute("class", "p-1");
-    td1.textContent = fecha;
+        let td4 = document.createElement("td");
+        td4.setAttribute("class", "p-1 text-left");
 
-    let td2 = document.createElement("td");
-    td2.setAttribute("class", "p-1");
-  
-    td2.textContent = element.descripcion;
+        let button = document.createElement("button");
 
-    let td3 = document.createElement("td");
-    td3.setAttribute("class", "p-1");
-    td3.textContent = element.organo;
+        let svg = create_svg()
 
-    let td4 = document.createElement("td");
-    td4.setAttribute("class", "p-1 text-left");
-
-    let button = document.createElement("button");
-
-    let svg = create_svg()
-
-
-    button.innerHTML =    svg;
-    button.setAttribute("value" , element.id);
-    button.setAttribute("id" , "button_details");
-   
+        button.innerHTML =    svg;
+        button.setAttribute("value" , element.id);
+        button.setAttribute("id" , "button_details");
     
-    td4.appendChild(button);
+        td4.appendChild(button);
 
-    tr.appendChild(td1);
-    tr.appendChild(td2);
-    tr.appendChild(td3);
-    tr.appendChild(td4);
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        tr.appendChild(td4);
 
-    fragment.appendChild(tr);
-    tbodycassetes.appendChild(fragment);
-});
+        fragment.appendChild(tr);
+        tbodycassetes.appendChild(fragment);
+    });
     
+};
+
+const printFilteredCassetesByOrgano = async (organo) => {
+    tbodycassetes.innerHTML = "";
+    const array = await GetallCassetesFromUser();
+    
+    const filteredArray = organo === "*" ? array : array.filter(cassette => cassette.organo === organo);
+
+    renderCassetes(filteredArray);
+};
+
+const printFilteredCassetesByDate = async (fechaInicio, fechaFin) => {
+    tbodycassetes.innerHTML = "";
+    const array = await GetallCassetesFromUser();
+
+    const filteredArray = array.filter(cassette => {
+        const fechaCassette = cassette.fecha.split("T")[0];
+
+        if (fechaInicio && !fechaFin) {
+            return fechaCassette === fechaInicio;
+        }
+        if (fechaInicio && fechaFin) {
+            return fechaCassette >= fechaInicio && fechaCassette <= fechaFin;
+        }
+        return true;
+    });
+
+    renderCassetes(filteredArray);
+};
+
+const renderCassetes = (array) => {
+    tbodycassetes.innerHTML = "";
+
+    array.forEach(element => {
+        let fragment = document.createDocumentFragment();
+        let tr = document.createElement("tr");
+        tr.setAttribute("class", "border-b hover:bg-blue-50");
+
+        let fecha = element.fecha.split("T")[0];
+        let td1 = document.createElement("td");
+        td1.setAttribute("class", "p-1");
+        td1.textContent = fecha;
+
+        let td2 = document.createElement("td");
+        td2.setAttribute("class", "p-1");
+        td2.textContent = element.descripcion;
+
+        let td3 = document.createElement("td");
+        td3.setAttribute("class", "p-1");
+        td3.textContent = element.organo;
+
+        let td4 = document.createElement("td");
+        td4.setAttribute("class", "p-1 text-left");
+
+        let button = document.createElement("button");
+        let svg = create_svg();
+        button.innerHTML = svg;
+        button.setAttribute("value", element.id);
+        button.setAttribute("id", "button_details");
+
+        td4.appendChild(button);
+
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        tr.appendChild(td4);
+
+        fragment.appendChild(tr);
+        tbodycassetes.appendChild(fragment);
+    });
+};
+
+const initializeFilters = () => {
+    const selectOrgano = document.querySelector("select");
+    const fechaInicioInput = document.querySelectorAll("input[type='date']")[0];
+    const fechaFinInput = document.querySelectorAll("input[type='date']")[1];
+
+    selectOrgano.addEventListener("change", async () => {
+        let selectedOrgano = selectOrgano.value;
+        printFilteredCassetesByOrgano(selectedOrgano);
+    });
+
+    fechaInicioInput.addEventListener("change", async () => {
+        let fechaInicio = fechaInicioInput.value;
+        let fechaFin = fechaFinInput.value;
+        selectOrgano.selectedIndex = 0;
+        printFilteredCassetesByDate(fechaInicio, fechaFin);
+    });
+
+    fechaFinInput.addEventListener("change", async () => {
+        let fechaInicio = fechaInicioInput.value;
+        let fechaFin = fechaFinInput.value;
+        selectOrgano.selectedIndex = 0;
+        printFilteredCassetesByDate(fechaInicio, fechaFin);
+    });
 };
 
 let create_svg = () => {
@@ -109,84 +204,88 @@ let create_svg = () => {
     return svg;
 }
 
+let num;
 let printDetailsCassette = async (event)=>{
     
-    let  numero ;
     if (event.target.parentElement.parentElement.tagName == "BUTTON") {
-     numero  = event.target.parentElement.parentElement.getAttribute("value"); 
-
-     await imprimirdetalles(numero);
+     num = event.target.parentElement.parentElement.getAttribute("value"); 
+     await imprimirdetalles();
     }
-    
-
-
 
 } ; 
 
-
-let imprimirdetalles = async (id)=>{
-    let num = Number(id)
-    localStorage.setItem('cassette', id);
+let imprimirdetalles = async ()=>{
+    // localStorage.setItem('cassette', id);
     org.textContent = "";
     fech.textContent = "";
     iden.textContent = "";
     carac.textContent = "";
     obs.textContent = "";
     desc.textContent = "";
-    //
-     observaciones_edit.value = "";
- caracteristicas_edit.value = "";
- organo_edit.value  ="";
-fecha_edit.value = "";
-identificador_edit.value  = "";
- descripcion_edit.value  = "";
+    
+    observaciones_edit.value = "";
+    caracteristicas_edit.value = "";
+    organo_edit.value  ="";
+    fecha_edit.value = "";
+    identificador_edit.value  = "";
+    descripcion_edit.value  = "";
     let element = await GetOneCassetteById(num)
-     org.textContent = element.organo;
-     fech.textContent = element.fecha.split("T")[0]
-     iden.textContent = element.identificador_cassette;
-     carac.textContent = element.caracteristicas;
-     obs.textContent = element.observaciones;
-     desc.textContent = element.descripcion;
-
-     //
-     observaciones_edit.value = element.observaciones;
-     caracteristicas_edit.value = element.caracteristicas;
-     organo_edit.value  = element.organo;
+    org.textContent = element.organo;
+    fech.textContent = element.fecha.split("T")[0]
+    iden.textContent = element.identificador_cassette;
+    carac.textContent = element.caracteristicas;
+    obs.textContent = element.observaciones;
+    desc.textContent = element.descripcion;
+    
+    observaciones_edit.value = element.observaciones;
+    caracteristicas_edit.value = element.caracteristicas;
+    organo_edit.value  = element.organo;
     fecha_edit.value = element.fecha.split("T")[0];
     identificador_edit.value  = element.identificador_cassette;
-     descripcion_edit.value  =  element.descripcion;
+    descripcion_edit.value  =  element.descripcion;
 }
 
 let DeleteCassete = async ()=>{
-    let cassete = localStorage.getItem('cassette');
-let response = await DeleteCasseteById(cassete);
-if (response) {
-    alert ("Cassette eliminado  correctamente !");
+    // let cassete = localStorage.getItem('cassette');
+    let response = await DeleteCasseteById(num);
+    if (response) 
+        document.getElementById('delete__cassetteModal').classList.add('d-none');
+    org.textContent = "";
+    fech.textContent = "";
+    iden.textContent = "";
+    carac.textContent = "";
+    obs.textContent = "";
+    desc.textContent = "";
+    printAllCassetes()
 }
-printAllCassetes()
-}
 
 
 
-let  EditCassette = async (event )=>{
+let  EditCassette = async (event)=>{
     event.preventDefault(); 
-    let cassete = localStorage.getItem('cassette');
+    // let cassete = localStorage.getItem('cassette');
     let data = {
         observaciones : observaciones_edit.value ,
         caracteristicas :  caracteristicas_edit.value,
         organo :  organo_edit.value  ,
         fecha :  fecha_edit.value ,
-        identificador_cassete :  identificador_edit.value,  
+        identificador_cassette :  identificador_edit.value,  
         descripcion : descripcion_edit.value ,
     }
-    console.log(data)
-  let response = await  EditCasseteById( cassete, data );
-  console.log(response)
-    printAllCassetes()
-   imprimirdetalles(cassete)
+    
+    let response = await EditCasseteById( num, data );
+    if(response){
+        document.getElementById('edit__cassetteModal').classList.add('d-none');
+        printAllCassetes()
+        imprimirdetalles()
+    }
 }
-printAllCassetes()
-editform.addEventListener("submit" ,EditCassette );
+
+document.addEventListener('DOMContentLoaded', () => {
+    printAllCassetes();
+    initializeFilters();
+});
 deletebutton.addEventListener("click" , DeleteCassete)
 tbodycassetes.addEventListener("click" , printDetailsCassette )
+editform.addEventListener("submit" ,EditCassette );
 createCassette.addEventListener("submit" , insertnewCassete)

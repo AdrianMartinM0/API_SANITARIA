@@ -65,6 +65,7 @@ const { Model, DataTypes } = require("sequelize");
         hooks: {
             afterCreate: async (muestra) => {
                 muestra.qr_muestra = `M_${muestra.id}`;
+                await muestra.save();
             }
         }
     }
