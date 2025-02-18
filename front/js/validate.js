@@ -1,88 +1,65 @@
-const form = document.getElementById("registroForm");
-const nombreInput = document.getElementById("nombre");
-const apellidosInput = document.getElementById("apellidos");
-const centroInput = document.getElementById("centro");
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-const confirmPasswordInput = document.getElementById("confirm-password");
-const loginForm = document.getElementById("loginForm");
-const loginEmail = document.getElementById("loginEmail");
-const loginPassword = document.getElementById("loginPassword");
+const form = document.getElementById("createCassette");
+const descripcion = document.getElementById("descripcion");
+const identificador = document.getElementById("identificador_cassette");
+const fecha = document.getElementById("fecha");
+const organo = document.getElementById("organo");
+const caracteristicas = document.getElementById("caracteristicas");
+const observaciones = document.getElementById("observaciones");
 
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const passwordRegex = /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[\W_]).{8,16}$/;
+const createErrorElement = (input) => {
+    let error = document.createElement("span");
+    error.classList.add("error-message", "hidden");
+    error.style.color = "red";
+    error.style.fontSize = "12px";
+    input.insertAdjacentElement("afterend", error);
+    return error;
+};
 
-const formSolicitud = document.getElementById("solicitudForm");
-const emailInputSolicitud = document.getElementById("solicitudEmail");
-const emailErrorSolicitud = document.getElementById("error-email-solicitud");
+const errorDescripcion = createErrorElement(descripcion);
+const errorIdentificador = createErrorElement(identificador);
+const errorFecha = createErrorElement(fecha);
+const errorOrgano = createErrorElement(organo);
+const errorCaracteristicas = createErrorElement(caracteristicas);
+const errorObservaciones = createErrorElement(observaciones);
 
-import { testlogin } from "./validateApis";
+const hideAllErrors = () => {
+    document.querySelectorAll(".error-message").forEach(error => error.classList.add("hidden"));
+};
 
-// function showError(id) {
-//     document.getElementById(id).classList.remove("hidden");
-//     return false;
-// }
+const showFirstError = (input, errorElement, message) => {
+    hideAllErrors();
+    errorElement.textContent = message;
+    errorElement.classList.remove("hidden");
+    input.focus();
+};
 
-// function hideErrors() {
-//     let errorElements = document.querySelectorAll(".text-red-500");
-//     errorElements.forEach(error => error.classList.add("hidden"));
-// }
-
-// function validarRegister(event) {
-//     event.preventDefault();
-
-//     let nombre = nombreInput.value.trim();
-//     let apellidos = apellidosInput.value.trim();
-//     let centro = centroInput.value;
-//     let email = emailInput.value.trim();
-//     let password = passwordInput.value;
-//     let confirmPassword = confirmPasswordInput.value;
-
-//     hideErrors();
-
-//     if (nombre === "") return showError("error-nombre");
-//     if (apellidos === "") return showError("error-apellidos");
-//     if (centro === "Centro") return showError("error-centro");
-//     if (!emailRegex.test(email)) return showError("error-email");
-//     if (!passwordRegex.test(password)) return showError("error-password");
-//     if (password !== confirmPassword) return showError("error-confirm-password");
-
-//     alert ("Solicitud enviada con éxito");
-//     // form.submit();
-// }
-
-// function validarSolicitud(event) {
-//     event.preventDefault();
-
-//     let email = emailInputSolicitud.value.trim();
-
-//     hideErrors();
-
-//     if (!emailRegex.test(email)) return showError("error-email-solicitud");
-
-//     alert ("Solicitud enviada con éxito");
-//     formSolicitud.submit();
-// }
-
-function validarLoginFormulario(event) {
+form.addEventListener("submit", (event) => {
     event.preventDefault();
-    let mail = loginEmail.value.trim();
-    let pass = loginPassword.value.trim();
-    // hideErrors();
-    console.log(mail)
-    if (!emailRegex.test(mail)) {
-        return showError("error-login-email");
+    hideAllErrors();
+
+    if (descripcion.value.trim() === "") {
+        return showFirstError(descripcion, errorDescripcion, "La descripción es obligatoria.");
     }
-    if (pass === "") {
-        return showError("error-login-password");
+
+    if (identificador.value.trim() === "") {
+        return showFirstError(identificador, errorIdentificador, "El identificador es obligatorio.");
     }
-    testlogin(email, pass);
-}
-//LISTENER
-loginForm.addEventListener("submit", validarLoginFormulario);
-// form.addEventListener("submit", validarRegister);
-// formSolicitud.addEventListener("submit", validarSolicitud);
-// formSolicitud.addEventListener("submit", validarSolicitud);
-// const loginForm = document.getElementById("loginForm");
-// const loginEmailInput = document.getElementById("loginEmail");
-// const loginPasswordInput = document.getElementById("loginPassword");
+
+    if (!fecha.value) {
+        return showFirstError(fecha, errorFecha, "Debe seleccionar una fecha.");
+    }
+
+    if (organo.value === "") {
+        return showFirstError(organo, errorOrgano, "Debe seleccionar un órgano.");
+    }
+
+    if (caracteristicas.value.trim() === "") {
+        return showFirstError(caracteristicas, errorCaracteristicas, "Las características son obligatorias.");
+    }
+
+    if (observaciones.value.trim() === "") {
+        return showFirstError(observaciones, errorObservaciones, "Las observaciones son obligatorias.");
+    }
+
+    console.log("Formulario validado correctamente.");
+});
