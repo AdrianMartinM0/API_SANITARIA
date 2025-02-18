@@ -27,9 +27,9 @@ const updateCassette = async (data, id) => {
         fecha: data.fecha,
         observaciones: data.observaciones,
         descripcion: data.descripcion,
-        caracteristicas: deleteCassete.caracteristicas,
+        caracteristicas: data.caracteristicas,
         organo: data.organo,
-        identificador_cassette: data.identificador_cassete,
+        identificador_cassette: data.identificador_cassette,
     },{
         where : {
             id: id,
