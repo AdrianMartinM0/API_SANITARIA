@@ -84,6 +84,7 @@ const { Model, DataTypes } = require("sequelize");
         hooks: {
             afterCreate: async (cassette) => {
                 cassette.qr_cassette = `C_${cassette.id}`;
+                await cassette.save();
             }
         }
     }
