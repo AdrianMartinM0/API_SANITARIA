@@ -27,6 +27,10 @@ const edit__muestraModal = document.getElementById ("edit__muestraModal");
 const close__btn__editMuestra = document.getElementById ("close__btn__editMuestra");
 
 const showModal = (event) => {
+    if(event.target.id == "delete__cassette" || event.target.id == "edit__cassette"){
+        if(event.target.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild.textContent == "")
+            return;
+    }
     const modalId = event.target.id + "Modal";
     document.getElementById(modalId).classList.remove("d-none");
 };

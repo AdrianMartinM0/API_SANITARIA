@@ -52,37 +52,38 @@ let insertnewCassete =  async (event)=>{
 let printAllCassetes =  async () => {
     tbodycassetes.innerHTML =""; 
     let array = await GetallCassetesFromUser();
-    array.forEach(element => {
+    const cassettesList = await array;
+    cassettesList.forEach(element => {
 
         let fragment = document.createDocumentFragment();
 
         let tr = document.createElement("tr");
-        tr.setAttribute("class", "border-b hover:bg-blue-50");
+        tr.class = "border-b hover:bg-blue-50";
         let fecha = element.fecha.split("T")[0];
         let td1 = document.createElement("td");
-        td1.setAttribute("class", "p-1");
         td1.textContent = fecha;
+        td1.classList.add("p-1");
 
         let td2 = document.createElement("td");
-        td2.setAttribute("class", "p-1");
+        td2.classList.add("p-1");
     
         td2.textContent = element.descripcion;
 
         let td3 = document.createElement("td");
-        td3.setAttribute("class", "p-1");
+        td3.classList.add("p-1");
         td3.textContent = element.organo;
 
         let td4 = document.createElement("td");
-        td4.setAttribute("class", "p-1 text-left");
+        td4.classList.add("p-1", "flex", "items-center", "justify-end");
 
         let button = document.createElement("button");
-
+        
         let svg = create_svg()
 
-        button.innerHTML =    svg;
-        button.setAttribute("value" , element.id);
-        button.setAttribute("id" , "button_details");
-    
+        button.innerHTML = svg;
+        button.value=element.id;
+        button.id="button_details";
+        
         td4.appendChild(button);
 
         tr.appendChild(td1);
@@ -162,6 +163,7 @@ let DeleteCassete = async ()=>{
     carac.textContent = "";
     obs.textContent = "";
     desc.textContent = "";
+    num = null;
     printAllCassetes()
 }
 
