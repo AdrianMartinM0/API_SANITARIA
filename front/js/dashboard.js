@@ -21,6 +21,7 @@ let fecha_edit = document.getElementById("fecha_edit");
 let identificador_edit  = document.getElementById("identificador_edit");
 let descripcion_edit  = document.getElementById("descripcion_edit");
 let editform = document.getElementById("editform");
+const logout = document.getElementById('logOut');
 import {postCassette , GetallCassetesFromUser , GetOneCassetteById  , EditCasseteById,  DeleteCasseteById} from "./dashboardApis.js"
 
 let insertnewCassete =  async (event)=>{
@@ -171,13 +172,21 @@ const initializeFilters = () => {
     const selectOrgano = document.querySelector("select");
     const fechaInicioInput = document.querySelectorAll("input[type='date']")[0];
     const fechaFinInput = document.querySelectorAll("input[type='date']")[1];
+    let noUsable = true;
+    fechaFinInput.disabled = noUsable;
 
     selectOrgano.addEventListener("change", async () => {
         let selectedOrgano = selectOrgano.value;
+        noUsable = true;
+        fechaFinInput.disabled = noUsable;
+        fechaInicioInput.value = "";
+        fechaFinInput.value = "";
         printFilteredCassetesByOrgano(selectedOrgano);
     });
 
     fechaInicioInput.addEventListener("change", async () => {
+        noUsable = false;
+        fechaFinInput.disabled = noUsable;
         let fechaInicio = fechaInicioInput.value;
         let fechaFin = fechaFinInput.value;
         selectOrgano.selectedIndex = 0;
@@ -191,6 +200,11 @@ const initializeFilters = () => {
         printFilteredCassetesByDate(fechaInicio, fechaFin);
     });
 };
+
+const logOut = () => {
+    sessionStorage.removeItem('user-token');
+    location.reload();
+}
 
 let create_svg = () => {
     let svg = `<svg class="h-5 w-11 text-blue-400 hover:text-blue-900" stroke-width="5" viewBox="0 0 23 23" fill="none"
@@ -288,7 +302,10 @@ document.addEventListener('DOMContentLoaded', () => {
     printAllCassetes();
     initializeFilters();
 });
-deletebutton.addEventListener("click" , DeleteCassete)
-tbodycassetes.addEventListener("click" , printDetailsCassette )
+
+
+logout.addEventListener("click", logOut);
+deletebutton.addEventListener("click" , DeleteCassete);
+tbodycassetes.addEventListener("click" , printDetailsCassette);
 editform.addEventListener("submit" ,EditCassette );
-createCassette.addEventListener("submit" , insertnewCassete)
+createCassette.addEventListener("submit" , insertnewCassete);
