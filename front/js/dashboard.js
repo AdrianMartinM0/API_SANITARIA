@@ -97,6 +97,101 @@ let printAllCassetes =  async () => {
     
 };
 
+const printFilteredCassetesByOrgano = async (organo) => {
+    tbodycassetes.innerHTML = "";
+    const array = await GetallCassetesFromUser();
+    
+    const filteredArray = organo === "*" ? array : array.filter(cassette => cassette.organo === organo);
+
+    renderCassetes(filteredArray);
+};
+
+const printFilteredCassetesByDate = async (fechaInicio, fechaFin) => {
+    tbodycassetes.innerHTML = "";
+    const array = await GetallCassetesFromUser();
+
+    const filteredArray = array.filter(cassette => {
+        const fechaCassette = cassette.fecha.split("T")[0];
+
+        if (fechaInicio && !fechaFin) {
+            return fechaCassette === fechaInicio;
+        }
+        if (fechaInicio && fechaFin) {
+            return fechaCassette >= fechaInicio && fechaCassette <= fechaFin;
+        }
+        return true;
+    });
+
+    renderCassetes(filteredArray);
+};
+
+const renderCassetes = (array) => {
+    tbodycassetes.innerHTML = "";
+
+    array.forEach(element => {
+        let fragment = document.createDocumentFragment();
+        let tr = document.createElement("tr");
+        tr.setAttribute("class", "border-b hover:bg-blue-50");
+
+        let fecha = element.fecha.split("T")[0];
+        let td1 = document.createElement("td");
+        td1.setAttribute("class", "p-1");
+        td1.textContent = fecha;
+
+        let td2 = document.createElement("td");
+        td2.setAttribute("class", "p-1");
+        td2.textContent = element.descripcion;
+
+        let td3 = document.createElement("td");
+        td3.setAttribute("class", "p-1");
+        td3.textContent = element.organo;
+
+        let td4 = document.createElement("td");
+        td4.setAttribute("class", "p-1 text-left");
+
+        let button = document.createElement("button");
+        let svg = create_svg();
+        button.innerHTML = svg;
+        button.setAttribute("value", element.id);
+        button.setAttribute("id", "button_details");
+
+        td4.appendChild(button);
+
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        tr.appendChild(td4);
+
+        fragment.appendChild(tr);
+        tbodycassetes.appendChild(fragment);
+    });
+};
+
+const initializeFilters = () => {
+    const selectOrgano = document.querySelector("select");
+    const fechaInicioInput = document.querySelectorAll("input[type='date']")[0];
+    const fechaFinInput = document.querySelectorAll("input[type='date']")[1];
+
+    selectOrgano.addEventListener("change", async () => {
+        let selectedOrgano = selectOrgano.value;
+        printFilteredCassetesByOrgano(selectedOrgano);
+    });
+
+    fechaInicioInput.addEventListener("change", async () => {
+        let fechaInicio = fechaInicioInput.value;
+        let fechaFin = fechaFinInput.value;
+        selectOrgano.selectedIndex = 0;
+        printFilteredCassetesByDate(fechaInicio, fechaFin);
+    });
+
+    fechaFinInput.addEventListener("change", async () => {
+        let fechaInicio = fechaInicioInput.value;
+        let fechaFin = fechaFinInput.value;
+        selectOrgano.selectedIndex = 0;
+        printFilteredCassetesByDate(fechaInicio, fechaFin);
+    });
+};
+
 let create_svg = () => {
     let svg = `<svg class="h-5 w-11 text-blue-400 hover:text-blue-900" stroke-width="5" viewBox="0 0 23 23" fill="none"
     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -189,7 +284,10 @@ let  EditCassette = async (event)=>{
     }
 }
 
-document.addEventListener('DOMContentLoaded', printAllCassetes)
+document.addEventListener('DOMContentLoaded', () => {
+    printAllCassetes();
+    initializeFilters();
+});
 deletebutton.addEventListener("click" , DeleteCassete)
 tbodycassetes.addEventListener("click" , printDetailsCassette )
 editform.addEventListener("submit" ,EditCassette );
