@@ -34,7 +34,7 @@ const edit__muestra = document.getElementById ("edit__muestra");
 const edit__muestraModal = document.getElementById ("edit__muestraModal");
 const close__btn__editMuestra = document.getElementById ("close__btn__editMuestra");
 
-
+const locks = document.querySelectorAll('.lock');
 
 
 
@@ -47,6 +47,18 @@ const closeModal = (event) => {
     const closeId=event.target.parentNode.parentNode.id;
     document.getElementById(closeId).classList.add("d-none");
 };
+
+
+locks.forEach(lock => {
+    lock.addEventListener('click', (event) => {
+        const input = event.target.parentElement.parentElement.previousElementSibling;
+        if (input.type === 'password') {
+            input.type = 'text';
+        } else {
+            input.type = 'password';
+        }
+    });
+});
 
     // Mostrar formulario de solicitud de contraseña y ocultar el login
     forgotPasswordLink.addEventListener('click', () => {
