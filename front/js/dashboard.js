@@ -214,6 +214,7 @@ let printDetailsCassette = async (event)=>{
 
 } ; 
 
+
 let imprimirdetalles = async ()=>{
     // localStorage.setItem('cassette', id);
     org.textContent = "";
