@@ -35,7 +35,7 @@
   // Crear una nueva muestra en un cassette
   export let newMuestra = async (data) => {
     try {
-        let response = await fetch(`http://localhost:3000/v1/cassette/${data}/muestra`, {
+        let response = await fetch(`http://localhost:3000/v1/muestra`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -116,6 +116,4 @@
         return false;
     }
   };
-  
-  
   

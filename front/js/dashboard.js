@@ -22,12 +22,110 @@ let identificador_edit  = document.getElementById("identificador_edit");
 let descripcion_edit  = document.getElementById("descripcion_edit");
 let editform = document.getElementById("editform");
 const logout = document.getElementById('logOut');
+
 import {postCassette , GetallCassetesFromUser , GetOneCassetteById  , EditCasseteById,  DeleteCasseteById} from "./dashboardApis.js"
 
+
+const createErrorElement = (input) => {
+    let error = document.createElement("span");
+    error.classList.add("error-message", "hidden");
+    error.style.color = "red";
+    error.style.fontSize = "12px";
+    input.after(error);
+    return error;
+};
+
+const hideAllErrors = () => {
+    document.querySelectorAll(".error-message").forEach(error => error.classList.add("hidden"));
+};
+
+const showFirstError = (input, errorElement, message) => {
+    hideAllErrors();
+    errorElement.textContent = message;
+    errorElement.classList.remove("hidden");
+    input.focus();
+};
+
+//MODAL NEW
+const errorDescripcion = createErrorElement(descripcion);
+const errorIdentificador_cassette = createErrorElement(identificador_cassette);
+const errorFecha = createErrorElement(fecha);
+const errorOrgano = createErrorElement(organo);
+const errorCaracteristicas = createErrorElement(caracteristicas);
+const errorObservaciones = createErrorElement(observaciones);
+
+createCassette.addEventListener("submit", (event) => {
+    event.preventDefault();
+    hideAllErrors();
+
+    if (descripcion.value.trim() === "") {
+        return showFirstError(descripcion, errorDescripcion, "La descripción es obligatoria.");
+    }
+
+    if (identificador_cassette.value.trim() === "") {
+        return showFirstError(identificador_cassette, errorIdentificador_cassette, "El identificador es obligatorio.");
+    }
+
+    if (!fecha.value) {
+        return showFirstError(fecha, errorFecha, "Debe seleccionar una fecha.");
+    }
+
+    if (organo.value === "") {
+        return showFirstError(organo, errorOrgano, "Debe seleccionar un órgano.");
+    }
+
+    if (caracteristicas.value.trim() === "") {
+        return showFirstError(caracteristicas, errorCaracteristicas, "Las características son obligatorias.");
+    }
+
+    if (observaciones.value.trim() === "") {
+        return showFirstError(observaciones, errorObservaciones, "Las observaciones son obligatorias.");
+    }
+
+    insertnewCassete();
+});
+
+//MODAL EDIT
+const errorIdentificador_edit = createErrorElement(identificador_edit);
+const errorDescripcion_edit = createErrorElement(descripcion_edit);
+const errorFecha_edit = createErrorElement(fecha_edit);
+const errorOrgano_edit = createErrorElement(organo_edit);
+const errorCaracteristicas_edit = createErrorElement(caracteristicas_edit);
+const errorObservaciones_edit = createErrorElement(observaciones_edit);
+
+editform.addEventListener("submit", (event) => {
+    event.preventDefault();
+    hideAllErrors();
+
+    if (descripcion_edit.value.trim() === "") {
+        return showFirstError(descripcion_edit, errorDescripcion_edit, "La descripción es obligatoria.");
+    }
+
+    if (identificador_edit.value.trim() === "") {
+        return showFirstError(identificador_edit, errorIdentificador_edit, "El identificador es obligatorio.");
+    }
+
+    if (!fecha_edit.value) {
+        return showFirstError(fecha_edit, errorFecha_edit, "Debe seleccionar una fecha.");
+    }
+
+    if (organo_edit.value === "") {
+        return showFirstError(organo_edit, errorOrgano_edit, "Debe seleccionar un órgano.");
+    }
+
+    if (caracteristicas_edit.value.trim() === "") {
+        return showFirstError(caracteristicas_edit, errorCaracteristicas_edit, "Las características son obligatorias.");
+    }
+
+    if (observaciones_edit.value.trim() === "") {
+        return showFirstError(observaciones_edit, errorObservaciones_edit, "Las observaciones son obligatorias.");
+    }
+
+});
+
+//INSERT
+
 let insertnewCassete =  async (event)=>{
-   
-    event.preventDefault(); 
-  
     let data = {
         descripcion : descripcion.value,
         fecha : fecha.value , 
@@ -49,6 +147,7 @@ let insertnewCassete =  async (event)=>{
         printAllCassetes()
     }
 }
+
 
 let printAllCassetes =  async () => {
     tbodycassetes.innerHTML =""; 
@@ -219,19 +318,21 @@ let create_svg = () => {
     return svg;
 }
 
-let num;
+
 let printDetailsCassette = async (event)=>{
     
     if (event.target.parentElement.parentElement.tagName == "BUTTON") {
-     num = event.target.parentElement.parentElement.getAttribute("value"); 
-     await imprimirdetalles();
+        
+     let num = event.target.parentElement.parentElement.getAttribute("value"); 
+     localStorage.setItem('cassette', num);
+     await imprimirdetalles(num);
     }
 
 } ; 
 
-
-let imprimirdetalles = async ()=>{
-    // localStorage.setItem('cassette', id);
+// let cassete = localStorage.getItem('cassette');
+let imprimirdetalles = async (id)=>{
+    localStorage.setItem ('cassette', id);
     org.textContent = "";
     fech.textContent = "";
     iden.textContent = "";
@@ -245,7 +346,7 @@ let imprimirdetalles = async ()=>{
     fecha_edit.value = "";
     identificador_edit.value  = "";
     descripcion_edit.value  = "";
-    let element = await GetOneCassetteById(num)
+    let element = await GetOneCassetteById(id)
     org.textContent = element.organo;
     fech.textContent = element.fecha.split("T")[0]
     iden.textContent = element.identificador_cassette;
@@ -262,8 +363,8 @@ let imprimirdetalles = async ()=>{
 }
 
 let DeleteCassete = async ()=>{
-    // let cassete = localStorage.getItem('cassette');
-    let response = await DeleteCasseteById(num);
+   
+    let response = await DeleteCasseteById(cassete);
     if (response) 
         document.getElementById('delete__cassetteModal').classList.add('d-none');
     org.textContent = "";
@@ -272,7 +373,7 @@ let DeleteCassete = async ()=>{
     carac.textContent = "";
     obs.textContent = "";
     desc.textContent = "";
-    num = null;
+    localStorage.setItem('cassette', null);
     printAllCassetes()
 }
 
@@ -280,7 +381,7 @@ let DeleteCassete = async ()=>{
 
 let  EditCassette = async (event)=>{
     event.preventDefault(); 
-    // let cassete = localStorage.getItem('cassette');
+   
     let data = {
         observaciones : observaciones_edit.value ,
         caracteristicas :  caracteristicas_edit.value,
@@ -290,7 +391,7 @@ let  EditCassette = async (event)=>{
         descripcion : descripcion_edit.value ,
     }
     
-    let response = await EditCasseteById( num, data );
+    let response = await EditCasseteById( cassete, data );
     if(response){
         document.getElementById('edit__cassetteModal').classList.add('d-none');
         printAllCassetes()
@@ -308,4 +409,4 @@ logout.addEventListener("click", logOut);
 deletebutton.addEventListener("click" , DeleteCassete);
 tbodycassetes.addEventListener("click" , printDetailsCassette);
 editform.addEventListener("submit" ,EditCassette );
-createCassette.addEventListener("submit" , insertnewCassete);
+// createCassette.addEventListener("submit" , insertnewCassete);
