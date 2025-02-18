@@ -21,7 +21,17 @@ let fecha_edit = document.getElementById("fecha_edit");
 let identificador_edit  = document.getElementById("identificador_edit");
 let descripcion_edit  = document.getElementById("descripcion_edit");
 let editform = document.getElementById("editform");
+let formnewmuestra = document.getElementById("formnewmuestra")
+
+let descripcion_m = document.getElementById("descripcion_m");
+let fecha_m = document.getElementById("fecha_m");
+let tincion_m = document.getElementById("tincion_m");
+let observaciones_m = document.getElementById("observaciones_m");
+
+
+
 import {postCassette , GetallCassetesFromUser , GetOneCassetteById  , EditCasseteById,  DeleteCasseteById} from "./dashboardApis.js"
+import { } from "./dashboardApisMuestra.js"
 
 let insertnewCassete =  async (event)=>{
    
@@ -284,6 +294,24 @@ let  EditCassette = async (event)=>{
     }
 }
 
+//muestras 
+let CreateNewMuestra = (event)=>{
+    event.preventDefault(); 
+ 
+
+
+let data = {
+    fecha : fecha_m.value ,
+    observaciones  : observaciones_m.value , 
+    descripcion : descripcion_m.value , 
+    tincion : tincion_m.value ,
+    CassetteId : num
+
+
+}
+console.log(data);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     printAllCassetes();
     initializeFilters();
@@ -292,3 +320,4 @@ deletebutton.addEventListener("click" , DeleteCassete)
 tbodycassetes.addEventListener("click" , printDetailsCassette )
 editform.addEventListener("submit" ,EditCassette );
 createCassette.addEventListener("submit" , insertnewCassete)
+formnewmuestra.addEventListener("submit" , CreateNewMuestra)

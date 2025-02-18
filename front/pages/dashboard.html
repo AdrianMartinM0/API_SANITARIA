@@ -218,7 +218,7 @@
     <div class="w-full bg-white shadow-md rounded-lg overflow-hidden p-4 h-64 text-sm">
       <div class="px-3 py-1 bg-blue-100 text-blue-900 font-semibold flex items-center justify-between">
         <p>MUESTRAS</p>
-        <button>
+        <button >
           <svg id="new__muestra" class="h-5 w-5 text-blue-400 hover:text-blue-900" fill="none" viewBox="0 0 23 23"
             stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -468,18 +468,18 @@
       <div class="modal-content">
         <span id="close__btn__newMuestra" class="close-btn">&times;</span>
         <h2>Nueva Muestra</h2>
-        <form>
+        <form id="formnewmuestra">
           <label for="descripcion">Descripción:</label>
-          <input type="text" id="descripcion" name="descripcion" required>
+          <input type="text" id="descripcion_m" name="descripcion" required>
 
           <div class="form-group">
             <div>
               <label for="fecha">Fecha:</label>
-              <input type="date" id="fecha" name="fecha" required>
+              <input type="date" id="fecha_m" name="fecha" required>
             </div>
             <div>
               <label for="tincion">Tinción:</label>
-              <select id="tincion" name="tincion" required>
+              <select id="tincion_m" name="tincion" required>
                 <option disabled selected>Seleccionar Tición</option>
                 <option>Hematoxilina Eosina (HE)</option>
                 <option>Giemsa</option>
@@ -491,11 +491,9 @@
           </div>
 
           <label for="observaciones">Observaciones:</label>
-          <textarea id="observaciones" name="observaciones" rows="4" required></textarea>
+          <textarea id="observaciones_m" name="observaciones" rows="4" required></textarea>
 
-          <label for="imagen">Imagen:</label>
-          <input type="file" id="imagen" name="imagen" accept="image/*" required>
-
+ 
           <button type="submit">Crear Nueva Muestra</button>
         </form>
       </div>

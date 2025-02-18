@@ -9,7 +9,7 @@ const { errores } = require("./middleware/middlewareErrores");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({
-  origin : 'http://127.0.0.1:5500', 
+  origin : '*', 
 }))
 
 const apiRoutes = require("./routes/v1.0.0/apiRouter");
