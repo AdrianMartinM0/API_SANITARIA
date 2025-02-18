@@ -22,7 +22,7 @@ let identificador_edit  = document.getElementById("identificador_edit");
 let descripcion_edit  = document.getElementById("descripcion_edit");
 let editform = document.getElementById("editform");
 import {postCassette , GetallCassetesFromUser , GetOneCassetteById  , EditCasseteById,  DeleteCasseteById} from "./dashboardApis.js"
-console.log(user_token)
+
 let insertnewCassete =  async (event)=>{
    
     event.preventDefault(); 
