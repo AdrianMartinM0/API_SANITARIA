@@ -3,7 +3,7 @@
   // Obtener todas las muestras de un cassette específico
   export let getAllMuestraByCassette = async (id) => {
     try {
-        let response = await fetch(`http://localhost:3000/v1/cassette/${id}/muestra`, {
+        let response = await fetch(`http://localhost:3000/v1/muestra/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -19,13 +19,15 @@
   // Obtener los detalles de una muestra específica
   export let getOneMuestra = async (idmuestra) => {
     try {
-        let response = await fetch(`http://localhost:3000/v1/muestra/${idmuestra}`, {
+        let response = await fetch(`http://localhost:3000/v1/muestra/one/${idmuestra}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "user-token": sessionStorage.getItem('user-token')
             }
         });
+        
+        
         return response.json();
     } catch (error) {
         return false;
@@ -117,3 +119,5 @@
     }
   };
   
+let a = await getAllMuestraByCassette(1);
+console.log(a)
