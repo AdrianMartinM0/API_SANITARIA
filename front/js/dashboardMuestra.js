@@ -51,7 +51,7 @@ if(response){
 }
 }
 
-let printMuestras = async () => {
+export let printMuestras = async () => {
     let cassette = localStorage.getItem('cassette');
     tdbody_muestra.innerHTML = ""; 
     
@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
 formnewmuestra.addEventListener("submit" , CreateNewMuestra);
 form__editMuestra.addEventListener("submit", editarMuestra);
 delete_muestra.addEventListener("click", borrarMuestra);
-tdbody_muestra.addEventListener("click", muestras);
+// tdbody_muestra.addEventListener("click", muestras);
 
 
 

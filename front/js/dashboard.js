@@ -24,6 +24,7 @@ let editform = document.getElementById("editform");
 const logout = document.getElementById('logOut');
 
 import {postCassette , GetallCassetesFromUser , GetOneCassetteById  , EditCasseteById,  DeleteCasseteById} from "./dashboardApis.js"
+import { printMuestras } from "./dashboardMuestra.js";
 
 
 const createErrorElement = (input) => {
@@ -320,11 +321,11 @@ let create_svg = () => {
 
 
 let printDetailsCassette = async (event)=>{
-    
     if (event.target.parentElement.parentElement.tagName == "BUTTON") {
         
-     let num = event.target.parentElement.parentElement.getAttribute("value"); 
-     localStorage.setItem('cassette', num);
+        let num = event.target.parentElement.parentElement.getAttribute("value"); 
+        localStorage.setItem('cassette', num);
+        printMuestras();
      await imprimirdetalles(num);
     }
 
