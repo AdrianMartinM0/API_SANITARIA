@@ -325,14 +325,14 @@ let printDetailsCassette = async (event)=>{
         
      let num = event.target.parentElement.parentElement.getAttribute("value"); 
      localStorage.setItem('cassette', num);
-     await imprimirdetalles();
+     await imprimirdetalles(num);
     }
 
 } ; 
 
-let cassete = localStorage.getItem('cassette');
-let imprimirdetalles = async ()=>{
- 
+// let cassete = localStorage.getItem('cassette');
+let imprimirdetalles = async (id)=>{
+    localStorage.setItem ('cassette', id);
     org.textContent = "";
     fech.textContent = "";
     iden.textContent = "";
@@ -346,7 +346,7 @@ let imprimirdetalles = async ()=>{
     fecha_edit.value = "";
     identificador_edit.value  = "";
     descripcion_edit.value  = "";
-    let element = await GetOneCassetteById(cassete)
+    let element = await GetOneCassetteById(id)
     org.textContent = element.organo;
     fech.textContent = element.fecha.split("T")[0]
     iden.textContent = element.identificador_cassette;
