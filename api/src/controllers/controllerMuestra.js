@@ -74,10 +74,24 @@ const deleteMuestraController = async(req , res , next)=>{
     }
 }
 
+const getOneMuestraController = async (req, res, next) => {
+    try {
+        const muestra = await getOneMuestra(req.params.id);
+        if (!muestra) {
+            const error = new Error('El Cassete no existe');
+            error.status=400;
+            throw error;
+        }
+        res.status(200).send(muestra)
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports={
     newMuestraController,
     getAllMuestraByCassetteController,
     updateMuestraController,
     deleteMuestraController,
-  
+    getOneMuestraController
 }
