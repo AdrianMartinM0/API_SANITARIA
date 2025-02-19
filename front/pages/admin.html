@@ -13,113 +13,224 @@
 
 <body class="bg-gray-100 min-h-screen flex justify-center">
   <div class="w-11/12 max-w-7xl flex flex-col gap-6 py-6">
+
     <!-- Barra de Filtros -->
     <div class="w-full bg-blue-200 p-4 shadow-md fixed top-0 left-0 right-0 z-10">
       <div class="max-w-7xl mx-auto flex flex-wrap gap-2 justify-around">
-        <button id="delete__allCassettes" class="flex justify-between items-center gap-4 bg-white p-2 border rounded-lg w-full sm:w-auto text-blue-900 hover:bg-blue-50">
+        <button id="delete__allCassettes"
+          class="flex justify-between items-center gap-4 bg-white p-2 border rounded-lg w-full sm:w-auto text-blue-900 hover:bg-blue-50">
           Eliminar cassettes
-          <svg class="h-5 w-5 text-blue-400 hover:text-blue-900"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">
+          <svg class="h-5 w-5 text-blue-400 hover:text-blue-900" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10" />
             <circle cx="12" cy="12" r="3" />
           </svg>
         </button>
-        <button id="delete__allMuestras" class="flex justify-between items-center gap-4 bg-white p-2 border rounded-lg w-full sm:w-auto text-blue-900 hover:bg-blue-50">
+        <button id="delete__allMuestras"
+          class="flex justify-between items-center gap-4 bg-white p-2 border rounded-lg w-full sm:w-auto text-blue-900 hover:bg-blue-50">
           Eliminar muestras
-          <svg class="h-5 w-5 text-blue-400 hover:text-blue-900"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>
+          <svg class="h-5 w-5 text-blue-400 hover:text-blue-900" width="24" height="24" viewBox="0 0 24 24"
+            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" />
             <rect x="3" y="4" width="18" height="4" rx="2" />
             <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
             <line x1="10" y1="12" x2="14" y2="12" />
           </svg>
         </button>
-        <button id="delete__allImages" class="flex justify-between items-center gap-4 bg-white p-2 border rounded-lg w-full sm:w-auto text-blue-900 hover:bg-blue-50">
+        <button id="delete__allImages"
+          class="flex justify-between items-center gap-4 bg-white p-2 border rounded-lg w-full sm:w-auto text-blue-900 hover:bg-blue-50">
           Eliminar imagenes
-          <svg class="h-5 w-5 text-blue-400 hover:text-blue-900"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">
+          <svg class="h-5 w-5 text-blue-400 hover:text-blue-900" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
             <circle cx="8.5" cy="8.5" r="1.5" />
             <polyline points="21 15 16 10 5 21" />
           </svg>
         </button>
-          <button id="returnDashboard" class="flex justify-between items-center gap-4 bg-white p-2 border rounded-lg w-full sm:w-auto text-blue-900 hover:bg-blue-50">
-            Dashboard Cassettes
-            <svg class="h-6 w-6 text-blue-400 hover:text-blue-900" width="24" height="24" viewBox="0 0 24 24"
-              stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" />
-              <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
-              <path d="M7 12h14l-3 -3m0 6l3 -3" />
-            </svg>
-          </button>
-        <button id="logOut" class="flex justify-between items-center gap-4 bg-white p-2 border rounded-lg w-full sm:w-auto text-blue-900 hover:bg-blue-50">
-            Log out
-            <svg class="h-6 w-6 text-blue-400 hover:text-blue-900" width="24" height="24" viewBox="0 0 24 24"
-              stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" />
-              <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
-              <path d="M7 12h14l-3 -3m0 6l3 -3" />
-            </svg>
-          </button>
+        <button id="returnDashboard"
+          class="flex justify-between items-center gap-4 bg-white p-2 border rounded-lg w-full sm:w-auto text-blue-900 hover:bg-blue-50">
+          Dashboard Cassettes
+          <svg class="h-6 w-6 text-blue-400 hover:text-blue-900" width="24" height="24" viewBox="0 0 24 24"
+            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+            <path d="M7 12h14l-3 -3m0 6l3 -3" />
+          </svg>
+        </button>
+        <button id="logOut__admin"
+          class="flex justify-between items-center gap-4 bg-white p-2 border rounded-lg w-full sm:w-auto text-blue-900 hover:bg-blue-50">
+          Log out
+          <svg class="h-6 w-6 text-blue-400 hover:text-blue-900" width="24" height="24" viewBox="0 0 24 24"
+            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+            <path d="M7 12h14l-3 -3m0 6l3 -3" />
+          </svg>
+        </button>
       </div>
     </div>
     <div class="flex flex-col gap-2 text-sm">
       <div class="flex gap-2">
+
         <!-- Tabla de Alumnos -->
-    <div class="w-full bg-white shadow-md rounded-lg overflow-hidden p-4 h-64 text-sm">
-        <div class="px-3 py-1 bg-blue-100 text-blue-900 font-semibold flex items-center justify-between">
-          <p>ALUMNOS</p>
-          <button id="delete__allAlumnos">
-            <svg class="h-6 w-6 text-blue-400 hover:text-blue-900"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">
-              <polyline points="3 6 5 6 21 6" />
-              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-              <line x1="10" y1="11" x2="10" y2="17" />
-              <line x1="14" y1="11" x2="14" y2="17" />
-            </svg>
-          </button>
+        <div class="w-full bg-white shadow-md rounded-lg overflow-hidden p-4 h-64 text-sm">
+          <div class="px-3 py-1 bg-blue-100 text-blue-900 font-semibold flex items-center justify-between">
+            <p>ALUMNOS</p>
+            <button id="delete__allAlumnos">
+              <svg class="h-6 w-6 text-blue-400 hover:text-blue-900" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="3 6 5 6 21 6" />
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                <line x1="10" y1="11" x2="10" y2="17" />
+                <line x1="14" y1="11" x2="14" y2="17" />
+              </svg>
+            </button>
+          </div>
+          <table class="w-full border-collapse">
+            <thead>
+              <tr class="bg-blue-200 text-blue-900">
+                <th class="p-1 text-left">Nombre</th>
+                <th class="p-1 text-left">Apellidos</th>
+                <th class="p-1 text-left">Correo</th>
+                <th class="p-1 text-left">Centro</th>
+                <th class="p-1 text-left">Rol</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody class="text-gray-700">
+              <tr class="border-b hover:bg-blue-50">
+                <td class="p-1 text-red-500 hidden" colspan="3">No se ha encontrado ninguna muestra</td>
+              </tr>
+              <tr class="border-b hover:bg-blue-50">
+                <td class="p-1">Oscar</td>
+                <td class="p-1">Sanchez Avellan</td>
+                <td class="p-1">oscar@ribera.es</td>
+                <td class="p-1">IES Ribera Del Tajo</td>
+                <td class="p-1">Admin</td>
+                <td class="p-1 text-center">
+                  <button id="delete__Alumno" value="">
+                    <svg stroke-width="1" class="h-5 w-5 text-blue-400 hover:text-blue-900"
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <polyline points="3 6 5 6 21 6" />
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                      <line x1="10" y1="11" x2="10" y2="17" />
+                      <line x1="14" y1="11" x2="14" y2="17" />
+                    </svg>
+                  </button>
+                  <button id="edit__Alumno" value="">
+                    <svg stroke-width="1" class="h-5 w-5 text-blue-400 hover:text-blue-900"
+                      viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" />
+                      <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
+                      <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
+                      <line x1="16" y1="5" x2="19" y2="8" />
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <table class="w-full border-collapse">
-          <thead>
-            <tr class="bg-blue-200 text-blue-900">
-              <th class="p-1 text-left">Nombre</th>
-              <th class="p-1 text-left">Apellidos</th>
-              <th class="p-1 text-left">Correo</th>
-              <th class="p-1 text-left">Centro</th>
-              <th class="p-1 text-left">Rol</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody class="text-gray-700">
-            <tr class="border-b hover:bg-blue-50">
-              <td class="p-1 text-red-500 hidden" colspan="3">No se ha encontrado ninguna muestra</td>
-            </tr>
-            <tr class="border-b hover:bg-blue-50">
-              <td class="p-1">Oscar</td>
-              <td class="p-1">Sanchez Avellan</td>
-              <td class="p-1">oscar@ribera.es</td>
-              <td class="p-1">IES Ribera Del Tajo</td>
-              <td class="p-1">Admin</td>
-              <td class="p-1 text-center">
-                <button value="">
-                  <svg id="delete__Alumno" stroke-width="1" class="h-5 w-5 text-blue-400 hover:text-blue-900" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="3 6 5 6 21 6" />
-                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-                    <line x1="10" y1="11" x2="10" y2="17" />
-                    <line x1="14" y1="11" x2="14" y2="17" />
-                  </svg>
-                </button>
-                <button value="">
-                  <svg id="edit__Alumno" stroke-width="1" class="h-5 w-5 text-blue-400 hover:text-blue-900" viewBox="0 0 24 24"
-                    stroke-width="2" stroke="currentColor" fill="none"  stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
-                    <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
-                    <line x1="16" y1="5" x2="19" y2="8" />
-                  </svg>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </div>
-    </div>
+
+      <!-- Modal para confirmación de eliminación de todos los cassettes -->
+      <div id="delete__allCassettesModal" class="modal d-none">
+        <div class="modal-delete">
+          <span id="close__allCassettesModal" class="close-btn">&times;</span>
+          <h2>Eliminar Cassettes</h2>
+          <p>¿Desea Eliminar todos los Cassettes?</p>
+          <p>Al eliminar los cassettes se eliminarán también todas las muestras.</p>
+          <button id="btnDelete__allCassettesModal" type="button">Eliminar</button>
+        </div>
+      </div>
+
+      <!-- Modal para confirmación de eliminación de todas las muestras -->
+      <div id="delete__allMuestrasModal" class="modal d-none">
+        <div class="modal-delete">
+          <span id="close__allMuestrasModal" class="close-btn">&times;</span>
+          <h2>Eliminar Muestras</h2>
+          <p>¿Desea Eliminar todas las Muestras?</p>
+          <p>Al eliminar las muestras se eliminarán también todas las imágenes.</p>
+          <button id="btnDelete__allMuestrasModal" type="button">Eliminar</button>
+        </div>
+      </div>
+
+      <!-- Modal para confirmación de eliminación de todas las imagenes -->
+      <div id="delete__allImagesModal" class="modal d-none">
+        <div class="modal-delete">
+          <span id="close__allImagesModal" class="close-btn">&times;</span>
+          <h2>Eliminar Imagenes</h2>
+          <p>¿Desea Eliminar todas las Imágenes?</p>
+          <p>Una vez eliminadas todas las imagenes no se podrán recuperar.</p>
+          <button id="btnDelete__allImagesModal" type="button">Eliminar</button>
+        </div>
+      </div>
+
+      <!-- Modal para confirmación de eliminación de todos los alumnos -->
+      <div id="delete__allAlumnosModal" class="modal d-none">
+        <div class="modal-delete">
+          <span id="close__allAlumnosModal" class="close-btn">&times;</span>
+          <h2>Eliminar Alumnos</h2>
+          <p>¿Desea Eliminar todos los Alumnos?</p>
+          <p>Al eliminar los alumnos no podrá acceder a sus Cassettes.</p>
+          <button id="btnDelete__allAlumnosModal" type="button">Eliminar</button>
+        </div>
+      </div>
+
+      <!-- Modal para confirmación de eliminación de un alumno -->
+      <div id="delete__alumnoModal" class="modal d-none">
+        <div class="modal-delete">
+          <span id="close__alumnoModal" class="close-btn">&times;</span>
+          <h2>Eliminar Alumno</h2>
+          <p>¿Desea Eliminar el Alumno?</p>
+          <p>Al eliminar el alumno no podrá acceder a sus Cassettes.</p>
+          <button id="btnDelete__alumnoModal" type="button">Eliminar</button>
+        </div>
+      </div>
+
+      <!-- Modal para Modificar Alumno -->
+      <div id="edit__alumnoModal" class="modal d-none">
+        <div class="modal-content">
+          <span id="close__editAlumno" class="close-btn">&times;</span>
+          <h2>Modificar Alumno</h2>
+          <form id="form__editAlumno" novalidate>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombreAlumno__edit" name="nombre" required>
+
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidosAlumno__edit" name="apellidos" required>
+
+            <label for="correo">Correo:</label>
+            <input type="email" id="correoAlumno__edit" name="correo" required>
+
+            <div class="mb-4">
+              <label for="centro">Centro:</label>
+              <select id="centroAlumno__edit"
+                class="w-full p-3 border rounded-lg text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <option value="Instituto Bonanova Formación Profesional Sanitaria">Instituto Bonanova Formación
+                  Profesional Sanitaria</option>
+                <option value="IES Ramón y Cajal">IES Ramón y Cajal</option>
+                <option value="IES Carlos Castilla Del Pino">IES Carlos Castilla Del Pino</option>
+                <option value="IES Ribera del Tajo">IES Ribera del Tajo</option>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <label for="rol">Rol:</label>
+              <select id="rolAlumno__edit"
+                class="w-full p-3 border rounded-lg text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <option value="0">Alumno</option>
+                <option value="1">Admin</option>
+              </select>
+            </div>
+
+            <button type="submit">Editar Alumno</button>
+          </form>
+        </div>
+      </div>
 </body>
+<script src="./../js/admin.js"></script>
 
 </html>
