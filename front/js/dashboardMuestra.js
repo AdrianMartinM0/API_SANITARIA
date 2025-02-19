@@ -51,11 +51,31 @@ if(response){
 }
 }
 
+let printmessegemuestra = ()=>{
+    let fragment = document.createDocumentFragment();
+    let tr = document.createElement("tr");
+    tr.setAttribute("class" , "border-b hover:bg-blue-50");
+    let td = document.createElement("td");
+    td.setAttribute("class" , "p-1 text-red-500")
+    td.textContent = "No se ha encontrado ninguna muestra";
+    tr.appendChild(td)
+    fragment.appendChild(tr);
+    tdbody_muestra.appendChild(fragment);
+}
+
 export let printMuestras = async () => {
     let cassette = localStorage.getItem('cassette');
-    tdbody_muestra.innerHTML = ""; 
+    
+   
     
     let data = await getAllMuestraByCassette(cassette);
+    if (data.length === 0 ) {
+        tdbody_muestra.innerHTML = ""; 
+        printmessegemuestra(); 
+       
+    }else{
+
+        tdbody_muestra.innerHTML = ""; 
     data.forEach(element => {
         let fragment = document.createDocumentFragment();
         let tr = document.createElement("tr");
@@ -98,8 +118,9 @@ export let printMuestras = async () => {
         
         tdbody_muestra.appendChild(fragment);
 
-      
+    
     });
+}
 };
 let create_svg = () => {
     let svg = ` <svg class="h-5 w-11 text-blue-400 hover:text-blue-900" stroke-width="5" viewBox="0 0 23 23" fill="none"
@@ -118,7 +139,7 @@ let create_svg = () => {
 // obtener detalles de una muestra
 let muestras = async (event)=>{
    
-        let button = event.target.closest("button"); // Asegura que es un botón
+        let button = event.target.closest("button"); 
         if (button && button.id === "botonDetalle__muestra") {
             let idmuestra = button.getAttribute("value"); 
             localStorage.setItem('idmuestra', idmuestra);
@@ -200,14 +221,12 @@ const borrarMuestra = async (id) => {
     } 
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-    printMuestras(); 
-});
+
 
 formnewmuestra.addEventListener("submit" , CreateNewMuestra);
 form__editMuestra.addEventListener("submit", editarMuestra);
 delete_muestra.addEventListener("click", borrarMuestra);
-// tdbody_muestra.addEventListener("click", muestras);
+tdbody_muestra.addEventListener("click", muestras);
 
 
 
