@@ -32,6 +32,10 @@ const getOneUserController = async ( req, res, next ) => {
     }
 } 
 
+const isAdmin = async ( req, res ) => {
+    res.status(200).send({ admin : req.admin})
+}
+
 const loginController = async ( req, res, next ) => {
     try{
         const usu = await getOneUser(req.params.email);
@@ -178,6 +182,7 @@ const generateJWT = (usu) => {
 module.exports={
     getAllUsersController,
     getOneUserController,
+    isAdmin,
     loginController,
     createUserController,
     updateUserController,
