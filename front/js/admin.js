@@ -7,8 +7,8 @@ const logOut__admin = document.getElementById("logOut__admin");
 
 // TABLA ALUMNOS
 const delete__allAlumnos = document.getElementById("delete__allAlumnos");
-const delete__Alumno = document.getElementById("delete__Alumno");
-const edit__Alumno = document.getElementById("edit__Alumno");
+const delete__alumno = document.getElementById("delete__alumno");
+const edit__alumno = document.getElementById("edit__alumno");
 
 //MODAL ELIMINAR TODOS LOS CASSETTES
 const delete__allCassettesModal = document.getElementById("delete__allCassettesModal");
@@ -44,3 +44,33 @@ const apellidosAlumno__edit = document.getElementById("apellidosAlumno__edit");
 const correoAlumno__edit = document.getElementById("correoAlumno__edit");
 const centroAlumno__edit = document.getElementById("centroAlumno__edit");
 const rolAlumno__edit = document.getElementById("rolAlumno__edit");
+
+//SHOW MODALS
+const showModal = (event) => {
+    const modalId = event.target.id + "Modal";
+    document.getElementById(modalId)?.classList.remove("d-none");
+};
+
+const closeModal = (event) => {
+    const closeId = event.target.parentNode.parentNode.id;
+    document.getElementById(closeId)?.classList.add("d-none");
+};
+
+//LISTENER
+delete__allCassettes.addEventListener("click", showModal);
+close__allCassettesModal.addEventListener("click", closeModal);
+
+delete__allMuestras.addEventListener("click", showModal);
+close__allMuestrasModal.addEventListener("click", closeModal);
+
+delete__allImages.addEventListener("click", showModal);
+close__allImagesModal.addEventListener("click", closeModal);
+
+delete__allAlumnos.addEventListener ("click", showModal);
+close__allAlumnosModal.addEventListener ("click", closeModal);
+
+delete__alumno.addEventListener ("click", showModal);
+close__alumnoModal.addEventListener ("click", closeModal);
+
+edit__alumno.addEventListener ("click", showModal);
+close__editAlumno.addEventListener ("click", closeModal);
