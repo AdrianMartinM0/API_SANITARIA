@@ -365,7 +365,7 @@ let imprimirdetalles = async (id)=>{
 
 let DeleteCassete = async ()=>{
    
-    let response = await DeleteCasseteById(cassete);
+    let response = await DeleteCasseteById(localStorage.getItem('cassette'));
     if (response) 
         document.getElementById('delete__cassetteModal').classList.add('d-none');
     org.textContent = "";
@@ -376,6 +376,7 @@ let DeleteCassete = async ()=>{
     desc.textContent = "";
     localStorage.setItem('cassette', null);
     printAllCassetes()
+    printMuestras();
 }
 
 

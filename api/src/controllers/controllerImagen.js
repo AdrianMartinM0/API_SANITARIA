@@ -2,7 +2,7 @@ const { getAllImagenByMuestra, getOneImagen, createImagen, deleteImagen } = requ
 
 const getAllImagenByMuestraController = async ( req, res, next ) => {
     try {
-        const imagen = await getAllImagenByMuestra(req.id);
+        const imagen = await getAllImagenByMuestra(req.params.id);
         res.status(200).send(imagen);
     } catch (error) {
         next(error);
