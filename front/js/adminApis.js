@@ -238,6 +238,7 @@ const putvalue = async(id) =>{
             "user-token" : sessionStorage.getItem('user-token'),
         }
     });
+    console.log (response);
   
     let  data = await response.json();
     nombreUser.value = data.nombre,

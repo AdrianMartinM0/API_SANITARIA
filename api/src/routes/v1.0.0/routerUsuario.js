@@ -6,7 +6,7 @@ usuRouter.get('/', checkToken, getAllUsersController);
 
 usuRouter.get('/:email', getOneUserController);
 
-usuRouter.get('id/:id', checkToken, getOneUserByIdController);
+usuRouter.get('/id/:id', checkToken, getOneUserByIdController);
 
 usuRouter.post('/login/:email', loginController);
 
