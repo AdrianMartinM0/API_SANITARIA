@@ -27,6 +27,7 @@ let fecha_edit_muestra  = document.getElementById("fecha_edit_muestra");
 let tincion_edit_muestra = document.getElementById("tincion_edit_muestra");
 let observacion_edit_muestra = document.getElementById("observacion_edit_muestra");
 let imagen_edit_muestra  = document.getElementById("imagen_edit_muestra");
+let edit__muestraModal = document.getElementById("edit__muestraModal"); 
 import {newMuestra , getAllMuestraByCassette , getOneMuestra  , deleteMuestra,  updateMuestra} from "./dashboardApisMuestras.js"
 
 
@@ -142,20 +143,20 @@ let create_svg = () => {
     return svg;
 }
 
-
+let idmuestra
 // obtener detalles de una muestra
 let muestras = async (event)=>{
    
         let button = event.target.closest("button"); 
         if (button && button.id === "botonDetalle__muestra") {
-            let idmuestra = button.getAttribute("value"); 
+            idmuestra = button.getAttribute("value"); 
            // localStorage.setItem('idmuestra', idmuestra);
             await mostrarDetalles(idmuestra);
             detail__muestra.classList.remove( "d-none"  )
         }
     }
 
-
+console.log(idmuestra)
 
 
 
@@ -172,27 +173,44 @@ let mostrarDetalles = async (idmuestra) => {
     detalleTincion_muestra.textContent = element.tincion;
     detalleObservaciones_muestra.textContent  = element.observaciones ;
     confirm_delete.setAttribute("value" , element.id);
+    idmuestra = element.id;
+
+
+     descripcion_edit_muestra.value = element.descripcion;
+ fecha_edit_muestra.value  = element.fecha.split("T")[0]
+tincion_edit_muestra.value = element.tincion
+ observacion_edit_muestra.value = element.observaciones ;
+
 }
 
 
 
 // Editar una muestra
 const editarMuestra = async (event) => {
+    let cassette = localStorage.getItem('cassette');
     event.preventDefault(); 
+   
+  
+ 
+  let data = {
+    id: idmuestra,
+    fecha: fecha_edit_muestra.value,
+    observaciones: observacion_edit_muestra.value,
+    descripcion: descripcion_edit_muestra.value,
+    tincion: tincion_edit_muestra.value,
+    CassetteId: cassette
+   }
+ let response = await updateMuestra(data ,idmuestra );
 
-    const data = {
-        descripcion : descripcion_m.value,
-        fecha : fecha_m.value,
-        tincion : tincion_m.value,
-        observaciones : observaciones_m.value,
-    }
-
- let response = await updateMuestra(data);
- if (response){
-    document.getElementById('edit__muestraModal').classList.add('d-none');
+ if (response) {
+    edit__muestraModal.classList.add( "d-none"  ) ;
+    detail__muestra.classList.add( "d-none"  );
     printMuestras()
-    printDetailsMuestra()
- }
+   } 
+    
+
+
+ 
 }
 
 
