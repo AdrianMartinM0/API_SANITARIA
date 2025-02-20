@@ -189,8 +189,8 @@ const editOneUser = async (event) => {
     };
     nombreUser.value = "",
     apellidosUser.value = "",
-    centroUser.value = "",
-    correoUser.value = "Instituto Bonanova Formación Profesional Sanitaria",
+    correoUser.value = "",
+    centroUser.value = "Instituto Bonanova Formación Profesional Sanitaria",
     await fetch(`http://localhost:3000/v1/usuario/update/${numUser}`, {
         method: 'PUT',
         headers: {
