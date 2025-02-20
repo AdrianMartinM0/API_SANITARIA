@@ -32,6 +32,7 @@ let addimage = document.getElementById("addimage");
 let delete__imageModal = document.getElementById("delete__imageModal")
 let modal_image_delete = document.getElementById("modal_image_delete")
 let images_muestra = document.getElementById("images_muestra");
+let noconfirm_delete_image = document.getElementById("noconfirm-delete-image") ;
 let confirm_delete_image = document.getElementById("confirm-delete-image")
 import {newMuestra , getAllMuestraByCassette , getOneMuestra  , deleteMuestra,  updateMuestra} from "./dashboardApisMuestras.js"
 
@@ -177,6 +178,8 @@ let muestras = async (event)=>{
            await  showimagesmuestra(); 
             detail__muestra.classList.remove( "d-none"  )
         }
+
+        printMuestras()
     }
 
 
@@ -203,7 +206,7 @@ let mostrarDetalles = async (idmuestra) => {
  fecha_edit_muestra.value  = element.fecha.split("T")[0]
 tincion_edit_muestra.value = element.tincion
  observacion_edit_muestra.value = element.observaciones ;
-
+ printMuestras()
 }
 
 
@@ -231,7 +234,8 @@ const editarMuestra = async (event) => {
     edit__muestraModal.classList.add( "d-none"  ) ;
     detail__muestra.classList.add( "d-none"  );
     printMuestras()
-   } 
+   }
+    printMuestras()
  
 }
 let addimageDetail = async (event)=>{
@@ -241,19 +245,18 @@ let addimageDetail = async (event)=>{
         fileImage : imagen_detail_muestra.files[0]
     
     }
-    console.log(dataimage.idMuestra , dataimage.fileImage)
-    let result = await  CreateImage(dataimage.idMuestra , dataimage.fileImage)
- if (result) {
-    detail__muestra.classList.add( "d-none"  )
-    
- }
+  
+    await  CreateImage(dataimage.idMuestra , dataimage.fileImage)
+
  await showimagesmuestra()
+ printMuestras()
+ muestras()
 }
 
 let showimagesmuestra = async ()=>{
 
     let images = await showallimages(idmuestra);
-    console.log(images)
+   
     images_muestra.innerHTML = ""; 
     
     // Crear y mostrar las imágenes en el cuerpo del documento
@@ -285,6 +288,7 @@ let showimagesmuestra = async ()=>{
         images_muestra.appendChild(fragment);
     });
 }
+printMuestras()
 }
 
 
@@ -298,14 +302,15 @@ const borrarMuestra = async (event) => {
     detail__muestra.classList.add( "d-none"  );
     printMuestras()
    }
+   printMuestras()
 };
 
 let showimagefordelete = (event) => {
    if (event.target.tagName == "IMG") {
-   // console.log(event.target.src)
+    modal_image_delete.innerHTML = ""; 
  
-            console.log(event.target.alt);
-    
+ 
+        
             let fragment = document.createDocumentFragment();
             let  img = event.target;
            
@@ -319,16 +324,26 @@ let showimagefordelete = (event) => {
 }
 
 let deleteimage =async ()=>{
-    console.log(confirm_delete_image.value)
+  
     if (confirm_delete_image.value) {
         let id = confirm_delete_image.value
-        let a = await  deleteImage(id)
-        console.log(a); 
+        let result = await  deleteImage(id)
+        if (result) {
+            delete__imageModal.classList.add("d-none");
+            await showimagesmuestra()
+        }
+     
     }
+    printMuestras()
 
 
 }
 
+let notshowdelete = async()=>{
+    delete__imageModal.classList.add("d-none");
+    printMuestras()
+    await showimagesmuestra(); 
+}
 
 addimage.addEventListener("click" , addimageDetail)
 formnewmuestra.addEventListener("submit" , CreateNewMuestra);
@@ -337,6 +352,7 @@ confirm_delete.addEventListener("click", borrarMuestra);
 tdbody_muestra.addEventListener("click", muestras);
 images_muestra.addEventListener("click" , showimagefordelete)
 confirm_delete_image.addEventListener("click" , deleteimage)
+noconfirm_delete_image.addEventListener("click" , notshowdelete)
 
 
 
