@@ -8,6 +8,10 @@ const nombreUser = document.getElementById('nombreAlumno__edit');
 const apellidosUser = document.getElementById('apellidosAlumno__edit');
 const correoUser = document.getElementById('correoAlumno__edit');
 const centroUser = document.getElementById('centroAlumno__edit');
+const btnAllCassettes = document.getElementById('btnDelete__allCassettesModal');
+const btnAllMuestras = document.getElementById('btnDelete__allMuestrasModal');
+const btnAllImages = document.getElementById('btnDelete__allImagesModal');
+const btnAllAlumnos = document.getElementById('btnDelete__allAlumnosModal');
 
 const cargaUsu = async () => {
     const response = await fetch('http://localhost:3000/v1/usuario/',{
@@ -84,18 +88,20 @@ const createTableRow = async (data) => {
             </svg>`;
         tdActions.appendChild(editButton);
 
-        const increaseButton = document.createElement('button');
-        increaseButton.value = item.id;
-        increaseButton.id = "rol";
-        increaseButton.innerHTML = `
-            <svg stroke-width="1" class="h-5 w-5 text-blue-400 hover:text-blue-900"
-            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-            stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <line x1="12" y1="19" x2="12" y2="5" />
-            <polyline points="5 12 12 5 19 12" />
-            </svg>`;
-        tdActions.appendChild(increaseButton);
+        if(!item.admin){
+            const increaseButton = document.createElement('button');
+            increaseButton.value = item.id;
+            increaseButton.id = "rol";
+            increaseButton.innerHTML = `
+                <svg stroke-width="1" class="h-5 w-5 text-blue-400 hover:text-blue-900"
+                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <line x1="12" y1="19" x2="12" y2="5" />
+                <polyline points="5 12 12 5 19 12" />
+                </svg>`;
+            tdActions.appendChild(increaseButton);
+        }
 
         tr.appendChild(tdActions);
         fragment.appendChild(tr);
@@ -166,6 +172,55 @@ const acciones = (event) => {
     }
 }
 
+const eliminarAllCassettes = async (event) => {
+    event.preventDefault();
+    document.getElementById('delete__allCassettesModal').classList.add('d-none')
+    await fetch('http://localhost:3000/v1/cassette',{
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            "user-token": sessionStorage.getItem('user-token'),
+        }
+    });
+}
+
+const eliminarAllMuestras = async (event)  => {
+    event.preventDefault();
+    document.getElementById('delete__allMuestrasModal').classList.add('d-none')
+    await fetch('http://localhost:3000/v1/muestra',{
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            "user-token": sessionStorage.getItem('user-token'),
+        }
+    });
+}
+
+const eliminarAllImages = async (event) => {
+    event.preventDefault();
+    document.getElementById('delete__allImagesModal').classList.add('d-none')
+    await fetch('http://localhost:3000/v1/imagen',{
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            "user-token": sessionStorage.getItem('user-token'),
+        }
+    });
+}
+
+const eliminarAllAlumnos = async (event) => {
+    event.preventDefault();
+    document.getElementById('delete__allAlumnosModal').classList.add('d-none')
+    await fetch('http://localhost:3000/v1/usuario/',{
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            "user-token": sessionStorage.getItem('user-token'),
+        }
+    });
+    await cargaUsu();
+}
+
 returnDahsboard.addEventListener('click', () => location.href="./dashboard.html");
 logOutAdmin.addEventListener('click', () => {
     sessionStorage.removeItem('user-token')
@@ -176,3 +231,7 @@ tbodyUsuarios.addEventListener('click', acciones);
 btnEliminar.addEventListener('click', deleteOneUser);
 btnEditar.addEventListener('click', editOneUser);
 btnRol.addEventListener('click', promocionar);
+btnAllCassettes.addEventListener('click', eliminarAllCassettes);
+btnAllMuestras.addEventListener('click', eliminarAllMuestras);
+btnAllImages.addEventListener('click', eliminarAllImages);
+btnAllAlumnos.addEventListener('click', eliminarAllAlumnos);

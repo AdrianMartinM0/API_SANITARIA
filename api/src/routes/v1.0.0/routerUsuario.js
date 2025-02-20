@@ -1,5 +1,5 @@
 const usuRouter = require('express').Router();
-const { getAllUsersController, getOneUserController, isAdmin, loginController, createUserController, updateUserController, updateUserForAdminController, updateRolController, deleteUserController, deleteUserByEmailController } = require('./../../controllers/controllerUsuario');
+const { getAllUsersController, getOneUserController, isAdmin, loginController, createUserController, updateUserController, updateUserForAdminController, updateRolController, deleteUserController, deleteUserByEmailController, deleteAllUserNoAdminController } = require('./../../controllers/controllerUsuario');
 const { checkToken } = require('../../middleware/checkToken');
 
 usuRouter.get('/', checkToken, getAllUsersController);
@@ -19,6 +19,8 @@ usuRouter.put('/rol/:id', checkToken, updateRolController);
 usuRouter.delete('/:email', checkToken, deleteUserByEmailController);
 
 usuRouter.delete('/one/:id', checkToken, deleteUserController);
+
+usuRouter.delete('/', checkToken, deleteAllUserNoAdminController);
 
 usuRouter.get('/info/admin', checkToken, isAdmin);
 

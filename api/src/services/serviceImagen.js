@@ -34,10 +34,16 @@ const deleteImagen = async (id) => {
     })
 }
 
+const deleteAllImages = async () => {
+    await Muestra.destroy({
+        where: {}
+    });
+}
 
 module.exports = {
     getAllImagenByMuestra,
     getOneImagen,
     createImagen,
-    deleteImagen
+    deleteImagen,
+    deleteAllImages
 } 

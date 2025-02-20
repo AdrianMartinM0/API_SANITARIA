@@ -57,10 +57,17 @@ const getOneCassetteById = async (id) => {
     return cassette;
 }
 
+const deleteAllCassettes = async () => {
+    await Cassette.destroy({
+        where: {}
+    });
+}
+
 module.exports = {
     deleteCassete,
     updateCassette,
     getAllCassetteByUser,
     newCassete,
-    getOneCassetteById
+    getOneCassetteById,
+    deleteAllCassettes,
 }

@@ -48,7 +48,6 @@ const rolAlumno__edit = document.getElementById("rolAlumno__edit");
 
 //SHOW MODALS
 const showModal = (event) => {
-    console.log(event.target)
     const modalId = event.target.id + "Modal";
     document.getElementById(modalId)?.classList.remove("d-none");
 };
