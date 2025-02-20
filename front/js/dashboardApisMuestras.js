@@ -119,5 +119,5 @@
     }
   };
   
-// let a = await getAllMuestraByCassette(1);
-// console.log(a)
+ let a = await getAllMuestraByCassette(10);
+ console.log(a)

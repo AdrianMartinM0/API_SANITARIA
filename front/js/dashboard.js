@@ -405,7 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
     printAllCassetes();
     initializeFilters();
 });
-
+printAllCassetes(); 
 
 logout.addEventListener("click", logOut);
 deletebutton.addEventListener("click" , DeleteCassete);
