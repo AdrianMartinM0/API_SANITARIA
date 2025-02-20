@@ -39,6 +39,18 @@ const createUser = async ({ email, nombre, apellidos, password, centro }) => {
     return usu;
 }
 
+const updateUserforAdmin = async (id, {nombre, apellidos, centro, email}) => {
+    const user = await Usuario.findOne({ where: { id: id } });
+    if (user) {
+        user.nombre = nombre;
+        user.apellidos = apellidos;
+        user.centro = centro;
+        user.email = email;
+        await user.save();
+        console.log('Usuario actualizado:', user);
+    }
+}
+
 const updateUser = async (email, password) => {
     const user = await Usuario.findOne({ where: { email: email } });
     if (user) {
@@ -47,18 +59,12 @@ const updateUser = async (email, password) => {
     }
 }
 
-const updateRolUser = async (email) => {
-    const usu = await Usuario.update(
-        {
-            admin: true 
-        },
-        { 
-            where: { 
-                email: email 
-            } 
-        }
-    );
-    return usu;
+const updateRolUser = async (id) => {
+    const user = await Usuario.findOne({ where: { id: id } });
+    if (user) {
+        user.admin = true;
+        await user.save();
+    }
 }
 
 const deleteUser = async (id) => {
@@ -84,6 +90,7 @@ module.exports = {
     getOneUserById,
     createUser,
     updateUser,
+    updateUserforAdmin,
     updateRolUser,
     deleteUser,
     deleteUserByEmail,

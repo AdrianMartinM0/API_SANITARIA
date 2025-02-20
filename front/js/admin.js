@@ -33,6 +33,7 @@ const btnDelete__allAlumnosModal = document.getElementById("btnDelete__allAlumno
 //MODAL ELIMINAR UN ALUMNO
 const delete__alumnoModal = document.getElementById("delete__alumnoModal");
 const close__alumnoModal = document.getElementById("close__alumnoModal");
+const close__alumnoModalPromo = document.getElementById("close__alumnoModalPromo");
 const btnDelete__alumnoModal = document.getElementById("btnDelete__alumnoModal");
 
 //MODAL MODIFICAR UN ALUMNO
@@ -47,6 +48,7 @@ const rolAlumno__edit = document.getElementById("rolAlumno__edit");
 
 //SHOW MODALS
 const showModal = (event) => {
+    console.log(event.target)
     const modalId = event.target.id + "Modal";
     document.getElementById(modalId)?.classList.remove("d-none");
 };
@@ -69,8 +71,9 @@ close__allImagesModal.addEventListener("click", closeModal);
 delete__allAlumnos.addEventListener ("click", showModal);
 close__allAlumnosModal.addEventListener ("click", closeModal);
 
-delete__alumno.addEventListener ("click", showModal);
+// delete__alumno.addEventListener ("click", showModal);
 close__alumnoModal.addEventListener ("click", closeModal);
+close__alumnoModalPromo.addEventListener ("click", closeModal);
 
-edit__alumno.addEventListener ("click", showModal);
+// edit__alumno.addEventListener ("click", showModal);
 close__editAlumno.addEventListener ("click", closeModal);

@@ -195,10 +195,22 @@
               </select>
             </div>
 
-            <button type="submit">Editar Alumno</button>
+            <button id="btnEdit__alumnoModal" type="submit">Editar Alumno</button>
           </form>
         </div>
       </div>
+
+      <!-- Modal para confirmación de promoción de un alumno -->
+      <div id="rol__alumnoModal" class="modal d-none">
+        <div class="modal-delete">
+          <span id="close__alumnoModalPromo" class="close-btn">&times;</span>
+          <h2>Promocionar Alumno</h2>
+          <p>¿Desea promocionar el Alumno?</p>
+          <p>Al Promocionar el alumno será ADMINISTRADOR.</p>
+          <button id="btnRol__alumnoModal" type="button">Promocionar</button>
+        </div>
+      </div>
+
 </body>
 <script src="./../js/admin.js"></script>
 <script src="./../js/adminApis.js"></script>

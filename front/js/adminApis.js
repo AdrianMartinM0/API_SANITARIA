@@ -1,6 +1,13 @@
 const returnDahsboard = document.getElementById('returnDashboard');
 const logOutAdmin = document.getElementById('logOut__admin');
 const tbodyUsuarios = document.getElementById('tbodyUsuarios');
+const btnEliminar = document.getElementById('btnDelete__alumnoModal');
+const btnEditar = document.getElementById('btnEdit__alumnoModal');
+const btnRol = document.getElementById('btnRol__alumnoModal');
+const nombreUser = document.getElementById('nombreAlumno__edit');
+const apellidosUser = document.getElementById('apellidosAlumno__edit');
+const correoUser = document.getElementById('correoAlumno__edit');
+const centroUser = document.getElementById('centroAlumno__edit');
 
 const cargaUsu = async () => {
     const response = await fetch('http://localhost:3000/v1/usuario/',{
@@ -50,7 +57,8 @@ const createTableRow = async (data) => {
         tdActions.className = 'p-1 text-center';
 
         const deleteButton = document.createElement('button');
-        deleteButton.id = 'delete__Alumno';
+        deleteButton.value = item.id;
+        deleteButton.id = "delete";
         deleteButton.innerHTML = `
             <svg stroke-width="1" class="h-5 w-5 text-blue-400 hover:text-blue-900"
                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -63,7 +71,8 @@ const createTableRow = async (data) => {
         tdActions.appendChild(deleteButton);
 
         const editButton = document.createElement('button');
-        editButton.id = 'edit__Alumno';
+        editButton.value = item.id;
+        editButton.id = "edit";
         editButton.innerHTML = `
             <svg stroke-width="1" class="h-5 w-5 text-blue-400 hover:text-blue-900"
                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -75,12 +84,87 @@ const createTableRow = async (data) => {
             </svg>`;
         tdActions.appendChild(editButton);
 
+        const increaseButton = document.createElement('button');
+        increaseButton.value = item.id;
+        increaseButton.id = "rol";
+        increaseButton.innerHTML = `
+            <svg stroke-width="1" class="h-5 w-5 text-blue-400 hover:text-blue-900"
+            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <line x1="12" y1="19" x2="12" y2="5" />
+            <polyline points="5 12 12 5 19 12" />
+            </svg>`;
+        tdActions.appendChild(increaseButton);
+
         tr.appendChild(tdActions);
         fragment.appendChild(tr);
     });
-
+    tbodyUsuarios.innerHTML = '';
     tbodyUsuarios.appendChild(fragment);
 };
+let numUser;
+const deleteOneUser = async () => {
+    await fetch(`http://localhost:3000/v1/usuario/one/${numUser}`,{
+        method: 'DELETE',
+        headers: {
+            "Content-Type" : "application/json",
+            "user-token" : sessionStorage.getItem('user-token'),
+        }
+    });
+    cargaUsu();
+    document.getElementById('delete__alumnoModal').classList.add('d-none')
+}
+
+const editOneUser = async (event) => {
+    event.preventDefault();
+    document.getElementById('edit__alumnoModal').classList.add('d-none');
+    const userData = {
+        nombre: nombreUser.value,
+        apellidos: apellidosUser.value,
+        centro: centroUser.value,
+        email: correoUser.value,
+    };
+    nombreUser.value = "",
+    apellidosUser.value = "",
+    centroUser.value = "",
+    correoUser.value = "Instituto Bonanova Formación Profesional Sanitaria",
+    await fetch(`http://localhost:3000/v1/usuario/update/${numUser}`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+            "user-token": sessionStorage.getItem('user-token'),
+        },
+        body: JSON.stringify(userData)
+    });
+
+    await cargaUsu(); 
+}
+
+const promocionar = async (event) => {
+    event.preventDefault();
+    document.getElementById('rol__alumnoModal').classList.add('d-none');
+    await fetch(`http://localhost:3000/v1/usuario/rol/${numUser}`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+            "user-token": sessionStorage.getItem('user-token'),
+        }
+    });
+    await cargaUsu();
+}
+
+const acciones = (event) => {
+    if(event.target.parentElement.nodeName == 'BUTTON'){
+        numUser = event.target.parentElement.value;
+        if(event.target.parentElement.id == 'delete')
+            document.getElementById('delete__alumnoModal').classList.remove('d-none')
+        if(event.target.parentElement.id == 'edit')
+            document.getElementById('edit__alumnoModal').classList.remove('d-none')
+        if(event.target.parentElement.id == 'rol')
+            document.getElementById('rol__alumnoModal').classList.remove('d-none')
+    }
+}
 
 returnDahsboard.addEventListener('click', () => location.href="./dashboard.html");
 logOutAdmin.addEventListener('click', () => {
@@ -88,3 +172,7 @@ logOutAdmin.addEventListener('click', () => {
     location.reload();
 });
 document.addEventListener('DOMContentLoaded', cargaUsu)
+tbodyUsuarios.addEventListener('click', acciones);
+btnEliminar.addEventListener('click', deleteOneUser);
+btnEditar.addEventListener('click', editOneUser);
+btnRol.addEventListener('click', promocionar);

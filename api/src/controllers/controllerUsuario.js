@@ -1,4 +1,4 @@
-const { getAllUsers, getOneUser, createUser, updateUser, updateRolUser, deleteUser, getOneUserById, deleteUserByEmail } = require('./../services/serviceUsuario');
+const { getAllUsers, getOneUser, createUser, updateUser, updateUserforAdmin, updateRolUser, deleteUser, getOneUserById, deleteUserByEmail } = require('./../services/serviceUsuario');
 const bcryptjs = require('bcryptjs');
 const generator = require('generate-password');
 const moment = require('moment');
@@ -86,6 +86,35 @@ const createUserController = async ( req, res, next ) => {
     }
 }
 
+const updateUserForAdminController = async ( req, res, next ) => {
+    try{
+        if(!req.admin){
+            const error = new Error('No tienes permisos de administrador');
+            error.status=400;
+            throw error;
+        }
+        let usu = await getOneUserById(req.params.id);
+        let data = {
+            nombre: req.body.nombre,
+            apellidos: req.body.apellidos,
+            centro: req.body.centro,
+            email: req.body.email
+        }
+        if(!usu){
+            const error = new Error('El usuario no existe');
+            error.status=400;
+            throw error;
+        }
+        await updateUserforAdmin(req.params.id, data);
+        res.status(200).send({
+            id: req.params.id,
+            data
+        });
+    }catch(error){
+        next(error);
+    }
+}
+
 const updateUserController = async ( req, res, next ) => {
     try{
         let usu = await getOneUser(req.params.email);
@@ -107,13 +136,13 @@ const updateUserController = async ( req, res, next ) => {
 
 const updateRolController = async ( req, res, next ) => {
     try{
-        let usu = await getOneUser(req.params.email);
+        let usu = await getOneUserById(req.params.id);
         if(!usu){
             const error = new Error('El usuario no existe');
             error.status=400;
             throw error;
         }
-        usu = await updateRolUser(req.params.email);
+        usu = await updateRolUser(req.params.id);
         res.status(200).send(usu);
     }catch(error){
         next(error);
@@ -127,13 +156,13 @@ const deleteUserController = async (req, res, next ) => {
             error.status=400;
             throw error;
         }
-        let usu = await getOneUserById(req.id);
+        let usu = await getOneUserById(req.params.id);
         if(!usu){
             const error = new Error('El usuario no existe');
             error.status=400;
             throw error;
         }
-        usu = await deleteUser(req.id);
+        usu = await deleteUser(req.params.id);
         res.status(200).send('Usuario eliminado con exito');
     }catch(error){
         next(error);
@@ -186,6 +215,7 @@ module.exports={
     loginController,
     createUserController,
     updateUserController,
+    updateUserForAdminController,
     updateRolController,
     deleteUserController,
     deleteUserByEmailController,
