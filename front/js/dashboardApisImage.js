@@ -68,6 +68,3 @@ export let deleteImage = async (ide) => {
     }
   };
   
-
-  let a = await  deleteImage(6)
-  console.log(a); 

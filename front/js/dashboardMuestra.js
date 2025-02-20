@@ -65,7 +65,8 @@ if(response){
 }
 }
 
-let printmessegemuestra = (msg)=>{
+let printmessegemuestra = (msg , div)=>{
+    div.innerHTML = ""; 
     let fragment = document.createDocumentFragment();
     let tr = document.createElement("tr");
     tr.setAttribute("class" , "border-b hover:bg-blue-50");
@@ -74,7 +75,21 @@ let printmessegemuestra = (msg)=>{
     td.textContent = msg;
     tr.appendChild(td)
     fragment.appendChild(tr);
-    tdbody_muestra.appendChild(fragment);
+    div.appendChild(fragment);
+}
+
+
+let printmessegeimagenes = (msg , div)=>{
+    div.innerHTML = ""; 
+    let fragment = document.createDocumentFragment();
+    let tr = document.createElement("tr");
+    tr.setAttribute("class" , "border-b hover:bg-blue-50");
+    let td = document.createElement("td");
+    td.setAttribute("class" , "p-1 text-red-500")
+    td.textContent = msg;
+    tr.appendChild(td)
+    fragment.appendChild(tr);
+    div.appendChild(fragment);
 }
 
 export let printMuestras = async () => {
@@ -86,7 +101,7 @@ export let printMuestras = async () => {
     if (data.length === 0 ) {
         tdbody_muestra.innerHTML = ""; 
         let msg = "No se ha encontrado ninguna muestra"
-        printmessegemuestra(msg); 
+       // printmessegemuestra(msg , tdbody_muestra); 
        
     }else{
 
@@ -248,7 +263,7 @@ let showimagesmuestra = async ()=>{
         if (images.length == 0) {
             tdbody_muestra.innerHTML = ""; 
             let msg = "No se han insertado imagenes . "
-        printmessegemuestra(msg); 
+           // printmessegeimagenes(msg , tdbody_muestra); 
         }else{
             images.forEach(element => {
                 let fragment = document.createDocumentFragment();
