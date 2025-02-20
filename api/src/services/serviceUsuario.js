@@ -46,7 +46,7 @@ const updateUserforAdmin = async (id, {nombre, apellidos, centro, email}) => {
         user.apellidos = apellidos;
         user.centro = centro;
         user.email = email;
-        await user.save();
+        await user.save({ fields: ['nombre', 'apellidos', 'centro', 'email'] });
         console.log('Usuario actualizado:', user);
     }
 }
