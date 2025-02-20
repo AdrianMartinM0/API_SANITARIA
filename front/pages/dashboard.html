@@ -546,7 +546,7 @@
                 <input type="file" accept="image/*" name="imagen"   id="imagen_detail_muestra">
                 <button type="submit" id="addimage">Añadir Imagen</button>
             </form>
-            <div class="pt-2 p-2 flex w-full overflow-y-scroll" id="images_muestra">
+            <div class="mt-8 pt-2 p-2 flex w-full overflow-y-scroll" id="images_muestra">
               
           </div>
           
@@ -557,18 +557,18 @@
     </div>
 
     <!-- Modal para Eliminar Muestra -->
-    <div id="delete__muestraModal" class="modal d-none" id="delete-sample-modal">
-      <div class="modal-content">
+     <div id="delete__muestraModal" class="modal d-none" id="delete-sample-modal">
+      <div class="modal-delete">
         <span id="close__btn__deleteMuestra" class="close-btn">&times;</span>
         <h2>Eliminar Muestra</h2>
-        <p>¿Seguro que deseas eliminar esta muestra? Esta acción no se puede deshacer.</p>
-        <button class="p-1 bg-blue-200 mt-2 rounded-lg" id="confirm-delete">Eliminar</button>
-        
+        <p>¿Desea Eliminar la Muestra?</p>
+        <p>Esta acción no se puede deshacer.</p>
+        <button id="confirm-delete" type="button">Eliminar</button>
       </div>
     </div>
 
     <!-- Modal para Eliminar imagen de cassete  -->
-    <div id="delete__imageModal" class="modal d-none" id="delete-sample-image">
+    <!-- <div id="delete__imageModal" class="modal d-none" id="delete-sample-image">
     
       <div  class="modal-content">
       <div id="modal_image_delete">
@@ -582,7 +582,28 @@
       </div>
     
      
+    </div> -->
+
+
+
+
+    <div id="delete__imageModal" class="modal d-none fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+      <div class="modal-delete bg-white rounded shadow-lg">
+        <span id="noconfirm-delete-image" class="close-btn text-red-500 text-2xl cursor-pointer">&times;</span>
+        <div id="modal_image_delete" class="w-auto mx-auto">
+
+        </div>
+        <!-- <div class="flex justify-between"> -->
+          <button id="confirm-delete-image" type="button" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700">
+            Eliminar Imagen
+          </button>
+          <!-- <button id="noconfirm-delete-image" type="button" class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-500">
+            Cancelar
+          </button> -->
+        <!-- </div> -->
+      </div>
     </div>
+    
 
     <!-- Modal para Modificar Muestra -->
     <div id="edit__muestraModal" class="modal d-none" id="edit-sample-modal">
@@ -627,7 +648,7 @@
     <script type="module" src="./../js/dashboardImage.js"></script>
     <script type="module" src="./../js/dashboardApisImage.js"></script>
     
-    <script  type="module" src="./../js/qr.js"></script>
+    <!-- <script  type="module" src="./../js/qr.js"></script> -->
 </body>
 
 </html>
