@@ -119,5 +119,5 @@
     }
   };
   
- let a = await getAllMuestraByCassette(10);
+ let a = await getOneMuestra(1);
  console.log(a)
