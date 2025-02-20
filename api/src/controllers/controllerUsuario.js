@@ -32,6 +32,25 @@ const getOneUserController = async ( req, res, next ) => {
     }
 } 
 
+const getOneUserByIdController = async (req, res, next) => {
+    try{
+        if(!req.admin){
+            const error = new Error('No tienes permisos de administrador');
+            error.status=400;
+            throw error;
+        }
+        let usu = await getOneUserById(req.params.id);
+        if(!usu){
+            const error = new Error('El usuario no existe');
+            error.status=400;
+            throw error;
+        }
+        res.status(200).send(usu); 
+    }catch(error){
+        next(error);
+    }
+}
+
 const isAdmin = async ( req, res ) => {
     res.status(200).send({ admin : req.admin})
 }
@@ -225,6 +244,7 @@ const generateJWT = (usu) => {
 module.exports={
     getAllUsersController,
     getOneUserController,
+    getOneUserByIdController,
     isAdmin,
     loginController,
     createUserController,
