@@ -199,7 +199,7 @@ const eliminarAllMuestras = async (event)  => {
 const eliminarAllImages = async (event) => {
     event.preventDefault();
     document.getElementById('delete__allImagesModal').classList.add('d-none')
-    await fetch('http://localhost:3000/v1/imagen',{
+    await fetch('http://localhost:3000/v1/imagen/all',{
         method: 'DELETE',
         headers: {
             "Content-Type": "application/json",
