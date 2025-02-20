@@ -62,13 +62,13 @@ if(response){
 }
 }
 
-let printmessegemuestra = ()=>{
+let printmessegemuestra = (msg)=>{
     let fragment = document.createDocumentFragment();
     let tr = document.createElement("tr");
     tr.setAttribute("class" , "border-b hover:bg-blue-50");
     let td = document.createElement("td");
     td.setAttribute("class" , "p-1 text-red-500")
-    td.textContent = "No se ha encontrado ninguna muestra";
+    td.textContent = msg;
     tr.appendChild(td)
     fragment.appendChild(tr);
     tdbody_muestra.appendChild(fragment);
@@ -82,7 +82,8 @@ export let printMuestras = async () => {
     let data = await getAllMuestraByCassette(cassette);
     if (data.length === 0 ) {
         tdbody_muestra.innerHTML = ""; 
-        printmessegemuestra(); 
+        let msg = "No se ha encontrado ninguna muestra"
+        printmessegemuestra(msg); 
        
     }else{
 
@@ -155,6 +156,7 @@ let muestras = async (event)=>{
             idmuestra = button.getAttribute("value"); 
            // localStorage.setItem('idmuestra', idmuestra);
             await mostrarDetalles(idmuestra);
+           await  showimagesmuestra(); 
             detail__muestra.classList.remove( "d-none"  )
         }
     }
@@ -227,25 +229,41 @@ let addimageDetail = async (event)=>{
     detail__muestra.classList.add( "d-none"  )
     
  }
+ await showimagesmuestra()
 }
 
 let showimagesmuestra = async ()=>{
     let images = await showallimages(idmuestra);
-   
+    images_muestra.innerHTML = ""; 
     
     // Crear y mostrar las imágenes en el cuerpo del documento
-    images.forEach(url => {
+    
+       
+
+        if (images.length == 0) {
+            tdbody_muestra.innerHTML = ""; 
+            let msg = "No se han insertado imagenes . "
+        printmessegemuestra(msg); 
+        }else{
+            images.forEach(url => {
+                let fragment = document.createDocumentFragment();
 
 
-        const img = document.createElement('img');
-        img.src = url;
+        const img = document.createElement('IMG');
+        img.setAttribute("src" , url) ;
+        img.setAttribute("class" , "p-2 w-52") ;
         document.body.appendChild(img);
         
         // Opcional: Revocar la URL del objeto después de que la imagen se haya cargado para liberar memoria
         img.onload = () => {
             URL.revokeObjectURL(url);
         };
+        
+        fragment.appendChild(img);
+        
+        images_muestra.appendChild(fragment);
     });
+}
 }
 
 
