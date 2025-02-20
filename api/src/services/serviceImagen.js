@@ -15,6 +15,7 @@ const getOneImagen = async (id) => {
             id:id
         }
     });
+    return imagen;
 }
 
 const createImagen = async (img, id) => {
