@@ -81,7 +81,7 @@
           </optgroup>
           <option>Otros</option>
         </select>
-        <button
+        <button id="btn__mostrarQR"
           class="flex justify-between items-center gap-4 bg-white p-2 border rounded-lg w-full sm:w-auto text-blue-900 hover:bg-blue-50">
           Escanear
           <svg class="h-6 w-6 text-blue-400 hover:text-blue-900" width="24" height="24" viewBox="0 0 24 24"
@@ -176,12 +176,21 @@
             <p>DETALLE CASSETTE</p>
             <div class="flex space-x-2">
               <button>
-                <svg class="h-5 w-5 text-blue-400 hover:text-blue-900" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="3" width="7" height="7" />
-                  <rect x="14" y="3" width="7" height="7" />
-                  <rect x="14" y="14" width="7" height="7" />
-                  <rect x="3" y="14" width="7" height="7" />
+                <svg id="btn__generarQR" class="h-6 w-6 text-blue-400 hover:text-blue-900" width="24" height="24" viewBox="0 0 24 24"
+                  stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" />
+                  <rect x="4" y="4" width="6" height="6" rx="1" />
+                  <line x1="7" y1="17" x2="7" y2="17.01" />
+                  <rect x="14" y="4" width="6" height="6" rx="1" />
+                  <line x1="7" y1="7" x2="7" y2="7.01" />
+                  <rect x="4" y="14" width="6" height="6" rx="1" />
+                  <line x1="17" y1="7" x2="17" y2="7.01" />
+                  <line x1="14" y1="14" x2="17" y2="14" />
+                  <line x1="20" y1="14" x2="20" y2="14.01" />
+                  <line x1="14" y1="14" x2="14" y2="17" />
+                  <line x1="14" y1="20" x2="17" y2="20" />
+                  <line x1="17" y1="17" x2="20" y2="17" />
+                  <line x1="20" y1="17" x2="20" y2="20" />
                 </svg>
               </button>
               <button>
@@ -491,58 +500,56 @@
       <div class="modal-content  ">
         <span id="close__btn__detailMuestra" class="close-btn">&times;</span>
         <h2>Detalle Muestra</h2>
-
-        <div class="action-buttons flex items-center">
-          <button id="boton_qr">
-            <svg class="h-6 w-6 text-blue-400 hover:text-blue-900" width="24" height="24" viewBox="0 0 24 24"
-              stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" />
-              <rect x="4" y="4" width="6" height="6" rx="1" />
-              <line x1="7" y1="17" x2="7" y2="17.01" />
-              <rect x="14" y="4" width="6" height="6" rx="1" />
-              <line x1="7" y1="7" x2="7" y2="7.01" />
-              <rect x="4" y="14" width="6" height="6" rx="1" />
-              <line x1="17" y1="7" x2="17" y2="7.01" />
-              <line x1="14" y1="14" x2="17" y2="14" />
-              <line x1="20" y1="14" x2="20" y2="14.01" />
-              <line x1="14" y1="14" x2="14" y2="17" />
-              <line x1="14" y1="20" x2="17" y2="20" />
-              <line x1="17" y1="17" x2="20" y2="17" />
-              <line x1="20" y1="17" x2="20" y2="20" />
-            </svg>
-          </button>
-          <button id="delete_muestra" title="Eliminar muestra">
-            <svg id="delete__muestra" id="delete__cassette" class="h-5 w-5 text-blue-400 hover:text-blue-900"
-              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <polyline points="3 6 5 6 21 6" />
-              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-              <line x1="10" y1="11" x2="10" y2="17" />
-              <line x1="14" y1="11" x2="14" y2="17" />
-            </svg>
-          </button>
-          <button id="modificar_muestra" title="Modificar muestra">
-            <svg id="edit__muestra" class="h-5 w-5 text-blue-400 hover:text-blue-900" viewBox="0 0 24 24"
-              stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" />
-              <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
-              <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
-              <line x1="16" y1="5" x2="19" y2="8" />
-            </svg>
-          </button>
-        </div>
+        <div class="flex justify-between items-start">
+          <div class="sample-details">
+            <p><strong>Descripción:</strong> <span id="detalleDescripcion_muestra"></span></p>
+            <p><strong>Fecha:</strong><span id="detalleFecha_muestra"></span> </p>
+            <p><strong>Tinción:</strong><span id="detalleTincion_muestra"></span> </p>
+            <p><strong>Observaciones:</strong><span id="detalleObservaciones_muestra"></span> </p>
 
 
-        <div class="sample-details">
-          <p><strong>Descripción:</strong> <span id="detalleDescripcion_muestra"></span></p>
-          <p><strong>Fecha:</strong><span id="detalleFecha_muestra"></span> </p>
-          <p><strong>Tinción:</strong><span id="detalleTincion_muestra"></span> </p>
-          <p><strong>Observaciones:</strong><span id="detalleObservaciones_muestra"></span> </p>
-
-
-          <div class="sample-images">
-           
-           
+            <div class="sample-images">
+            
+            </div>
+          </div>
+          <div class="action-buttons flex items-center mr-20">
+            <button id="btn__muestrasQR">
+              <svg class="h-6 w-6 text-blue-400 hover:text-blue-900" width="24" height="24" viewBox="0 0 24 24"
+                stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <rect x="4" y="4" width="6" height="6" rx="1" />
+                <line x1="7" y1="17" x2="7" y2="17.01" />
+                <rect x="14" y="4" width="6" height="6" rx="1" />
+                <line x1="7" y1="7" x2="7" y2="7.01" />
+                <rect x="4" y="14" width="6" height="6" rx="1" />
+                <line x1="17" y1="7" x2="17" y2="7.01" />
+                <line x1="14" y1="14" x2="17" y2="14" />
+                <line x1="20" y1="14" x2="20" y2="14.01" />
+                <line x1="14" y1="14" x2="14" y2="17" />
+                <line x1="14" y1="20" x2="17" y2="20" />
+                <line x1="17" y1="17" x2="20" y2="17" />
+                <line x1="20" y1="17" x2="20" y2="20" />
+              </svg>
+            </button>
+            <button id="delete_muestra" title="Eliminar muestra">
+              <svg id="delete__muestra" id="delete__cassette" class="h-5 w-5 text-blue-400 hover:text-blue-900"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="3 6 5 6 21 6" />
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                <line x1="10" y1="11" x2="10" y2="17" />
+                <line x1="14" y1="11" x2="14" y2="17" />
+              </svg>
+            </button>
+            <button id="modificar_muestra" title="Modificar muestra">
+              <svg id="edit__muestra" class="h-5 w-5 text-blue-400 hover:text-blue-900" viewBox="0 0 24 24"
+                stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
+                <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
+                <line x1="16" y1="5" x2="19" y2="8" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
@@ -593,12 +600,26 @@
         </form>
       </div>
     </div>
+
+    <!-- MODAL QR -->
+     <div id="show__QRModal" class="modal d-none" id="qr-sample-modal">
+      <div class="modal-content">
+        <span id="close__btn__QR" class="close-btn">&times;</span>
+        <h2>Código QR</h2>
+        <div id ="codeQR">
+
+        </div>
+      </div>
+     </div>
+
+
     <script src="./../js/funcionalities.js"></script>
     <script src="./../js/comprobarLogin.js"></script>
     <script type="module" src="./../js/dashboardApis.js"></script>
     <script  type="module" src="./../js/dashboard.js"></script>
     <script type="module" src="./../js/dashboardMuestra.js"></script>
     <script  type="module" src="./../js/dashboardApisMuestras.js"></script>
+    <script  type="module" src="./../js/qr.js"></script>
 </body>
 
 </html>
