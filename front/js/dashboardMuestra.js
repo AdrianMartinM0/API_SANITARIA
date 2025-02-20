@@ -26,10 +26,13 @@ let descripcion_edit_muestra = document.getElementById("descripcion_edit_muestra
 let fecha_edit_muestra  = document.getElementById("fecha_edit_muestra");
 let tincion_edit_muestra = document.getElementById("tincion_edit_muestra");
 let observacion_edit_muestra = document.getElementById("observacion_edit_muestra");
-let imagen_edit_muestra  = document.getElementById("imagen_edit_muestra");
+let imagen_detail_muestra  = document.getElementById("imagen_detail_muestra");
 let edit__muestraModal = document.getElementById("edit__muestraModal"); 
+let addimage = document.getElementById("addimage");
+let images_muestra = document.getElementById("images_muestra");
 import {newMuestra , getAllMuestraByCassette , getOneMuestra  , deleteMuestra,  updateMuestra} from "./dashboardApisMuestras.js"
 
+import {CreateImage , showallimages} from "./dashboardApisImage.js"
 
 //muestras 
 let CreateNewMuestra = async (event)=>{
@@ -202,15 +205,47 @@ const editarMuestra = async (event) => {
    }
  let response = await updateMuestra(data ,idmuestra );
 
+
+
  if (response) {
     edit__muestraModal.classList.add( "d-none"  ) ;
     detail__muestra.classList.add( "d-none"  );
     printMuestras()
    } 
-    
-
-
  
+}
+let addimageDetail = async (event)=>{
+    event.preventDefault();
+    let dataimage = {
+        idMuestra : idmuestra,
+        fileImage : imagen_detail_muestra.files[0]
+    
+    }
+    console.log(dataimage.idMuestra , dataimage.fileImage)
+    let result = await  CreateImage(dataimage.idMuestra , dataimage.fileImage)
+ if (result) {
+    detail__muestra.classList.add( "d-none"  )
+    
+ }
+}
+
+let showimagesmuestra = async ()=>{
+    let images = await showallimages(idmuestra);
+   
+    
+    // Crear y mostrar las imágenes en el cuerpo del documento
+    images.forEach(url => {
+
+
+        const img = document.createElement('img');
+        img.src = url;
+        document.body.appendChild(img);
+        
+        // Opcional: Revocar la URL del objeto después de que la imagen se haya cargado para liberar memoria
+        img.onload = () => {
+            URL.revokeObjectURL(url);
+        };
+    });
 }
 
 
@@ -227,7 +262,7 @@ const borrarMuestra = async (event) => {
 };
 
 
-
+addimage.addEventListener("click" , addimageDetail)
 formnewmuestra.addEventListener("submit" , CreateNewMuestra);
 form__editMuestra.addEventListener("submit", editarMuestra);
 confirm_delete.addEventListener("click", borrarMuestra);

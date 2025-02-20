@@ -542,8 +542,16 @@
 
           <div class="sample-images">
            
-           
+            <form>
+                <input type="file" accept="image/*" name="imagen"   id="imagen_detail_muestra">
+                <button type="submit" id="addimage">Añadir Imagen</button>
+            </form>
+            <div class="pt-2 p-2 flex w-full overflow-y-scroll" id="images_muestra">
+              
           </div>
+          
+        </div>
+        
         </div>
       </div>
     </div>
@@ -599,6 +607,9 @@
     <script  type="module" src="./../js/dashboard.js"></script>
     <script type="module" src="./../js/dashboardMuestra.js"></script>
     <script  type="module" src="./../js/dashboardApisMuestras.js"></script>
+    <script type="module" src="./../js/dashboardImage.js"></script>
+    <script type="module" src="./../js/dashboardApisImage.js"></script>
+    
 </body>
 
 </html>
