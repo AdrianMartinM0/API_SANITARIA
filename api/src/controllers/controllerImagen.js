@@ -31,12 +31,12 @@ const createImagenController = async ( req, res, next ) => {
 
 const deleteImagenController = async ( req, res, next ) => {
     try {
-        const imagen = await getOneImagen(req.body.id);
-        if(!imagen){
-            const error = new Error('La imagen no existe');
-            error.status=400;
-            throw error;
-        }
+       // const imagen = await getOneImagen(req.body.id);
+       // if(!imagen){
+         //   const error = new Error('La imagen no existe');
+         //   error.status=400;
+         //   throw error;
+        //}
         await deleteImagen(req.body.id);
         res.status(200).send('La imagen a sido eliminada con exito');
     } catch (error) {
