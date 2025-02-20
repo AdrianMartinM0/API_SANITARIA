@@ -14,12 +14,20 @@ let observaciones = document.getElementById("observaciones");
 
 let detail__muestra = document.getElementById("detail__muestra");
 let delete_muestra = document.getElementById("delete_muestra");
-let detalleDescripcion = document.getElementById("detalleDescripcion");
-let detalleFecha = document.getElementById("detalleFecha");
-let detalleTincion = document.getElementById("detalleTincion");
-let detalleObservaciones = document.getElementById("detalleObservaciones");
+let detalleDescripcion_muestra = document.getElementById("detalleDescripcion_muestra");
+let detalleFecha_muestra = document.getElementById("detalleFecha_muestra");
+let detalleTincion_muestra = document.getElementById("detalleTincion_muestra");
+let detalleObservaciones_muestra = document.getElementById("detalleObservaciones_muestra");
+let confirm_delete = document.getElementById("confirm-delete");
+let delete__muestraModal = document.getElementById("delete__muestraModal"); 
 
 
+let descripcion_edit_muestra = document.getElementById("descripcion_edit_muestra");
+let fecha_edit_muestra  = document.getElementById("fecha_edit_muestra");
+let tincion_edit_muestra = document.getElementById("tincion_edit_muestra");
+let observacion_edit_muestra = document.getElementById("observacion_edit_muestra");
+let imagen_edit_muestra  = document.getElementById("imagen_edit_muestra");
+let edit__muestraModal = document.getElementById("edit__muestraModal"); 
 import {newMuestra , getAllMuestraByCassette , getOneMuestra  , deleteMuestra,  updateMuestra} from "./dashboardApisMuestras.js"
 
 
@@ -135,18 +143,19 @@ let create_svg = () => {
     return svg;
 }
 
-
+let idmuestra
 // obtener detalles de una muestra
 let muestras = async (event)=>{
    
         let button = event.target.closest("button"); 
         if (button && button.id === "botonDetalle__muestra") {
-            let idmuestra = button.getAttribute("value"); 
-            localStorage.setItem('idmuestra', idmuestra);
+            idmuestra = button.getAttribute("value"); 
+           // localStorage.setItem('idmuestra', idmuestra);
             await mostrarDetalles(idmuestra);
-            document.getElementById('detail__muestraModal').classList.remove('d-none'); 
+            detail__muestra.classList.remove( "d-none"  )
         }
     }
+
 
 
 
@@ -154,78 +163,74 @@ let muestras = async (event)=>{
 let mostrarDetalles = async (idmuestra) => {
 
     let element = await getOneMuestra(idmuestra);
-    if (element){
-    document.getElementById('detail__muestra').classList.remove('d-none'); 
+    detalleDescripcion_muestra.textContent = "";
+    detalleFecha_muestra.textContent = "" ;
+    detalleTincion_muestra.textContent = "" ;
+    detalleObservaciones_muestra.textContent  = "" ;
+    confirm_delete.setAttribute("value" , null);
+    detalleDescripcion_muestra.textContent =  element.descripcion;
+    detalleFecha_muestra.textContent = element.fecha.split("T")[0] ;
+    detalleTincion_muestra.textContent = element.tincion;
+    detalleObservaciones_muestra.textContent  = element.observaciones ;
+    confirm_delete.setAttribute("value" , element.id);
+    idmuestra = element.id;
 
-    detalleDescripcion.textContent = "";
-    detalleFecha.textContent = "";
-    detalleTincion.textContent = "";
-    detalleObservaciones.textContent = "";
 
-    descripcion.value = "";
-    fecha.value = "";
-    tincion.value = "";
-    observaciones.value = "";
+     descripcion_edit_muestra.value = element.descripcion;
+ fecha_edit_muestra.value  = element.fecha.split("T")[0]
+tincion_edit_muestra.value = element.tincion
+ observacion_edit_muestra.value = element.observaciones ;
 
-    let element = await getOneMuestra(idmuestra);
-    console.log(element)
-
-    detalleDescripcion.textContent = `Descripción: ${element.descripcion}`;
-    detalleFecha.textContent = `Fecha: ${element.fecha.split("T")[0]}`;
-    detalleTincion.textContent = `Tinción: ${element.tincion}`;
-    detalleObservaciones.textContent = `Observaciones: ${element.observaciones}`;
-
-    descripcion.value = element.descripcion;
-    fecha.value = element.fecha.split("T")[0];
-    tincion.value = element.tincion;
-    observaciones.value = element.observaciones;
-    }
 }
 
 
 
 // Editar una muestra
 const editarMuestra = async (event) => {
+    let cassette = localStorage.getItem('cassette');
     event.preventDefault(); 
+   
+  
+ 
+  let data = {
+    id: idmuestra,
+    fecha: fecha_edit_muestra.value,
+    observaciones: observacion_edit_muestra.value,
+    descripcion: descripcion_edit_muestra.value,
+    tincion: tincion_edit_muestra.value,
+    CassetteId: cassette
+   }
+ let response = await updateMuestra(data ,idmuestra );
 
-    const data = {
-        descripcion : descripcion_m.value,
-        fecha : fecha_m.value,
-        tincion : tincion_m.value,
-        observaciones : observaciones_m.value,
-    }
-
- let response = await updateMuestra(data);
- if (response){
-    document.getElementById('edit__muestraModal').classList.add('d-none');
+ if (response) {
+    edit__muestraModal.classList.add( "d-none"  ) ;
+    detail__muestra.classList.add( "d-none"  );
     printMuestras()
-    printDetailsMuestra()
- }
+   } 
+    
+
+
+ 
 }
 
 
 // Eliminar una muestra
-const borrarMuestra = async (id) => {
+const borrarMuestra = async (event) => {
+    let id = event.target.value
     const response = await deleteMuestra(id);
 
-    if (response) {
-        document.getElementById('delete__muestraModal').classList.add('d-none');
-        descripcion_m.textContent = "";
-        fecha_m.textContent = "";
-        tincion_m.textContent = "";
-        observaciones_m.textContent = "";
-        localStorage.setItem('id', null);
-        printMuestras()
-    
-    
-    } 
+   if (response) {
+    delete__muestraModal.classList.add( "d-none"  ) ;
+    detail__muestra.classList.add( "d-none"  );
+    printMuestras()
+   }
 };
 
 
 
 formnewmuestra.addEventListener("submit" , CreateNewMuestra);
 form__editMuestra.addEventListener("submit", editarMuestra);
-delete_muestra.addEventListener("click", borrarMuestra);
+confirm_delete.addEventListener("click", borrarMuestra);
 tdbody_muestra.addEventListener("click", muestras);
 
 

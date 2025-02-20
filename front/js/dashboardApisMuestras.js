@@ -52,9 +52,9 @@
   };
   
   // Modificar una muestra existente (excepto la imagen)
-  export let updateMuestra = async (data) => {
+  export let updateMuestra = async (data , ide) => {
     try {
-        let response = await fetch(`http://localhost:3000/v1/muestra/${data}`, {
+        let response = await fetch(`http://localhost:3000/v1/muestra/${ide}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -119,5 +119,5 @@
     }
   };
   
- let a = await getAllMuestraByCassette(10);
- console.log(a)
+
+

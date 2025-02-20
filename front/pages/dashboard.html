@@ -488,7 +488,7 @@
 
     <!-- Modal para Detalle Muestra -->
     <div id="detail__muestra" class="modal d-none">
-      <div class="modal-content">
+      <div class="modal-content  ">
         <span id="close__btn__detailMuestra" class="close-btn">&times;</span>
         <h2>Detalle Muestra</h2>
 
@@ -534,16 +534,15 @@
 
 
         <div class="sample-details">
-          <p><strong>Descripción:</strong> <span id="detalleDescripcion"></span></p>
-          <p><strong>Fecha:</strong><span id="detalleFecha"></span></p>
-          <p><strong>Tinción:</strong><span id="detalleTincion"></span></p>
-          <p><strong>Observaciones:</strong><span id="detalleObservaciones"></span></p>
+          <p><strong>Descripción:</strong> <span id="detalleDescripcion_muestra"></span></p>
+          <p><strong>Fecha:</strong><span id="detalleFecha_muestra"></span> </p>
+          <p><strong>Tinción:</strong><span id="detalleTincion_muestra"></span> </p>
+          <p><strong>Observaciones:</strong><span id="detalleObservaciones_muestra"></span> </p>
 
 
           <div class="sample-images">
-            <img src="" alt="Imagen 1" />
-            <img src="" alt="Imagen 2" />
-            <button class="add-image-btn">Añadir Imagen</button>
+           
+           
           </div>
         </div>
       </div>
@@ -567,16 +566,16 @@
         <h2>Modificar Muestra</h2>
         <form id="form__editMuestra">
           <label for="descripcion">Descripción:</label>
-          <input type="text" id="descripcion" name="descripcion" required>
+          <input type="text" id="descripcion_edit_muestra" name="descripcion" required>
 
           <div class="form-group">
             <div>
               <label for="fecha">Fecha:</label>
-              <input type="date" id="fecha" name="fecha" required>
+              <input type="date" id="fecha_edit_muestra" name="fecha" required>
             </div>
             <div>
               <label for="tincion">Tinción:</label>
-              <select id="tincion" name="tincion" required>
+              <select id="tincion_edit_muestra" name="tincion" required>
                 <option disabled selected>Seleccionar Tición</option>
                 <option>Hematoxilina Eosina (HE)</option>
                 <option>Giemsa</option>
@@ -588,10 +587,10 @@
           </div>
 
           <label for="observaciones">Observaciones:</label>
-          <textarea id="observaciones" name="observaciones" rows="4" required></textarea>
+          <textarea id="observacion_edit_muestra" name="observaciones" rows="4" required></textarea>
 
           <label for="imagen">Imagen:</label>
-          <input type="file" id="imagen" name="imagen" accept="image/*" required>
+          <input type="file" id="imagen_edit_muestra" name="imagen" accept="image/*" required>
 
           <button type="submit">Modificar Muestra</button>
         </form>
