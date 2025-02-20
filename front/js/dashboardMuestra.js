@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
 formnewmuestra.addEventListener("submit" , CreateNewMuestra);
 form__editMuestra.addEventListener("submit", editarMuestra);
 delete_muestra.addEventListener("click", borrarMuestra);
-// tdbody_muestra.addEventListener("click", muestras);
+tdbody_muestra.addEventListener("click", muestras);
 
 
 

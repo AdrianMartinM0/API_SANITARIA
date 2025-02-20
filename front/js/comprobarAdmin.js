@@ -1,7 +1,6 @@
 const adminBtn = document.getElementById('Admin');
 
 document.addEventListener('DOMContentLoaded', async () => {
-    localStorage.removeItem('cassette')
     const token = sessionStorage.getItem('user-token');
     if(!token)
         return location.href='./../index.html';
@@ -12,11 +11,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             "user-token":  sessionStorage.getItem('user-token')
         }    
     });
+    // console.log(token)
     const data = await response.json();
-    if(data.admin)
-        adminBtn.classList.remove('d-none')
-})
-
-adminBtn.addEventListener('click', () => {
-    location.href = "./admin.html";
+    if(!data.admin)
+        location.href="./dashboard.html";
 })
