@@ -177,6 +177,8 @@ let muestras = async (event)=>{
            await  showimagesmuestra(); 
             detail__muestra.classList.remove( "d-none"  )
         }
+
+        printMuestras()
     }
 
 
@@ -203,7 +205,7 @@ let mostrarDetalles = async (idmuestra) => {
  fecha_edit_muestra.value  = element.fecha.split("T")[0]
 tincion_edit_muestra.value = element.tincion
  observacion_edit_muestra.value = element.observaciones ;
-
+ printMuestras()
 }
 
 
@@ -231,7 +233,8 @@ const editarMuestra = async (event) => {
     edit__muestraModal.classList.add( "d-none"  ) ;
     detail__muestra.classList.add( "d-none"  );
     printMuestras()
-   } 
+   }
+    printMuestras()
  
 }
 let addimageDetail = async (event)=>{
@@ -243,11 +246,10 @@ let addimageDetail = async (event)=>{
     }
     console.log(dataimage.idMuestra , dataimage.fileImage)
     let result = await  CreateImage(dataimage.idMuestra , dataimage.fileImage)
- if (result) {
-    detail__muestra.classList.add( "d-none"  )
-    
- }
+
  await showimagesmuestra()
+ printMuestras()
+ muestras()
 }
 
 let showimagesmuestra = async ()=>{
@@ -285,6 +287,7 @@ let showimagesmuestra = async ()=>{
         images_muestra.appendChild(fragment);
     });
 }
+printMuestras()
 }
 
 
@@ -298,10 +301,12 @@ const borrarMuestra = async (event) => {
     detail__muestra.classList.add( "d-none"  );
     printMuestras()
    }
+   printMuestras()
 };
 
 let showimagefordelete = (event) => {
    if (event.target.tagName == "IMG") {
+    modal_image_delete.innerHTML = ""; 
    // console.log(event.target.src)
  
             console.log(event.target.alt);
@@ -319,12 +324,18 @@ let showimagefordelete = (event) => {
 }
 
 let deleteimage =async ()=>{
+   
     console.log(confirm_delete_image.value)
     if (confirm_delete_image.value) {
         let id = confirm_delete_image.value
-        let a = await  deleteImage(id)
-        console.log(a); 
+        let result = await  deleteImage(id)
+        if (result) {
+            delete__imageModal.classList.add("d-none");
+            await showimagesmuestra()
+        }
+     
     }
+    printMuestras()
 
 
 }
