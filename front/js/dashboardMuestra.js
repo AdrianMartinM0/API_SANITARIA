@@ -156,7 +156,7 @@ let muestras = async (event)=>{
         }
     }
 
-console.log(idmuestra)
+
 
 
 
