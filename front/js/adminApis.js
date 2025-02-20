@@ -110,6 +110,7 @@ const createTableRow = async (data) => {
     tbodyUsuarios.appendChild(fragment);
 };
 let numUser;
+
 const deleteOneUser = async () => {
     await fetch(`http://localhost:3000/v1/usuario/one/${numUser}`,{
         method: 'DELETE',
@@ -122,75 +123,18 @@ const deleteOneUser = async () => {
     document.getElementById('delete__alumnoModal').classList.add('d-none')
 }
 
-//VALIDAR FORM
-const createErrorElement = (input) => {
-    let error = document.createElement("span");
-    error.classList.add("error-message", "hidden");
-    error.style.color = "red";
-    error.style.fontSize = "12px";
-    input.after(error);
-    return error;
-};
-
-const errorNombre = createErrorElement(nombreUser);
-const errorApellidos = createErrorElement(apellidosUser);
-const errorCorreo = createErrorElement(correoUser);
-const errorCentro = createErrorElement(centroUser);
-
-const hideAllErrors = () => {
-    document.querySelectorAll(".error-message").forEach(error => error.classList.add("hidden"));
-};
-
-const showFirstError = (input, errorElement, message) => {
-    hideAllErrors();
-    errorElement.textContent = message;
-    errorElement.classList.remove("hidden");
-    input.focus();
-};
-
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-const validUser = () => {
-    hideAllErrors();
-
-    if (nombreUser.value.trim() === "") {
-        return showFirstError(nombreUser, errorNombre, "El nombre es obligatorio.");
-    }
-
-    if (apellidosUser.value.trim() === "") {
-        return showFirstError(apellidosUser, errorApellidos, "Los apellidos son obligatorios.");
-    }
-
-    if (correoUser.value.trim() === "") {
-        return showFirstError(correoUser, errorCorreo, "El correo es obligatorio.");
-    }
-
-    if (!emailRegex.test(correoUser.value.trim())) {
-        return showFirstError(correoUser, errorCorreo, "El correo no tiene un formato válido.");
-    }
-
-    if (centroUser.value.trim() === "") {
-        return showFirstError(centroUser, errorCentro, "Debe seleccionar un centro.");
-    }
-    return true;
-};
-
 const editOneUser = async (event) => {
     event.preventDefault();
-    const isValid = validUser();
-    if (!isValid)
-        return;
     document.getElementById('edit__alumnoModal').classList.add('d-none');
+
     const userData = {
         nombre: nombreUser.value,
         apellidos: apellidosUser.value,
         centro: centroUser.value,
         email: correoUser.value,
     };
-    nombreUser.value = "",
-    apellidosUser.value = "",
-    correoUser.value = "",
-    centroUser.value = "Instituto Bonanova Formación Profesional Sanitaria",
+  
+
     await fetch(`http://localhost:3000/v1/usuario/update/${numUser}`, {
         method: 'PUT',
         headers: {
@@ -223,9 +167,18 @@ const acciones = (event) => {
             document.getElementById('delete__alumnoModal').classList.remove('d-none')
         if(event.target.parentElement.id == 'edit')
             document.getElementById('edit__alumnoModal').classList.remove('d-none')
+
         if(event.target.parentElement.id == 'rol')
             document.getElementById('rol__alumnoModal').classList.remove('d-none')
     }
+
+    if(event.target.parentElement.id == 'edit'){
+console.log(event.target.parentElement.value)
+console.log (numUser)
+putvalue(event.target.parentElement.value)
+    }
+        
+    
 }
 
 const eliminarAllCassettes = async (event) => {
@@ -277,6 +230,23 @@ const eliminarAllAlumnos = async (event) => {
     await cargaUsu();
 }
 
+const putvalue = async(id) =>{
+    const response = await fetch(`http://localhost:3000/v1/usuario/id/${id}`,{
+        method: 'GET',
+        headers: {
+            "Content-Type" : "application/json",
+            "user-token" : sessionStorage.getItem('user-token'),
+        }
+    });
+  
+    let  data = await response.json();
+    nombreUser.value = data.nombre,
+    apellidosUser.value = data.apellidos,
+    centroUser.value = data.centro,
+    correoUser.value = data.email
+}
+
+//LISTENER
 returnDahsboard.addEventListener('click', () => location.href="./dashboard.html");
 logOutAdmin.addEventListener('click', () => {
     sessionStorage.removeItem('user-token')
