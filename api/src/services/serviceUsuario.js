@@ -63,7 +63,7 @@ const updateRolUser = async (id) => {
     const user = await Usuario.findOne({ where: { id: id } });
     if (user) {
         user.admin = true;
-        await user.save();
+        await user.save({ fields: ['admin'] });
     }
 }
 
