@@ -62,7 +62,7 @@ export let deleteImage = async (ide) => {
             } ,
             body: JSON.stringify(data) ,
         });
-        return response.text();
+        return response.ok;
     } catch (error) {
         return false;
     }

@@ -67,12 +67,12 @@ close__allMuestrasModal.addEventListener("click", closeModal);
 delete__allImages.addEventListener("click", showModal);
 close__allImagesModal.addEventListener("click", closeModal);
 
-delete__allAlumnos.addEventListener ("click", showModal);
-close__allAlumnosModal.addEventListener ("click", closeModal);
+delete__allAlumnos.addEventListener("click", showModal);
+close__allAlumnosModal.addEventListener("click", closeModal);
 
 // delete__alumno.addEventListener ("click", showModal);
-close__alumnoModal.addEventListener ("click", closeModal);
-close__alumnoModalPromo.addEventListener ("click", closeModal);
+close__alumnoModal.addEventListener("click", closeModal);
+close__alumnoModalPromo.addEventListener("click", closeModal);
 
 // edit__alumno.addEventListener ("click", showModal);
-close__editAlumno.addEventListener ("click", closeModal);
+close__editAlumno.addEventListener("click", closeModal);
