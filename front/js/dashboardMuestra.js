@@ -29,10 +29,13 @@ let observacion_edit_muestra = document.getElementById("observacion_edit_muestra
 let imagen_detail_muestra  = document.getElementById("imagen_detail_muestra");
 let edit__muestraModal = document.getElementById("edit__muestraModal"); 
 let addimage = document.getElementById("addimage");
+let delete__imageModal = document.getElementById("delete__imageModal")
+let modal_image_delete = document.getElementById("modal_image_delete")
 let images_muestra = document.getElementById("images_muestra");
+let confirm_delete_image = document.getElementById("confirm-delete-image")
 import {newMuestra , getAllMuestraByCassette , getOneMuestra  , deleteMuestra,  updateMuestra} from "./dashboardApisMuestras.js"
 
-import {CreateImage , showallimages} from "./dashboardApisImage.js"
+import {CreateImage , deleteImage,showallimages} from "./dashboardApisImage.js"
 
 //muestras 
 let CreateNewMuestra = async (event)=>{
@@ -233,7 +236,9 @@ let addimageDetail = async (event)=>{
 }
 
 let showimagesmuestra = async ()=>{
+
     let images = await showallimages(idmuestra);
+    console.log(images)
     images_muestra.innerHTML = ""; 
     
     // Crear y mostrar las imágenes en el cuerpo del documento
@@ -245,18 +250,19 @@ let showimagesmuestra = async ()=>{
             let msg = "No se han insertado imagenes . "
         printmessegemuestra(msg); 
         }else{
-            images.forEach(url => {
+            images.forEach(element => {
                 let fragment = document.createDocumentFragment();
 
 
         const img = document.createElement('IMG');
-        img.setAttribute("src" , url) ;
+        img.setAttribute("src" , element[0]) ;
+        img.setAttribute("alt" , element[1]) ;
         img.setAttribute("class" , "p-2 w-52") ;
         document.body.appendChild(img);
         
         // Opcional: Revocar la URL del objeto después de que la imagen se haya cargado para liberar memoria
         img.onload = () => {
-            URL.revokeObjectURL(url);
+            URL.revokeObjectURL(element[0]);
         };
         
         fragment.appendChild(img);
@@ -279,13 +285,43 @@ const borrarMuestra = async (event) => {
    }
 };
 
+let showimagefordelete = (event) => {
+   if (event.target.tagName == "IMG") {
+   // console.log(event.target.src)
+ 
+            console.log(event.target.alt);
+    
+            let fragment = document.createDocumentFragment();
+            let  img = event.target;
+           
+    
+            fragment.appendChild(img);
+            modal_image_delete.appendChild(fragment);
+            confirm_delete_image.value = event.target.alt
+            delete__imageModal.classList.remove("d-none");
+
+   }
+}
+
+let deleteimage =async ()=>{
+    console.log(confirm_delete_image.value)
+    if (confirm_delete_image.value) {
+        let id = confirm_delete_image.value
+        let a = await  deleteImage(id)
+        console.log(a); 
+    }
+
+
+}
+
 
 addimage.addEventListener("click" , addimageDetail)
 formnewmuestra.addEventListener("submit" , CreateNewMuestra);
 form__editMuestra.addEventListener("submit", editarMuestra);
 confirm_delete.addEventListener("click", borrarMuestra);
 tdbody_muestra.addEventListener("click", muestras);
-
+images_muestra.addEventListener("click" , showimagefordelete)
+confirm_delete_image.addEventListener("click" , deleteimage)
 
 
 

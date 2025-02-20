@@ -34,8 +34,10 @@ export let showallimages = async (idMuestra) => {
         // Crear un array para almacenar las URLs de las imágenes
         const urls = datas.map(data => {
             let buffer = data.imagen.data;
+            let id = data.id
             const blob = new Blob([new Uint8Array(buffer)], { type: 'image/jpeg' });
-            return URL.createObjectURL(blob);
+            let valores = [URL.createObjectURL(blob)  , id]
+            return valores;
         });
         
         // Devolver las URLs de las imágenes
@@ -47,4 +49,23 @@ export let showallimages = async (idMuestra) => {
     }
 }
 
+export let deleteImage = async (ide) => {
+    let data = {
+        id : ide
+    }
+    try {
+        let response = await fetch(`http://localhost:3000/v1/imagen/`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "user-token": sessionStorage.getItem('user-token')
+            } ,
+            body: JSON.stringify(data) ,
+        });
+        return response.text();
+    } catch (error) {
+        return false;
+    }
+  };
+  
 
