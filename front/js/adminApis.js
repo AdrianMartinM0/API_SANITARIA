@@ -122,8 +122,64 @@ const deleteOneUser = async () => {
     document.getElementById('delete__alumnoModal').classList.add('d-none')
 }
 
+//VALIDAR FORM
+const createErrorElement = (input) => {
+    let error = document.createElement("span");
+    error.classList.add("error-message", "hidden");
+    error.style.color = "red";
+    error.style.fontSize = "12px";
+    input.after(error);
+    return error;
+};
+
+const errorNombre = createErrorElement(nombreUser);
+const errorApellidos = createErrorElement(apellidosUser);
+const errorCorreo = createErrorElement(correoUser);
+const errorCentro = createErrorElement(centroUser);
+
+const hideAllErrors = () => {
+    document.querySelectorAll(".error-message").forEach(error => error.classList.add("hidden"));
+};
+
+const showFirstError = (input, errorElement, message) => {
+    hideAllErrors();
+    errorElement.textContent = message;
+    errorElement.classList.remove("hidden");
+    input.focus();
+};
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const validUser = () => {
+    hideAllErrors();
+
+    if (nombreUser.value.trim() === "") {
+        return showFirstError(nombreUser, errorNombre, "El nombre es obligatorio.");
+    }
+
+    if (apellidosUser.value.trim() === "") {
+        return showFirstError(apellidosUser, errorApellidos, "Los apellidos son obligatorios.");
+    }
+
+    if (correoUser.value.trim() === "") {
+        return showFirstError(correoUser, errorCorreo, "El correo es obligatorio.");
+    }
+
+    if (!emailRegex.test(correoUser.value.trim())) {
+        return showFirstError(correoUser, errorCorreo, "El correo no tiene un formato válido.");
+    }
+
+    if (centroUser.value.trim() === "") {
+        return showFirstError(centroUser, errorCentro, "Debe seleccionar un centro.");
+    }
+    return true;
+};
+
 const editOneUser = async (event) => {
     event.preventDefault();
+    const isValid = validUser();
+    if (!isValid)
+        return;
     document.getElementById('edit__alumnoModal').classList.add('d-none');
     const userData = {
         nombre: nombreUser.value,
