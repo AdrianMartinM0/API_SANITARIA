@@ -32,6 +32,7 @@ let addimage = document.getElementById("addimage");
 let delete__imageModal = document.getElementById("delete__imageModal")
 let modal_image_delete = document.getElementById("modal_image_delete")
 let images_muestra = document.getElementById("images_muestra");
+let noconfirm_delete_image = document.getElementById("noconfirm-delete-image") ;
 let confirm_delete_image = document.getElementById("confirm-delete-image")
 import {newMuestra , getAllMuestraByCassette , getOneMuestra  , deleteMuestra,  updateMuestra} from "./dashboardApisMuestras.js"
 
@@ -340,6 +341,11 @@ let deleteimage =async ()=>{
 
 }
 
+let notshowdelete = async()=>{
+    delete__imageModal.classList.add("d-none");
+    printMuestras()
+    await showimagesmuestra(); 
+}
 
 addimage.addEventListener("click" , addimageDetail)
 formnewmuestra.addEventListener("submit" , CreateNewMuestra);
@@ -348,6 +354,7 @@ confirm_delete.addEventListener("click", borrarMuestra);
 tdbody_muestra.addEventListener("click", muestras);
 images_muestra.addEventListener("click" , showimagefordelete)
 confirm_delete_image.addEventListener("click" , deleteimage)
+noconfirm_delete_image.addEventListener("click" , notshowdelete)
 
 
 
