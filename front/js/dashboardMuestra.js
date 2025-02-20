@@ -245,8 +245,8 @@ let addimageDetail = async (event)=>{
         fileImage : imagen_detail_muestra.files[0]
     
     }
-    console.log(dataimage.idMuestra , dataimage.fileImage)
-    let result = await  CreateImage(dataimage.idMuestra , dataimage.fileImage)
+  
+    await  CreateImage(dataimage.idMuestra , dataimage.fileImage)
 
  await showimagesmuestra()
  printMuestras()
@@ -256,7 +256,7 @@ let addimageDetail = async (event)=>{
 let showimagesmuestra = async ()=>{
 
     let images = await showallimages(idmuestra);
-    console.log(images)
+   
     images_muestra.innerHTML = ""; 
     
     // Crear y mostrar las imágenes en el cuerpo del documento
@@ -308,10 +308,9 @@ const borrarMuestra = async (event) => {
 let showimagefordelete = (event) => {
    if (event.target.tagName == "IMG") {
     modal_image_delete.innerHTML = ""; 
-   // console.log(event.target.src)
  
-            console.log(event.target.alt);
-    
+ 
+        
             let fragment = document.createDocumentFragment();
             let  img = event.target;
            
@@ -325,8 +324,7 @@ let showimagefordelete = (event) => {
 }
 
 let deleteimage =async ()=>{
-   
-    console.log(confirm_delete_image.value)
+  
     if (confirm_delete_image.value) {
         let id = confirm_delete_image.value
         let result = await  deleteImage(id)
