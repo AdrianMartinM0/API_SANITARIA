@@ -36,7 +36,7 @@ const deleteImagen = async (id) => {
 }
 
 const deleteAllImages = async () => {
-    await Muestra.destroy({
+    await Imagen.destroy({
         where: {}
     });
 }
