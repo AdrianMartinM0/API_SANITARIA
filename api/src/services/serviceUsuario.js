@@ -84,6 +84,14 @@ const deleteUserByEmail = async (email) => {
     });
 }
 
+const deleteAllUserNoAdmin = async () => {
+    await Usuario.destroy({
+        where: {
+            admin: false,
+        }
+    });
+} 
+
 module.exports = {
     getAllUsers,
     getOneUser,
@@ -94,4 +102,5 @@ module.exports = {
     updateRolUser,
     deleteUser,
     deleteUserByEmail,
+    deleteAllUserNoAdmin,
 }

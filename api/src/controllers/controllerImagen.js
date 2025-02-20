@@ -1,4 +1,4 @@
-const { getAllImagenByMuestra, getOneImagen, createImagen, deleteImagen } = require('./../services/serviceImagen');
+const { getAllImagenByMuestra, getOneImagen, createImagen, deleteImagen, deleteAllImages } = require('./../services/serviceImagen');
 
 const getAllImagenByMuestraController = async ( req, res, next ) => {
     try {
@@ -44,9 +44,23 @@ const deleteImagenController = async ( req, res, next ) => {
     }
 }
 
+const deleteAllImagesController = async(req , res , next)=>{
+    try{
+        if(!req.admin){
+            const error = new Error('No tienes permisos de administrador');
+            error.status=400;
+            throw error;
+        }
+        await deleteAllImages();
+        res.status(200).send({menssage: "Imagenes eliminados con exito"});
+    }catch(error){
+        next(error);
+    }
+}
 
 module.exports={
     getAllImagenByMuestraController,
     createImagenController,
-    deleteImagenController
+    deleteImagenController,
+    deleteAllImagesController,
 }

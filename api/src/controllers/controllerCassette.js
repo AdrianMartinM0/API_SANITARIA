@@ -1,4 +1,4 @@
-const { newCassete, getAllCassetteByUser, updateCassette, deleteCassete , getOneCassetteById} = require('../services/serviceCassette');
+const { newCassete, getAllCassetteByUser, updateCassette, deleteCassete , getOneCassetteById, deleteAllCassettes} = require('../services/serviceCassette');
 
 
 const newCasseteController  = async(req , res , next)=>{
@@ -95,11 +95,25 @@ const getOneCassetteController = async(req , res , next)=>{
     }
 }
 
+const deleteAllCassettesController = async(req , res , next)=>{
+    try{
+        if(!req.admin){
+            const error = new Error('No tienes permisos de administrador');
+            error.status=400;
+            throw error;
+        }
+        await deleteAllCassettes();
+        res.status(200).send({menssage: "Cassettes eliminados con exito"});
+    }catch(error){
+        next(error);
+    }
+}
 
 module.exports={
     deleteCasseteController,
     updateCassetteController,
     getAllCassetteByUserController,
     newCasseteController,
-    getOneCassetteController
+    getOneCassetteController,
+    deleteAllCassettesController
 }

@@ -1,4 +1,4 @@
-const { getAllUsers, getOneUser, createUser, updateUser, updateUserforAdmin, updateRolUser, deleteUser, getOneUserById, deleteUserByEmail } = require('./../services/serviceUsuario');
+const { getAllUsers, getOneUser, createUser, updateUser, updateUserforAdmin, updateRolUser, deleteUser, getOneUserById, deleteUserByEmail, deleteAllUserNoAdmin } = require('./../services/serviceUsuario');
 const bcryptjs = require('bcryptjs');
 const generator = require('generate-password');
 const moment = require('moment');
@@ -184,6 +184,20 @@ const deleteUserByEmailController = async ( req, res, next ) => {
     }
 }
 
+const deleteAllUserNoAdminController = async (req, res, next) => {
+    try{
+        if(!req.admin){
+            const error = new Error('No tienes permisos de administrador');
+            error.status=400;
+            throw error;
+        }
+        await deleteAllUserNoAdmin();
+        res.status(200).send({menssage: "Alumnos eliminados con exito"});
+    }catch(error){
+        next(error);
+    }
+}
+
 const generatePass = () => {
     let pass;
     const regex = /^[A-Za-z\d@$!%*?&]{8,36}$/;
@@ -219,4 +233,5 @@ module.exports={
     updateRolController,
     deleteUserController,
     deleteUserByEmailController,
+    deleteAllUserNoAdminController,
 }

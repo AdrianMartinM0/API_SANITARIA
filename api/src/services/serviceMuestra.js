@@ -56,11 +56,17 @@ const getOneMuestra = async (idmuestra)=>{
     return muestra;
 }
 
+const deleteAllMuestras = async () => {
+    await Muestra.destroy({
+        where: {}
+    });
+}
 
 module.exports = {
     updateMuestra,
     deleteMuestra,
     newMuestra,
     getAllMuestraByCassette,
-    getOneMuestra
+    getOneMuestra,
+    deleteAllMuestras
 }

@@ -1,4 +1,4 @@
-const { newMuestra, getAllMuestraByCassette, updateMuestra, deleteMuestra , getOneMuestra} = require('../services/serviceMuestra');
+const { newMuestra, getAllMuestraByCassette, updateMuestra, deleteMuestra , getOneMuestra, deleteAllMuestras} = require('../services/serviceMuestra');
 
 
 const newMuestraController = async(req , res , next)=>{
@@ -88,10 +88,25 @@ const getOneMuestraController = async (req, res, next) => {
     }
 }
 
+const deleteAllMuestrasController = async(req , res , next)=>{
+    try{
+        if(!req.admin){
+            const error = new Error('No tienes permisos de administrador');
+            error.status=400;
+            throw error;
+        }
+        await deleteAllMuestras();
+        res.status(200).send({menssage: "Muestras eliminados con exito"});
+    }catch(error){
+        next(error);
+    }
+} 
+
 module.exports={
     newMuestraController,
     getAllMuestraByCassetteController,
     updateMuestraController,
     deleteMuestraController,
-    getOneMuestraController
+    getOneMuestraController,
+    deleteAllMuestrasController
 }
