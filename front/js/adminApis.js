@@ -33,27 +33,27 @@ const createTableRow = async (data) => {
         tr.className = 'border-b hover:bg-blue-50 dark:hover:bg-gray-700';
 
         const tdFirstName = document.createElement('td');
-        tdFirstName.className = 'p-1';
+        tdFirstName.className = 'p-1 text-left hidden sm:table-cell';
         tdFirstName.textContent = item.nombre;
         tr.appendChild(tdFirstName);
 
         const tdLastName = document.createElement('td');
-        tdLastName.className = 'p-1';
+        tdLastName.className = 'p-1 text-left hidden lg:table-cell';
         tdLastName.textContent = item.apellidos;
         tr.appendChild(tdLastName);
 
         const tdEmail = document.createElement('td');
-        tdEmail.className = 'p-1';
+        tdEmail.className = 'p-1 text-left';
         tdEmail.textContent = item.email;
         tr.appendChild(tdEmail);
 
         const tdSchool = document.createElement('td');
-        tdSchool.className = 'p-1';
+        tdSchool.className = 'p-1 text-left hidden lg:table-cell';
         tdSchool.textContent = item.centro;
         tr.appendChild(tdSchool);
 
         const tdRole = document.createElement('td');
-        tdRole.className = 'p-1';
+        tdRole.className = 'p-1 text-left hidden sm:table-cell';
         tdRole.textContent = item.admin? 'Admin' : 'Alumno';
         tr.appendChild(tdRole);
 
