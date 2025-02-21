@@ -28,7 +28,7 @@ let tincion_edit_muestra = document.getElementById("tincion_edit_muestra");
 let observacion_edit_muestra = document.getElementById("observacion_edit_muestra");
 let imagen_detail_muestra  = document.getElementById("imagen_detail_muestra");
 let edit__muestraModal = document.getElementById("edit__muestraModal"); 
-let addimage = document.getElementById("addimage");
+let imagenInput = document.getElementById("imagen_detail_muestra");
 let delete__imageModal = document.getElementById("delete__imageModal")
 let modal_image_delete = document.getElementById("modal_image_delete")
 let images_muestra = document.getElementById("images_muestra");
@@ -37,6 +37,8 @@ let confirm_delete_image = document.getElementById("confirm-delete-image")
 import {newMuestra , getAllMuestraByCassette , getOneMuestra  , deleteMuestra,  updateMuestra} from "./dashboardApisMuestras.js"
 
 import {CreateImage , deleteImage,showallimages} from "./dashboardApisImage.js"
+
+const today = new Date().toISOString().split("T")[0];
 
 //muestras 
 let CreateNewMuestra = async (event)=>{
@@ -275,7 +277,7 @@ let showimagesmuestra = async ()=>{
         const img = document.createElement('IMG');
         img.setAttribute("src" , element[0]) ;
         img.setAttribute("alt" , element[1]) ;
-        img.setAttribute("class" , "p-2 w-52") ;
+        img.setAttribute("class" , "p-2 h-52" ) ;
         document.body.appendChild(img);
         
         // Opcional: Revocar la URL del objeto después de que la imagen se haya cargado para liberar memoria
@@ -345,7 +347,117 @@ let notshowdelete = async()=>{
     await showimagesmuestra(); 
 }
 
-addimage.addEventListener("click" , addimageDetail)
+const createErrorElement = (input) => {
+    let error = document.createElement("span");
+    error.classList.add("error-message", "hidden");
+    error.style.color = "red";
+    error.style.fontSize = "12px";
+    input.after(error);
+    return error;
+};
+
+const errorDescripcion = createErrorElement(descripcion_m);
+const errorFecha = createErrorElement(fecha_m);
+const errorTincion = createErrorElement(tincion_m);
+const errorObservaciones = createErrorElement(observaciones_m);
+
+const hideAllErrors = () => {
+    document.querySelectorAll(".error-message").forEach(error => error.classList.add("hidden"));
+};
+
+const showFirstError = (input, errorElement, message) => {
+    hideAllErrors();
+    errorElement.textContent = message;
+    errorElement.classList.remove("hidden");
+    input.focus();
+};
+
+fecha.setAttribute("min", today);
+fecha_m.setAttribute("min", today);
+const validarMuestra = (event) => {
+    event.preventDefault();
+    hideAllErrors();
+
+    if (descripcion_m.value.trim() === "") {
+        return showFirstError(descripcion_m, errorDescripcion, "La descripción es obligatoria.");
+    }
+
+    if (!fecha_m.value) {
+        return showFirstError(fecha_m, errorFecha, "Debe seleccionar una fecha.");
+    }
+
+    if (tincion_m.value === "" || tincion_m.selectedIndex === 0) {
+        return showFirstError(tincion_m, errorTincion, "Debe seleccionar una tinción.");
+    }
+
+    if (observaciones_m.value.trim() === "") {
+        return showFirstError(observaciones_m, errorObservaciones, "Las observaciones son obligatorias.");
+    }
+
+};
+
+    const errorEditMuestra = createErrorElement(descripcion_edit_muestra);
+    const errorEditFechaMuestra = createErrorElement(fecha_edit_muestra);
+    const errorEditTincionMuestra = createErrorElement(tincion_edit_muestra);
+    const errorEditObservacionesMuestra = createErrorElement(observacion_edit_muestra);
+
+    form__editMuestra.addEventListener("submit", (event) => {
+        event.preventDefault();
+        hideAllErrors();
+
+        if (descripcion_edit_muestra.value.trim() === "") {
+            return showFirstError(descripcion_edit_muestra, errorEditMuestra, "La descripción es obligatoria.");
+        }
+
+        if (!fecha_edit_muestra.value) {
+            return showFirstError(fecha_edit_muestra, errorEditFechaMuestra, "Debe seleccionar una fecha.");
+        }
+
+        if (tincion_edit_muestra.value === "" || tincion_edit_muestra.selectedIndex === 0) {
+            return showFirstError(tincion_edit_muestra, errorEditTincionMuestra, "Debe seleccionar una tinción.");
+        }
+
+        if (observacion_edit_muestra.value.trim() === "") {
+            return showFirstError(observacion_edit_muestra, errorEditObservacionesMuestra, "Las observaciones son obligatorias.");
+        }
+
+        console.log("Formulario validado correctamente.");
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+const errorMessage = document.getElementById("error-message");
+const validarImagen = (event) => {
+    let file = event.target.files[0];
+    errorMessage.classList.add("hidden");
+    if (!file) return;
+    
+    const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/webp", "image/bmp"];
+    
+    if (!allowedTypes.includes(file.type)) {
+        errorMessage.textContent = "Solo se permiten imágenes estáticas (JPG, PNG, WEBP, BMP).";
+        errorMessage.classList.remove("hidden");
+        imagen_detail_muestra.value = "";
+        return;
+    }
+    
+    errorMessage.classList.add("hidden");
+};
+
+//LISTENER
+formnewmuestra.addEventListener("submit", validarMuestra);
+imagen_detail_muestra.addEventListener("change", validarImagen);
+imagenInput.addEventListener("change", addimageDetail);
 formnewmuestra.addEventListener("submit" , CreateNewMuestra);
 form__editMuestra.addEventListener("submit", editarMuestra);
 confirm_delete.addEventListener("click", borrarMuestra);
