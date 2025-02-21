@@ -4,18 +4,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.10.2/dist/cdn.min.js" defer></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/awesome-notifications@latest/dist/index.var.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/awesome-notifications@latest/dist/style.css">
 
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class', // Esto permite que 'dark:' responda a la clase 'dark' en <html>
+    };
+  </script>
   <title>Dashboard</title>
 </head>
 
-<body class="bg-gray-100 min-h-screen overflow-y-auto flex flex-col justify-start items-center">
+<body class="bg-gray-100 min-h-screen overflow-y-auto flex flex-col justify-start items-center dark:bg-gray-900"
+x-data="{ darkMode: false }" x-init="
+darkMode = localStorage.getItem('darkMode') === 'true';
+if (darkMode) document.documentElement.classList.add('dark');
+">
+
+
   <!-- Barra de Filtros -->
-  <div class="w-full bg-blue-200 p-4 shadow-md">
+  <div class="w-full bg-blue-200 p-4 shadow-md dark:bg-blue-600">
     <!-- Botón de hamburguesa para pantallas pequeñas -->
     <button id="hamburgerButton" class="lg:hidden text-blue-900 p-2 focus:outline-none">
       <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -23,7 +36,7 @@
       </svg>
     </button>
     <div id="filtersMenu" class="max-w-7xl mx-auto flex flex-wrap gap-2 justify-between">
-      <select class="text-blue-900 p-2 border rounded-lg w-full sm:w-auto hover:bg-blue-50">
+      <select class="text-blue-900 p-2 border rounded-lg w-full sm:w-auto dark:text-blue-400 dark:bg-gray-800 hover:bg-blue-50">
         <option disabled selected>Seleccionar un Órgano</option>
         <option value="*">Todos</option>
         <optgroup label="Sistema Nervioso">
@@ -89,7 +102,7 @@
         <option>Otros</option>
       </select>
       <button id="generatePDFButton"
-        class="flex justify-between items-center gap-4 bg-white p-2 border rounded-lg w-full sm:w-auto text-blue-900 hover:bg-blue-50">
+        class="flex justify-between items-center gap-4 bg-white p-2 border rounded-lg w-full sm:w-auto text-blue-900 dark:text-blue-400 dark:bg-gray-800 hover:bg-blue-50">
         Descargar PDF
         <svg class="h-6 w-6 text-blue-400 hover:text-blue-900" viewBox="0 0 24 24" fill="none" stroke="currentColor"
           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -98,12 +111,12 @@
           <rect x="6" y="14" width="12" height="8" />
         </svg>
       </button>
-      <input type="date" class="text-blue-900 p-2 border rounded-lg w-full sm:w-auto hover:bg-blue-50">
-      <input type="date" class="text-blue-900 p-2 border rounded-lg w-full sm:w-auto hover:bg-blue-50">
+      <input type="date" class="text-blue-900 p-2 border rounded-lg w-full dark:text-blue-400 dark:bg-gray-800 sm:w-auto hover:bg-blue-50">
+      <input type="date" class="text-blue-900 p-2 border rounded-lg w-full dark:text-blue-400 dark:bg-gray-800 sm:w-auto hover:bg-blue-50">
       <button id="Admin"
-        class="flex justify-between items-center gap-4 bg-white p-2 border rounded-lg w-full sm:w-auto text-blue-900 bg-green-100 hover:bg-green-50 d-none">Administrar</button>
+        class="flex justify-between items-center gap-4 bg-white p-2 border rounded-lg w-full sm:w-auto text-blue-900 bg-green-100 hover:bg-green-50 dark:text-blue-400 dark:bg-gray-800 d-none">Administrar</button>
       <button id="logOut"
-        class="flex justify-between items-center gap-4 bg-white p-2 border rounded-lg w-full sm:w-auto text-blue-900 hover:bg-blue-50">
+        class="flex justify-between items-center gap-4 bg-white p-2 border rounded-lg w-full sm:w-auto text-blue-900 dark:text-blue-400 dark:bg-gray-800 hover:bg-blue-50">
         Log out
         <svg class="h-6 w-6 text-blue-400 hover:text-blue-900" width="24" height="24" viewBox="0 0 24 24"
           stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -112,6 +125,26 @@
           <path d="M7 12h14l-3 -3m0 6l3 -3" />
         </svg>
       </button>
+      <!-- TOGGLE PARA EL MODO DE TEMA (CLARO U OSCURO) -->
+      <label class="inline-flex items-center cursor-pointer" x-data="{ checked: false }" x-init="
+      checked = localStorage.getItem('darkMode') === 'true';
+      if (checked) document.documentElement.classList.add('dark');
+      ">
+        <input type="checkbox" class="sr-only" x-model="checked" @change="
+          document.documentElement.classList.toggle('dark', checked);
+          localStorage.setItem('darkMode', checked);
+      " />
+        <div
+          class="w-20 h-10 rounded-full bg-gradient-to-r from-yellow-300 to-orange-400 transition-all duration-500 border-2 border-gray-500"
+          :class="{ 'from-blue-400 to-indigo-500': checked }">
+          <div
+            class=" mt-[2px] mx-[2px] bg-white rounded-full h-8 w-8 flex items-center justify-center transition-all duration-500 transform"
+            :class="{ 'translate-x-10': checked }">
+            <span x-show="!checked">☀️</span>
+            <span x-show="checked">🌙</span>
+          </div>
+        </div>
+      </label>
     </div>
   </div>
   <div class="w-11/12 max-w-7xl flex flex-col gap-2 lg:gap-6 py-6">
@@ -119,19 +152,19 @@
     <div class="flex flex-col gap-2 text-sm">
       <div class="flex flex-col lg:flex-row gap-2">
         <!-- Tabla de Cassettes -->
-        <div class="lg:w-3/5 bg-white shadow-md w-full rounded-lg overflow-hidden p-3">
-          <div class="px-3 py-1 bg-blue-100 text-blue-900 font-semibold text-sm flex items-center justify-between">
+        <div class="lg:w-3/5 bg-white  dark:bg-gray-800  shadow-md w-full rounded-lg overflow-hidden p-3">
+          <div class="px-3 py-1 bg-blue-100 dark:bg-blue-600 dark:text-gray-100 text-blue-900 font-semibold text-sm flex items-center justify-between">
             <p>CASSETTES</p>
             <div class="flex space-x-2">
               <button>
-                <svg id="new__cassette" class="h-5 w-5 text-blue-400 hover:text-blue-800" fill="none"
+                <svg id="new__cassette" class="h-5 w-5 text-blue-400 hover:text-blue-800 dark:text-gray-100 dark:hover:text-gray-200" fill="none"
                   viewBox="0 0 23 23" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </button>
               <button>
-                <svg class="h-5 w-5 text-blue-400 hover:text-blue-900" fill="none" viewBox="0 0 23 23"
+                <svg class="h-5 w-5 text-blue-400 hover:text-blue-900 dark:text-gray-100 dark:hover:text-gray-200" fill="none" viewBox="0 0 23 23"
                   stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
@@ -141,13 +174,13 @@
           </div>
           <table class="w-full border-collapse text-sm">
             <thead>
-              <tr class="bg-blue-200 text-blue-900">
+              <tr class="bg-blue-200 dark:bg-blue-500 text-blue-900 dark:text-blue-100">
                 <th class="p-1 text-left w-1/6">
                   <div class="flex justify-between">
                     <p>
                       Fecha
                     </p>
-                    <svg class="mr-6 h-5 w-5 text-blue-900"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <polyline points="3 8 7 4 11 8" />  <line x1="7" y1="4" x2="7" y2="13" />  <polyline points="13 16 17 20 21 16" />  <line x1="17" y1="10" x2="17" y2="20" /></svg>
+                    <svg class="mr-6 h-5 w-5 text-blue-900 dark:text-blue-100"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <polyline points="3 8 7 4 11 8" />  <line x1="7" y1="4" x2="7" y2="13" />  <polyline points="13 16 17 20 21 16" />  <line x1="17" y1="10" x2="17" y2="20" /></svg>
                   </div>
                 </th>
                 <th class="p-1 text-left w-3/6 truncate">
@@ -155,7 +188,7 @@
                     <p>
                       Descripción
                     </p>
-                    <svg class="mr-8 h-5 w-5 text-blue-900"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <polyline points="3 8 7 4 11 8" />  <line x1="7" y1="4" x2="7" y2="13" />  <polyline points="13 16 17 20 21 16" />  <line x1="17" y1="10" x2="17" y2="20" /></svg>
+                    <svg class="mr-8 h-5 w-5 text-blue-900 dark:text-blue-100"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <polyline points="3 8 7 4 11 8" />  <line x1="7" y1="4" x2="7" y2="13" />  <polyline points="13 16 17 20 21 16" />  <line x1="17" y1="10" x2="17" y2="20" /></svg>
                   </div>
                 </th>
                 <th class="p-1 text-left w-1/6">
@@ -163,16 +196,16 @@
                     <p>
                       Órgano
                     </p>
-                    <svg class="h-5 w-5 text-blue-900"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <polyline points="3 8 7 4 11 8" />  <line x1="7" y1="4" x2="7" y2="13" />  <polyline points="13 16 17 20 21 16" />  <line x1="17" y1="10" x2="17" y2="20" /></svg>
+                    <svg class="h-5 w-5 text-blue-900 dark:text-blue-100"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <polyline points="3 8 7 4 11 8" />  <line x1="7" y1="4" x2="7" y2="13" />  <polyline points="13 16 17 20 21 16" />  <line x1="17" y1="10" x2="17" y2="20" /></svg>
                   </div>
                 </th>
                 <th class="p-1 w-1/6"></th>
               </tr>
             </thead>
           </table>          
-          <div class="max-h-48 w-full overflow-y-auto">
+          <div class="max-h-52 w-full overflow-y-auto">
             <table class="w-full border-collapse text-sm">
-              <tbody id="tbodycassetes" class="text-gray-700">
+              <tbody id="tbodycassetes" class="text-gray-700 dark:text-gray-200">
                 <!-- Filas dinámicas -->
               </tbody>
             </table>
@@ -183,12 +216,12 @@
 
 
         <!-- Detalle del Cassette -->
-        <div class="lg:w-2/5 w-full bg-white shadow-md rounded-lg p-3 h-72 overflow-hidden">
-          <div class="text-blue-900 font-semibold text-sm pb-1 mb-1 flex items-center justify-between">
+        <div class="lg:w-2/5 w-full bg-white  dark:bg-gray-800  shadow-md rounded-lg p-3 h-72 overflow-hidden">
+          <div class="text-blue-900 dark:text-blue-100 font-semibold text-sm pb-1 mb-1 flex items-center justify-between">
             <p>DETALLE CASSETTE</p>
             <div class="flex space-x-2">
               <button id="detail__QRCassette">
-                <svg class="h-6 w-6 text-blue-400 hover:text-blue-900" width="24" height="24" viewBox="0 0 24 24"
+                <svg class="h-6 w-6 text-blue-400 hover:text-blue-900 dark:text-blue-100" width="24" height="24" viewBox="0 0 24 24"
                   stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" />
                   <rect x="4" y="4" width="6" height="6" rx="1" />
@@ -206,7 +239,7 @@
                 </svg>
               </button>
               <button>
-                <svg id="delete__cassette" stroke-width="1" class="h-5 w-5 text-blue-400 hover:text-blue-900"
+                <svg id="delete__cassette" stroke-width="1" class="h-5 w-5 text-blue-400 hover:text-blue-900 dark:text-blue-100"
                   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                   stroke-linejoin="round">
                   <polyline points="3 6 5 6 21 6" />
@@ -216,7 +249,7 @@
                 </svg>
               </button>
               <button>
-                <svg id="edit__cassette" stroke-width="1" class="h-5 w-5 text-blue-400 hover:text-blue-900"
+                <svg id="edit__cassette" stroke-width="1" class="h-5 w-5 text-blue-400 hover:text-blue-900 dark:text-blue-100"
                   viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                   stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" />
@@ -227,30 +260,30 @@
               </button>
             </div>
           </div>
-          <p class="text-gray-700 font-semibold border-b text-sm">DESCRIPCIÓN: <span id="desc"
+          <p class="text-gray-700 dark:text-blue-100 font-semibold border-b text-sm">DESCRIPCIÓN: <span id="desc"
               class="font-normal"></span></p>
           <!-- <div class="flex justify-between items-center mt-4"> -->
-          <p class="text-gray-700 font-semibold border-b text-sm">ÓRGANO: <span id="org" class="font-normal"></span></p>
-          <p class="text-gray-700 font-semibold border-b text-sm">FECHA: <span id="fech" class="font-normal"></span></p>
-          <p class="text-gray-700 font-semibold border-b text-sm">IDENTIFICADOR: <span id="iden"
+          <p class="text-gray-700 dark:text-blue-100 font-semibold border-b text-sm">ÓRGANO: <span id="org" class="font-normal"></span></p>
+          <p class="text-gray-700 dark:text-blue-100 font-semibold border-b text-sm">FECHA: <span id="fech" class="font-normal"></span></p>
+          <p class="text-gray-700 dark:text-blue-100 font-semibold border-b text-sm">IDENTIFICADOR: <span id="iden"
               class="font-normal"></span></p>
 
           <!-- </div> -->
-          <p class="text-gray-700 font-semibold text-sm mt-2">CARACTERÍSTICAS:</p>
-          <textarea id="carac" class="font-normal h-12 w-full resize-none"></textarea>
-          <p class="text-gray-700 font-semibold border-t text-sm">OBSERVACIONES:</p>
-          <textarea id="obs" class="font-normal h-12 w-full resize-none"></textarea>
+          <p class="text-gray-700 dark:text-blue-100 font-semibold text-sm mt-2">CARACTERÍSTICAS:</p>
+          <textarea disabled id="carac" class="font-normal h-12 w-full resize-none dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200"></textarea>
+          <p class="text-gray-700 dark:text-blue-100 font-semibold border-t text-sm">OBSERVACIONES:</p>
+          <textarea disabled id="obs" class="font-normal h-12 w-full resize-none dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200"></textarea>
 
         </div>
       </div>
     </div>
 
     <!-- Tabla de Muestras -->
-    <div class="w-full  bg-white shadow-md rounded-lg overflow-hidden p-4 h-64 text-sm">
-      <div class="px-3 py-1 bg-blue-100 text-blue-900 font-semibold flex items-center justify-between">
+    <div class="w-full  bg-white dark:bg-gray-800  shadow-md rounded-lg overflow-hidden p-4 h-64 text-sm">
+      <div class="px-3 py-1 bg-blue-100 text-blue-900 font-semibold flex items-center  dark:bg-blue-600 dark:text-gray-100  justify-between">
         <p>MUESTRAS</p>
         <button>
-          <svg id="new__muestra" class="h-5 w-5 text-blue-400 hover:text-blue-900" fill="none" viewBox="0 0 23 23"
+          <svg id="new__muestra" class="h-5 w-5 text-blue-400 hover:text-blue-900 dark:text-gray-100 dark:hover:text-gray-200" fill="none" viewBox="0 0 23 23"
             stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -259,7 +292,7 @@
       </div>
       <table class="w-full border-collapse">
         <thead>
-          <tr class="bg-blue-200 text-blue-900">
+          <tr class="bg-blue-200 dark:bg-blue-500 text-blue-900 dark:text-blue-100">
             <th class="w-1/6 p-1 text-left">
               <div class="flex justify-between">
                   Fecha
@@ -278,7 +311,7 @@
             <th class="w-1/6 p-1 text-left"></th>
           </tr>
         </thead>
-        <tbody id="tdbody_muestra" class="text-gray-700">
+        <tbody id="tdbody_muestra" class="text-gray-700 dark:text-gray-200">
 
 
         </tbody>
@@ -286,23 +319,23 @@
     </div>
 
     <!-- Modal para Nuevo Cassette -->
-    <div id="new__cassetteModal" class="modal d-none">
-      <div class="modal-content">
+    <div id="new__cassetteModal" class="modal d-none ">
+      <div class="modal-content dark:bg-gray-800 dark:text-blue-500">
         <span id="close__btn" class="close-btn">&times;</span>
         <h2>Nuevo Cassette</h2>
         <form id="createCassette" novalidate>
           <label for="descripcion">Descripción Corta:</label>
-          <input type="text" id="descripcion" name="descripcion" required>
+          <input class="dark:bg-gray-700 dark:text-gray-200" type="text" id="descripcion" name="descripcion" required>
           <label for="identificador_cassette">identificador Cassette:</label>
-          <input type="text" id="identificador_cassette" name="identificador_cassette" required>
+          <input class="dark:bg-gray-700 dark:text-gray-200" type="text" id="identificador_cassette" name="identificador_cassette" required>
           <div class="form-group flex-col lg:flex-row"> 
             <div class="flex flex-col">
               <label for="fecha">Fecha Órgano:</label>
-              <input type="date" id="fecha" name="fecha" required>
+              <input class="dark:bg-gray-700 dark:text-gray-200" type="date" id="fecha" name="fecha" required>
             </div>
             <div class="flex flex-col">
               <label for="organo">Seleccionar Órgano:</label>
-              <select id="organo" name="organo" required>
+              <select class="dark:bg-gray-700 dark:text-gray-200" id="organo" name="organo" required>
                 <option disabled value="" selected>Seleccionar un Órgano</option>
                 <optgroup label="Sistema Nervioso">
                   <option>Encéfalo</option>
@@ -370,10 +403,10 @@
           </div>
 
           <label for="caracteristicas">Características:</label>
-          <textarea id="caracteristicas" name="caracteristicas" rows="4" required></textarea>
+          <textarea class="dark:bg-gray-700 dark:text-gray-200"  id="caracteristicas" name="caracteristicas" rows="4" required></textarea>
 
           <label for="observaciones">Observaciones:</label>
-          <textarea id="observaciones" name="observaciones" rows="4" required></textarea>
+          <textarea  class="dark:bg-gray-700 dark:text-gray-200" id="observaciones" name="observaciones" rows="4" required></textarea>
 
           <button type="submit">Crear Cassette</button>
         </form>
@@ -383,7 +416,7 @@
 
     <!-- Modal para confirmación de eliminación -->
     <div id="delete__cassetteModal" class="modal d-none">
-      <div class="modal-delete">
+      <div class="modal-delete dark:bg-gray-800 dark:text-blue-500">
         <span id="close__btn__delete" class="close-btn">&times;</span>
         <h2>Eliminar Cassette</h2>
         <p>¿Desea Eliminar el Cassette?</p>
@@ -394,22 +427,22 @@
 
     <!-- Modal para Modificar Cassette -->
     <div id="edit__cassetteModal" class="modal d-none">
-      <div class="modal-content">
+      <div class="modal-content  dark:bg-gray-800 dark:text-blue-500">
         <span id="close__btn__edit" class="close-btn">&times;</span>
         <h2>Modificar Cassette</h2>
         <form id="editform" novalidate>
           <label for="descripcion">Descripción Corta:</label>
-          <input type="text" id="descripcion_edit" name="descripcion" required>
+          <input class="dark:bg-gray-700 dark:text-gray-200" type="text" id="descripcion_edit" name="descripcion" required>
           <label for="identificador">IDENTIFICADOR:</label>
-          <input type="text" id="identificador_edit" name="identificador" required>
+          <input class="dark:bg-gray-700 dark:text-gray-200" type="text" id="identificador_edit" name="identificador" required>
           <div class="form-group flex-col lg:flex-row"> 
             <div class="flex flex-col">
               <label for="fecha">Fecha Órgano:</label>
-              <input type="date" id="fecha_edit" name="fecha" required>
+              <input class="dark:bg-gray-700 dark:text-gray-200" type="date" id="fecha_edit" name="fecha" required>
             </div>
             <div class="flex flex-col">
               <label for="organo">Seleccionar Órgano:</label>
-              <select id="organo_edit" name="organo" required>
+              <select class="dark:bg-gray-700 dark:text-gray-200"  id="organo_edit" name="organo" required>
                 <option disabled selected>Seleccionar un Órgano</option>
                 <optgroup label="Sistema Nervioso">
                   <option>Encéfalo</option>
@@ -477,10 +510,10 @@
           </div>
 
           <label for="caracteristicas">Características:</label>
-          <textarea id="caracteristicas_edit" name="caracteristicas" rows="4" required></textarea>
+          <textarea class="dark:bg-gray-700 dark:text-gray-200"  id="caracteristicas_edit" name="caracteristicas" rows="4" required></textarea>
 
           <label for="observaciones">Observaciones:</label>
-          <textarea id="observaciones_edit" name="observaciones" rows="4" required></textarea>
+          <textarea class="dark:bg-gray-700 dark:text-gray-200"  id="observaciones_edit" name="observaciones" rows="4" required></textarea>
 
           <button type="submit">Editar Cassette</button>
         </form>
@@ -489,21 +522,21 @@
 
     <!-- Modal para Nueva Muestra -->
     <div id="new__muestraModal" class="modal d-none">
-      <div class="modal-content">
+      <div class="modal-content dark:bg-gray-800 dark:text-blue-500">
         <span id="close__btn__newMuestra" class="close-btn">&times;</span>
         <h2>Nueva Muestra</h2>
         <form id="formnewmuestra" novalidate>
           <label for="descripcion">Descripción:</label>
-          <input type="text" id="descripcion_m" name="descripcion" required>
+          <input class="dark:bg-gray-700 dark:text-gray-200" type="text" id="descripcion_m" name="descripcion" required>
 
           <div class="form-group  flex-col lg:flex-row">
             <div class="flex flex-col">
               <label for="fecha">Fecha:</label>
-              <input type="date" id="fecha_m" name="fecha" required>
+              <input class="dark:bg-gray-700 dark:text-gray-200" type="date" id="fecha_m" name="fecha" required>
             </div>
             <div class="flex flex-col">
               <label for="tincion">Tinción:</label>
-              <select id="tincion_m" name="tincion" required>
+              <select class="dark:bg-gray-700 dark:text-gray-200"  id="tincion_m" name="tincion" required>
                 <option disabled selected>Seleccionar Tición</option>
                 <option>Hematoxilina Eosina (HE)</option>
                 <option>Giemsa</option>
@@ -515,7 +548,7 @@
           </div>
 
           <label for="observaciones">Observaciones:</label>
-          <textarea id="observaciones_m" name="observaciones" rows="4" required></textarea>
+          <textarea class="dark:bg-gray-700 dark:text-gray-200"  id="observaciones_m" name="observaciones" rows="4" required></textarea>
 
 
           <button type="submit">Crear Nueva Muestra</button>
@@ -525,7 +558,7 @@
 
     <!-- Modal para Detalle Muestra -->
     <div id="detail__muestra" class="modal d-none">
-      <div class="modal-content">
+      <div class="modal-content dark:bg-gray-800 dark:text-blue-500">
         <span id="close__btn__detailMuestra" class="close-btn">&times;</span>
         <h2>Detalle Muestra</h2>
         <div class="flex justify-between items-start">
@@ -583,7 +616,7 @@
             <label for="imagen_detail_muestra" class="cursor-pointer bg-blue-400 text-white px-4 py-2 rounded-lg mt-4">
               Seleccionar Imagen
             </label>
-            <input type="file" name="imagen" id="imagen_detail_muestra" class="hidden">
+            <input class="dark:bg-gray-700 dark:text-gray-200 hidden" type="file" name="imagen" id="imagen_detail_muestra" class="hidden">
             <p id="error-message" class="text-red-500 text-sm mt-2 hidden"></p> <!-- Mensaje de error oculto -->
           </form>
           <div class="mt-2 pt-2 p-2 flex w-full overflow-y-auto" id="images_muestra">
@@ -595,7 +628,7 @@
 
     <!-- Modal para Eliminar Muestra -->
     <div id="delete__muestraModal" class="modal d-none" id="delete-sample-modal">
-      <div class="modal-delete">
+      <div class="modal-delete dark:bg-gray-800 dark:text-blue-500">
         <span id="close__btn__deleteMuestra" class="close-btn">&times;</span>
         <h2>Eliminar Muestra</h2>
         <p>¿Desea Eliminar la Muestra?</p>
@@ -606,9 +639,9 @@
 
     <!-- Modal para Eliminar imagen de cassete  -->
     <div id="delete__imageModal"
-      class="modal d-none fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div class="modal-delete bg-white rounded shadow-lg">
-        <span id="noconfirm-delete-image" class="close-btn text-red-500 text-2xl cursor-pointer">&times;</span>
+      class="modal d-none">
+      <div class="modal-delete bg-white rounded-lg shadow-lg dark:bg-gray-800 dark:text-blue-500">
+        <span id="noconfirm-delete-image" class="close-btn text-blue-500 text-2xl cursor-pointer">&times;</span>
         <div id="modal_image_delete" class="w-auto mx-auto">
 
         </div>
@@ -620,11 +653,11 @@
     </div>
 
     <!-- Modal para QR  -->
-    <div id="show__QRModal" class="modal d-none fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div class="modal-delete">
+    <div id="show__QRModal" class="modal d-none">
+      <div class="modal-delete dark:bg-gray-800 dark:text-blue-500">
         <span id="close__QR" class="close-btn">&times;</span>
         <h2>Código QR</h2>
-        <div class="flex justify-center" id="img__QR">
+        <div class="flex justify-center p-4" id="img__QR">
 
         </div>
       </div>
@@ -633,21 +666,21 @@
 
     <!-- Modal para Modificar Muestra -->
     <div id="edit__muestraModal" class="modal d-none" id="edit-sample-modal">
-      <div class="modal-content">
+      <div class="modal-content dark:bg-gray-800 dark:text-blue-500">
         <span id="close__btn__editMuestra" class="close-btn">&times;</span>
         <h2>Modificar Muestra</h2>
         <form id="form__editMuestra" novalidate>
           <label for="descripcion">Descripción:</label>
-          <input type="text" id="descripcion_edit_muestra" name="descripcion" required>
+          <input class="dark:bg-gray-700 dark:text-gray-200" type="text" id="descripcion_edit_muestra" name="descripcion" required>
 
           <div class="form-group flex-col lg:flex-row">
             <div class="flex flex-col">
               <label for="fecha">Fecha:</label>
-              <input type="date" id="fecha_edit_muestra" name="fecha" required>
+              <input class="dark:bg-gray-700 dark:text-gray-200" type="date" id="fecha_edit_muestra" name="fecha" required>
             </div>
             <div class="flex flex-col">
               <label for="tincion">Tinción:</label>
-              <select id="tincion_edit_muestra" name="tincion" required>
+              <select class="dark:bg-gray-700 dark:text-gray-200" id="tincion_edit_muestra" name="tincion" required>
                 <option disabled selected>Seleccionar Tición</option>
                 <option>Hematoxilina Eosina (HE)</option>
                 <option>Giemsa</option>
@@ -659,7 +692,7 @@
           </div>
 
           <label for="observaciones">Observaciones:</label>
-          <textarea id="observacion_edit_muestra" name="observaciones" rows="4" required></textarea>
+          <textarea class="dark:bg-gray-700 dark:text-gray-200" id="observacion_edit_muestra" name="observaciones" rows="4" required></textarea>
 
           <button type="submit">Modificar Muestra</button>
         </form>

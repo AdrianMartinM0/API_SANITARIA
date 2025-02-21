@@ -159,7 +159,7 @@ let printAllCassetes = async () => {
         let fragment = document.createDocumentFragment();
 
         let tr = document.createElement("tr");
-        tr.classList.add("border-b", "hover:bg-blue-50");
+        tr.classList.add("border-b", "hover:bg-blue-50", "dark:hover:bg-gray-700");
 
         let fecha = element.fecha.split("T")[0];
         
@@ -231,7 +231,7 @@ const renderCassetes = (array) => {
         let fragment = document.createDocumentFragment();
 
         let tr = document.createElement("tr");
-        tr.classList.add("border-b", "hover:bg-blue-50");
+        tr.classList.add("border-b", "hover:bg-blue-50", "dark:hover:bg-gray-700");
 
         let fecha = element.fecha.split("T")[0];
         
@@ -307,7 +307,7 @@ const logOut = () => {
 }
 
 let create_svg = () => {
-    let svg = `<svg class="h-5 w-11 text-blue-400 hover:text-blue-900" stroke-width="5" viewBox="0 0 23 23" fill="none"
+    let svg = `<svg class="h-5 w-11 text-blue-400 hover:text-blue-900 dark:hover:text-blue-200" stroke-width="5" viewBox="0 0 23 23" fill="none"
     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
     <polyline points="14 2 14 8 20 8" />

@@ -114,7 +114,7 @@ export let printMuestras = async () => {
             let fragment = document.createDocumentFragment();
             let tr = document.createElement("tr");
 
-            tr.classList.add("border-b", "hover:bg-blue-50");
+            tr.classList.add("border-b", "hover:bg-blue-50", "dark:hover:bg-gray-700");
 
             let fecha = element.fecha.split("T")[0];
             let td1 = document.createElement("td");

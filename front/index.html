@@ -27,12 +27,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/awesome-notifications@latest/dist/style.css">
 </head>
 
-<body class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900" x-data="{ darkMode: false }" x-init="
+<body class="flex items-center justify-center overflow-y-auto min-h-screen bg-gray-100 dark:bg-gray-900" x-data="{ darkMode: false }" x-init="
     darkMode = localStorage.getItem('darkMode') === 'true';
     if (darkMode) document.documentElement.classList.add('dark');
 ">
 <!-- TOGGLE PARA EL MODO DE TEMA (CLARO U OSCURO) -->
-<label class="fixed bottom-12 right-4 sm:right-[unset]  inline-flex items-center cursor-pointer" x-data="{ checked: false }" x-init="
+<label class="fixed top-2 right-2  inline-flex items-center cursor-pointer" x-data="{ checked: false }" x-init="
     checked = localStorage.getItem('darkMode') === 'true';
     if (checked) document.documentElement.classList.add('dark');
 ">
@@ -44,7 +44,7 @@
         class="w-10 h-5 sm:w-20 sm:h-10 rounded-full bg-gradient-to-r from-yellow-300 to-orange-400 transition-all duration-500 border-2 border-gray-500"
         :class="{ 'from-blue-400 to-indigo-500': checked }"
     >
-        <div class="absolute top-0.5 left-0.5 sm:top-1 sm:left-1 bg-white rounded-full h-4 w-4 sm:h-8 sm:w-8 flex items-center justify-center transition-all duration-500 transform"
+        <div class="top-0.5 left-0.5 sm:mx-[2px] sm:mt-[2px] sm:top-1 sm:left-1 bg-white rounded-full h-4 w-4 sm:h-8 sm:w-8 flex items-center justify-center transition-all duration-500 transform"
             :class="{ 'translate-x-5 sm:translate-x-10': checked }">
             <span x-show="!checked" class="text-xs sm:text-base">☀️</span>
             <span x-show="checked" class="text-xs sm:text-base">🌙</span>
