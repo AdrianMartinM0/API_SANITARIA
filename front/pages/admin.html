@@ -22,27 +22,6 @@ darkMode = localStorage.getItem('darkMode') === 'true';
 if (darkMode) document.documentElement.classList.add('dark');
 ">
 
-  <!-- TOGGLE PARA EL MODO DE TEMA (CLARO U OSCURO) -->
-  <label class="absolute bottom-12 inline-flex items-center cursor-pointer" x-data="{ checked: false }" x-init="
-  checked = localStorage.getItem('darkMode') === 'true';
-  if (checked) document.documentElement.classList.add('dark');
-  ">
-    <input type="checkbox" class="sr-only" x-model="checked" @change="
-      document.documentElement.classList.toggle('dark', checked);
-      localStorage.setItem('darkMode', checked);
-  " />
-    <div
-      class="w-20 h-10 rounded-full bg-gradient-to-r from-yellow-300 to-orange-400 transition-all duration-500 border-2 border-gray-500"
-      :class="{ 'from-blue-400 to-indigo-500': checked }">
-      <div
-        class="absolute top-1 left-1 bg-white rounded-full h-8 w-8 flex items-center justify-center transition-all duration-500 transform"
-        :class="{ 'translate-x-10': checked }">
-        <span x-show="!checked">☀️</span>
-        <span x-show="checked">🌙</span>
-      </div>
-    </div>
-  </label>
-
   <!-- Barra de Filtros -->
   <div class="w-full bg-blue-200 p-4 shadow-md dark:bg-blue-600 ">
     <!-- Botón de hamburguesa para pantallas pequeñas -->
@@ -102,6 +81,26 @@ if (darkMode) document.documentElement.classList.add('dark');
           <path d="M7 12h14l-3 -3m0 6l3 -3" />
         </svg>
       </button>
+      <!-- TOGGLE PARA EL MODO DE TEMA (CLARO U OSCURO) -->
+      <label class="inline-flex items-center cursor-pointer" x-data="{ checked: false }" x-init="
+      checked = localStorage.getItem('darkMode') === 'true';
+      if (checked) document.documentElement.classList.add('dark');
+      ">
+        <input type="checkbox" class="sr-only" x-model="checked" @change="
+          document.documentElement.classList.toggle('dark', checked);
+          localStorage.setItem('darkMode', checked);
+      " />
+        <div
+          class="w-20 h-10 rounded-full bg-gradient-to-r from-yellow-300 to-orange-400 transition-all duration-500 border-2 border-gray-500"
+          :class="{ 'from-blue-400 to-indigo-500': checked }">
+          <div
+            class=" mt-[2px] mx-[2px] bg-white rounded-full h-8 w-8 flex items-center justify-center transition-all duration-500 transform"
+            :class="{ 'translate-x-10': checked }">
+            <span x-show="!checked">☀️</span>
+            <span x-show="checked">🌙</span>
+          </div>
+        </div>
+      </label>
     </div>
   </div>
 
@@ -133,7 +132,7 @@ if (darkMode) document.documentElement.classList.add('dark');
                   <p>
                     Nombre
                   </p>
-                  <svg class="mr-6 h-5 w-5 text-blue-900" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                  <svg class="mr-6 h-5 w-5 text-blue-900 dark:text-blue-100" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" />
                     <polyline points="3 8 7 4 11 8" />
@@ -148,7 +147,7 @@ if (darkMode) document.documentElement.classList.add('dark');
                   <p>
                     Apelldios
                   </p>
-                  <svg class="mr-6 h-5 w-5 text-blue-900" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                  <svg class="mr-6 h-5 w-5 text-blue-900 dark:text-blue-100" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" />
                     <polyline points="3 8 7 4 11 8" />
@@ -163,7 +162,7 @@ if (darkMode) document.documentElement.classList.add('dark');
                   <p>
                     Correo
                   </p>
-                  <svg class="mr-6 h-5 w-5 text-blue-900" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                  <svg class="mr-6 h-5 w-5 text-blue-900 dark:text-blue-100" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" />
                     <polyline points="3 8 7 4 11 8" />
@@ -178,7 +177,7 @@ if (darkMode) document.documentElement.classList.add('dark');
                   <p>
                     Centro
                   </p>
-                  <svg class="mr-6 h-5 w-5 text-blue-900" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                  <svg class="mr-6 h-5 w-5 text-blue-900 dark:text-blue-100" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" />
                     <polyline points="3 8 7 4 11 8" />
@@ -193,7 +192,7 @@ if (darkMode) document.documentElement.classList.add('dark');
                   <p>
                     rol
                   </p>
-                  <svg class="mr-6 h-5 w-5 text-blue-900" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                  <svg class="mr-6 h-5 w-5 text-blue-900 dark:text-blue-100" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" />
                     <polyline points="3 8 7 4 11 8" />
@@ -251,7 +250,7 @@ if (darkMode) document.documentElement.classList.add('dark');
 
       <!-- Modal para confirmación de eliminación de todos los cassettes -->
       <div id="delete__allCassettesModal" class="modal d-none">
-        <div class="modal-delete">
+        <div class="modal-delete dark:bg-gray-800 dark:text-blue-500">
           <span id="close__allCassettesModal" class="close-btn">&times;</span>
           <h2>Eliminar Cassettes</h2>
           <p>¿Desea Eliminar todos los Cassettes?</p>
@@ -262,7 +261,7 @@ if (darkMode) document.documentElement.classList.add('dark');
 
       <!-- Modal para confirmación de eliminación de todas las muestras -->
       <div id="delete__allMuestrasModal" class="modal d-none">
-        <div class="modal-delete">
+        <div class="modal-delete dark:bg-gray-800 dark:text-blue-500">
           <span id="close__allMuestrasModal" class="close-btn">&times;</span>
           <h2>Eliminar Muestras</h2>
           <p>¿Desea Eliminar todas las Muestras?</p>
@@ -273,7 +272,7 @@ if (darkMode) document.documentElement.classList.add('dark');
 
       <!-- Modal para confirmación de eliminación de todas las imagenes -->
       <div id="delete__allImagesModal" class="modal d-none">
-        <div class="modal-delete">
+        <div class="modal-delete dark:bg-gray-800 dark:text-blue-500">
           <span id="close__allImagesModal" class="close-btn">&times;</span>
           <h2>Eliminar Imagenes</h2>
           <p>¿Desea Eliminar todas las Imágenes?</p>
@@ -284,7 +283,7 @@ if (darkMode) document.documentElement.classList.add('dark');
 
       <!-- Modal para confirmación de eliminación de todos los alumnos -->
       <div id="delete__allAlumnosModal" class="modal d-none">
-        <div class="modal-delete">
+        <div class="modal-delete dark:bg-gray-800 dark:text-blue-500">
           <span id="close__allAlumnosModal" class="close-btn">&times;</span>
           <h2>Eliminar Alumnos</h2>
           <p>¿Desea Eliminar todos los Alumnos?</p>
@@ -295,7 +294,7 @@ if (darkMode) document.documentElement.classList.add('dark');
 
       <!-- Modal para confirmación de eliminación de un alumno -->
       <div id="delete__alumnoModal" class="modal d-none">
-        <div class="modal-delete w-1/2">
+        <div class="modal-delete w-1/2  dark:bg-gray-800 dark:text-blue-500">
           <span id="close__alumnoModal" class="close-btn">&times;</span>
           <h2>Eliminar Alumno</h2>
           <p>¿Desea Eliminar el Alumno?</p>
@@ -306,22 +305,22 @@ if (darkMode) document.documentElement.classList.add('dark');
 
       <!-- Modal para Modificar Alumno -->
       <div id="edit__alumnoModal" class="modal d-none">
-        <div class="modal-content">
+        <div class="modal-content dark:bg-gray-800 dark:text-blue-500">
           <span id="close__editAlumno" class="close-btn">&times;</span>
           <h2>Modificar Alumno</h2>
           <form id="form__editAlumno" novalidate>
             <label for="nombre">Nombre:</label>
-            <input type="text" id="nombreAlumno__edit" name="nombre" required>
+            <input class="dark:bg-gray-700 dark:text-gray-200" type="text" id="nombreAlumno__edit" name="nombre" required>
 
             <label for="apellidos">Apellidos:</label>
-            <input type="text" id="apellidosAlumno__edit" name="apellidos" required>
+            <input class="dark:bg-gray-700 dark:text-gray-200" type="text" id="apellidosAlumno__edit" name="apellidos" required>
 
             <label for="correo">Correo:</label>
-            <input type="email" id="correoAlumno__edit" name="correo" required>
+            <input class="dark:bg-gray-700 dark:text-gray-200" type="email" id="correoAlumno__edit" name="correo" required>
 
-            <div class="mb-4">
+            <div class="mb-4 flex flex-col">
               <label for="centro">Centro:</label>
-              <select id="centroAlumno__edit"
+              <select class="dark:bg-gray-700 dark:text-gray-200" id="centroAlumno__edit"
                 class="w-full p-3 border rounded-lg text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400">
                 <option value="Instituto Bonanova Formación Profesional Sanitaria">Instituto Bonanova Formación
                   Profesional Sanitaria</option>
@@ -338,7 +337,7 @@ if (darkMode) document.documentElement.classList.add('dark');
 
       <!-- Modal para confirmación de promoción de un alumno -->
       <div id="rol__alumnoModal" class="modal d-none">
-        <div class="modal-delete">
+        <div class="modal-delete dark:bg-gray-800 dark:text-blue-500">
           <span id="close__alumnoModalPromo" class="close-btn">&times;</span>
           <h2>Promocionar Alumno</h2>
           <p>¿Desea promocionar el Alumno?</p>

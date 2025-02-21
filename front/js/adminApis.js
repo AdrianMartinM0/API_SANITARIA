@@ -64,7 +64,7 @@ const createTableRow = async (data) => {
         deleteButton.value = item.id;
         deleteButton.id = "delete";
         deleteButton.innerHTML = `
-            <svg stroke-width="1" class="h-5 w-5 text-blue-400 hover:text-blue-900"
+            <svg stroke-width="1" class="h-5 w-5 text-blue-400 hover:text-blue-900 dark:hover:text-blue-200"
                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round">
                 <polyline points="3 6 5 6 21 6" />
@@ -78,7 +78,7 @@ const createTableRow = async (data) => {
         editButton.value = item.id;
         editButton.id = "edit";
         editButton.innerHTML = `
-            <svg stroke-width="1" class="h-5 w-5 text-blue-400 hover:text-blue-900"
+            <svg stroke-width="1" class="h-5 w-5 text-blue-400 hover:text-blue-900 dark:hover:text-blue-200"
                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                 stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" />
@@ -93,7 +93,7 @@ const createTableRow = async (data) => {
             increaseButton.value = item.id;
             increaseButton.id = "rol";
             increaseButton.innerHTML = `
-                <svg stroke-width="1" class="h-5 w-5 text-blue-400 hover:text-blue-900"
+                <svg stroke-width="1" class="h-5 w-5 text-blue-400 hover:text-blue-900 dark:hover:text-blue-200"
                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                 stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" />
