@@ -188,6 +188,7 @@ let muestras = async (event) => {
 
 
 
+const boton_qr = document.getElementById("boton_qr");
 let mostrarDetalles = async (idmuestra) => {
 
     let element = await getOneMuestra(idmuestra);
@@ -203,6 +204,7 @@ let mostrarDetalles = async (idmuestra) => {
     confirm_delete.setAttribute("value", element.id);
     idmuestra = element.id;
 
+    boton_qr.value=element.qr_muestra;
 
     descripcion_edit_muestra.value = element.descripcion;
     fecha_edit_muestra.value = element.fecha.split("T")[0]
@@ -210,6 +212,7 @@ let mostrarDetalles = async (idmuestra) => {
     observacion_edit_muestra.value = element.observaciones;
     printMuestras()
 }
+
 
 
 
@@ -465,6 +468,39 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const qrButton = document.getElementById("boton_qr");
+    const qrModal = document.getElementById("show__QRModal");
+    const qrClose = document.getElementById("close__QR");
+    const qrContainer = document.getElementById("img__QR");
+
+    qrButton.addEventListener("click", () => {
+        const qrValue = qrButton.value;
+        console.log(qrValue);
+
+        if (qrValue) {
+            qrContainer.innerHTML = "";
+            new QRCode(qrContainer, qrValue);
+            qrModal.classList.remove("d-none");
+        } else {
+            console.error("No hay valor en el botón QR.");
+        }
+    });
+
+    qrClose.addEventListener("click", function () {
+        qrModal.classList.add("d-none");
+    });
+
+    window.addEventListener("click", function (event) {
+        if (event.target === qrModal) {
+            qrModal.classList.add("d-none");
+        }
+    });
+});
+
+
+
 
 const errorMessage = document.getElementById("error-message");
 const validarImagen = (event) => {
