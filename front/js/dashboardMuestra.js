@@ -188,6 +188,7 @@ let muestras = async (event) => {
 
 
 
+const boton_qr = document.getElementById("boton_qr");
 let mostrarDetalles = async (idmuestra) => {
 
     let element = await getOneMuestra(idmuestra);
@@ -203,6 +204,7 @@ let mostrarDetalles = async (idmuestra) => {
     confirm_delete.setAttribute("value", element.id);
     idmuestra = element.id;
 
+    boton_qr.value=element.qr_muestra;
 
     descripcion_edit_muestra.value = element.descripcion;
     fecha_edit_muestra.value = element.fecha.split("T")[0]
@@ -210,6 +212,7 @@ let mostrarDetalles = async (idmuestra) => {
     observacion_edit_muestra.value = element.observaciones;
     printMuestras()
 }
+
 
 
 
@@ -466,6 +469,36 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const qrButton = document.getElementById("boton_qr");
+    const qrModal = document.getElementById("show__QRModal");
+    const qrClose = document.getElementById("close__QR");
+    const qrContainer = document.getElementById("img__QR");
+
+    qrButton.addEventListener("click", () => {
+        const qrValue = qrButton.value;
+        console.log(qrValue);
+
+        if (qrValue) {
+            qrContainer.innerHTML = "";
+            new QRCode(qrContainer, qrValue);
+            qrModal.classList.remove("d-none");
+        } else {
+            console.error("No hay valor en el botón QR.");
+        }
+    });
+
+    qrClose.addEventListener("click", function () {
+        qrModal.classList.add("d-none");
+    });
+
+    window.addEventListener("click", function (event) {
+        if (event.target === qrModal) {
+            qrModal.classList.add("d-none");
+        }
+    });
+});
+
 const errorMessage = document.getElementById("error-message");
 const validarImagen = (event) => {
     let file = event.target.files[0];
@@ -484,7 +517,44 @@ const validarImagen = (event) => {
     errorMessage.classList.add("hidden");
 };
 
-//LISTENER
+const cargarSortable = () => {
+    const headers = document.querySelectorAll("thead th");
+    const tbody = document.querySelector("#tbodycassetes");
+  
+    if (!tbody) return;
+  
+    headers.forEach((header, index) => {
+      header.style.cursor = "pointer";
+      header.addEventListener("click", () => {
+        sortTableByColumn(tbody, index);
+      });
+    });
+  
+    function sortTableByColumn(tbody, columnIndex) {
+      const rows = Array.from(tbody.querySelectorAll("tr"));
+      const isAscending = tbody.getAttribute("data-sort-order") !== "asc";
+      tbody.setAttribute("data-sort-order", isAscending ? "asc" : "desc");
+  
+      rows.sort((rowA, rowB) => {
+        const cellA = rowA.children[columnIndex]?.textContent.trim().toLowerCase() || "";
+        const cellB = rowB.children[columnIndex]?.textContent.trim().toLowerCase() || "";
+  
+        return isAscending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+      });
+  
+      rows.forEach((row) => tbody.appendChild(row));
+    }
+  
+    new Sortable(tbody, {
+      animation: 150,
+      ghostClass: "sortable-ghost",
+      handle: "td",
+    });
+  };
+  
+  
+  //LISTENER
+  document.addEventListener("DOMContentLoaded", cargarSortable);
 formnewmuestra.addEventListener("submit", validarMuestra);
 imagen_detail_muestra.addEventListener("change", validarImagen);
 imagenInput.addEventListener("change", addimageDetail);
