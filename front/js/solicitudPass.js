@@ -1,21 +1,21 @@
 const email = document.getElementById('solicitudEmail');
 const form = document.getElementById('solicitudForm');
-
+const error = document.getElementById('error-email-solicitud');
+const success = document.getElementById('success-email-solicitud');
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const recuperarPass = async (event) => {
+    error.textContent = "";
     event.preventDefault();
     let mail = email.value.trim();
 
-
     if (!emailRegex.test(mail))
-        return;
+        return error.textContent='Formato del email no valido / campo email sin rellenar';
     
     const newPass = await generarNewPass(mail)
-    if(newPass.error)
-        return;
-    
+    if(newPass == false)
+        return error.textContent='Ingresa un email registrado'
     generarCorreo(newPass, mail);
 
 }
@@ -25,6 +25,8 @@ const generarNewPass = async (email) => {
         method:"PUT",
         headers: {"Content-Type" : "application/json"}
     });
+    if(!response.ok)
+        return false;
     const data = await response.json();
     return data;
 }
@@ -36,10 +38,14 @@ const generarCorreo = (datos, email) => {
         pass: datos.password
     };
     emailjs.send("service_0x712po", "template_w3r2748", templateParams)
-    .then(function(response) {
-        console.log('Correo enviado con éxito!', response.status, response.text);
-    }, function(error) {
-        console.log('Error al enviar el correo: ' + JSON.stringify(error));
+    .then(response => {
+        success.textContent='Contraseña cambiada con exito, porfavor compruebe el correo';
+        setTimeout(() => {
+            location.reload();
+        }, 5000);
+    })
+    .catch(err => {
+        error.textContent = 'Error Inesperado al enviar la nueva contraseña, porfavor intentelo de nuevo más tarde.';
     });
 }
 

@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SANITARIA</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.10.2/dist/cdn.min.js" defer></script>
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
     </script>
@@ -17,22 +18,50 @@
         });
     })();
     </script>
+    <script>
+        tailwind.config = {
+          darkMode: 'class', // Esto permite que 'dark:' responda a la clase 'dark' en <html>
+        };
+    </script>
 </head>
 
-<body class="flex items-center justify-center min-h-screen bg-gray-100">
+<body class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900" x-data="{ darkMode: false }" x-init="
+    darkMode = localStorage.getItem('darkMode') === 'true';
+    if (darkMode) document.documentElement.classList.add('dark');
+">
+    <label class="absolute bottom-12 inline-flex items-center cursor-pointer" x-data="{ checked: false }" x-init="
+        checked = localStorage.getItem('darkMode') === 'true';
+        if (checked) document.documentElement.classList.add('dark');
+    ">
+        <input type="checkbox" class="sr-only" x-model="checked" @change="
+            document.documentElement.classList.toggle('dark', checked);
+            localStorage.setItem('darkMode', checked);
+        " />
+        <div
+            class="w-20 h-10 rounded-full bg-gradient-to-r from-yellow-300 to-orange-400 transition-all duration-500 border-2 border-gray-500"
+            :class="{ 'from-blue-400 to-indigo-500': checked }"
+        >
+            <div class="absolute top-1 left-1 bg-white rounded-full h-8 w-8 flex items-center justify-center transition-all duration-500 transform"
+                :class="{ 'translate-x-10': checked }">
+                <span x-show="!checked">☀️</span>
+                <span x-show="checked">🌙</span>
+            </div>
+        </div>
+    </label>
+
     <!-- REGISTER -->
-    <div id="registerContainer" class="w-full max-w-md bg-white p-6 rounded-lg shadow-md d-none">
-        <h2 class="text-2xl font-bold text-center text-blue-400 mb-6">Registro</h2>
+    <div id="registerContainer" class="w-full max-w-md bg-white  dark:bg-gray-800 p-6 rounded-lg shadow-md d-none">
+        <h2 class="text-2xl font-bold text-center text-blue-400 dark:text-blue-500 mb-6">Registro</h2>
         <form id="registroForm" novalidate>
             <div class="mb-4">
-                <input type="text" id="nombre" placeholder="Nombre" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <input type="text" id="nombre" placeholder="Nombre" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200">
             </div>
             <div class="mb-4">
                 <input type="text" id="apellidos" placeholder="Apellidos"
-                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200">
             </div>
             <div class="mb-4">
-                <select id="centro" class="w-full p-3 border rounded-lg text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <select id="centro" class="w-full p-3 border rounded-lg text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-400">
                     <option disabled selected>Centro</option>
                     <option value="Instituto Bonanova Formación Profesional Sanitaria">Instituto Bonanova Formación Profesional Sanitaria</option>
                     <option value="IES Ramón y Cajal">IES Ramón y Cajal</option>
@@ -42,12 +71,12 @@
             </div>
             <div class="mb-4">
                 <input type="email" id="email" placeholder="Email"
-                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200">
                 <small class="text-red-500 hidden" id="error-email">Ingrese un email válido.</small>
             </div>
             <div class="mb-4">
-                <div class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 flex justify-between">
-                    <input type="password" id="registerPassword" placeholder="Contraseña" class="w-full border-none outline-none">
+                <div class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200  flex justify-between">
+                    <input type="password" id="registerPassword" placeholder="Contraseña" class="w-full border-none outline-none dark:bg-gray-700 dark:text-gray-200">
                     
                     <div class="flex items-center">
                         <label class="lock-checkbox">
@@ -66,8 +95,8 @@
                 </small>
             </div>
             <div class="mb-4">
-                <div class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 flex justify-between">
-                    <input type="password" id="registerPassword2" placeholder="Contraseña" class="w-full border-none outline-none">
+                <div class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200  flex justify-between">
+                    <input type="password" id="registerPassword2" placeholder="Contraseña" class="w-full border-none outline-none dark:bg-gray-700 dark:text-gray-200">
                     
                     <div class="flex items-center">
                         <label class="lock-checkbox">
@@ -92,22 +121,22 @@
                 class="text-blue-500">Login</a></p>
     </div>
 
- <!-- LOGIN -->
-<div id="loginContainer" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+  <!-- LOGIN -->
+  <div id="loginContainer" class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md">
     <form id="loginForm" action="#" method="post" class="space-y-6" novalidate>
-        <h2 class="text-2xl font-bold text-center text-blue-400 mb-6">Login</h2>
+        <h2 class="text-2xl font-bold text-center text-blue-400 dark:text-blue-500 mb-6">Login</h2>
 
         <!-- Campo de email -->
         <div class="mb-4">
             <input type="email" id="loginEmail" placeholder="Email"
-                class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200">
             <small class="text-red-500 hidden" id="error-login-email">Ingrese un email válido.</small>
         </div>
 
         <!-- Campo de contraseña -->
         <div class="mb-4">
-            <div class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 flex justify-between">
-                <input type="password" id="loginPassword" placeholder="Contraseña" class="w-full border-none outline-none">
+            <div class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200 flex justify-between">
+                <input type="password" id="loginPassword" placeholder="Contraseña" class="w-full border-none outline-none dark:bg-gray-700 dark:text-gray-200">
                 
                 <div class="flex items-center">
                     <label class="lock-checkbox">
@@ -131,28 +160,29 @@
 
         <!-- Botón de login -->
         <button type="submit"
-            class="w-full py-3 bg-blue-400 text-white rounded-md font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            class="w-full py-3 bg-blue-400 dark:bg-blue-500 text-white rounded-md font-semibold hover:bg-blue-500 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500">
             Entrar
         </button>
 
         <!-- Enlaces para recuperar contraseña y registro -->
         <div class="text-center">
-            <a href="#"  id="forgotPasswordLink" class="text-sm text-blue-500 hover:underline">¿Olvidaste tu contraseña?</a>
+            <a href="#"  id="forgotPasswordLink" class="text-sm text-blue-500 hover:underline dark:text-blue-400">¿Olvidaste tu contraseña?</a>
         </div>
-        <p class="text-center text-gray-600 mt-4">¿No tienes cuenta? <a href="#" id="register"
-            class="text-blue-500">Registro</a></p>
+        <p class="text-center text-gray-600 dark:text-gray-300 mt-4">¿No tienes cuenta? <a href="#" id="register"
+            class="text-blue-500 dark:text-blue-400">Registro</a></p>
     </form>
 </div>
 
     <!-- PASSWORD -->
-    <div id="solicitudContainer" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md d-none">
+    <div id="solicitudContainer" class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md d-none">
         <form id="solicitudForm" action="#" method="post" class="space-y-6" novalidate>
-            <h2 class="text-2xl font-bold text-center text-blue-400 mb-6">Solicitar Contraseña</h2>
+            <h2 class="text-2xl font-bold text-center text-blue-400 dark:text-blue-500 mb-6">Solicitar Contraseña</h2>
         
             <div class="mb-4">
+                <small id="success-email-solicitud" class="text-green-500"></small>
                 <input type="email" id="solicitudEmail" placeholder="Email"
-                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-                <small id="error-email-solicitud" class="text-red-500 hidden">Ingrese un email válido.</small>
+                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200">
+                <small id="error-email-solicitud" class="text-red-500"></small>
             </div>
         
             <button type="submit"
