@@ -349,7 +349,7 @@ let imprimirdetalles = async (id)=>{
     descripcion_edit.value  = "";
     let element = await GetOneCassetteById(id)
     org.textContent = element.organo;
-    fech.textContent = element.fecha && element.fecha.includes('T') ? element.fecha.split("T")[0] : element.fecha || '';
+    fech.textContent = element.fecha.split("T")[0];
     iden.textContent = element.identificador_cassette;
     carac.textContent = element.caracteristicas;
     obs.textContent = element.observaciones;
@@ -358,7 +358,7 @@ let imprimirdetalles = async (id)=>{
     observaciones_edit.value = element.observaciones;
     caracteristicas_edit.value = element.caracteristicas;
     organo_edit.value  = element.organo;
-    fecha_edit.value = element.fecha && element.fecha.includes('T') ? element.fecha.split("T")[0] : element.fecha || '';
+    fecha_edit.value =  element.fecha.split("T")[0];
     identificador_edit.value  = element.identificador_cassette;
     descripcion_edit.value  =  element.descripcion;
 }
