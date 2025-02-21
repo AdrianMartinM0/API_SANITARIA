@@ -22,7 +22,7 @@ const validarLogin = async (event) => {
     if (!passwordRegex.test(pass)) return errorPass.classList.remove("hidden");
 
     const token = await logear(mail, pass);
-    if(!token) return errorLogin.classList.remove("hidden");
+    if (!token) return errorLogin.classList.remove("hidden");
     sessionStorage.setItem('user-token', token);
     window.location.href = "./pages/dashboard.html";
 }
@@ -36,7 +36,9 @@ const logear = async (mail, pass) => {
         })
     });
     const data = await response.json();
+    localStorage.setItem('usuario', data.id);
     return data.token;
 }
+
 //LISTENER
 loginForm.addEventListener("submit", validarLogin);

@@ -23,11 +23,11 @@ const hideError = () => {
 const validarRegister = async (event) => {
     event.preventDefault();
     hideError();
-    if (!nombre.value || !apellidos.value || !centro.value || !emailRegister.value || !password.value || !confirmPassword.value) 
+    if (!nombre.value || !apellidos.value || !centro.value || !emailRegister.value || !password.value || !confirmPassword.value)
         return errorRegister.classList.remove('hidden');
-    if(!mailRgx.test(emailRegister.value)) return errorMail.classList.remove('hidden');
-    if(!passRegex.test(password.value)) return errorPassRegister.classList.remove('hidden');
-    if(password.value != confirmPassword.value) return errorPass2.classList.remove('hidden');
+    if (!mailRgx.test(emailRegister.value)) return errorMail.classList.remove('hidden');
+    if (!passRegex.test(password.value)) return errorPassRegister.classList.remove('hidden');
+    if (password.value != confirmPassword.value) return errorPass2.classList.remove('hidden');
 
     const data = {
         nombre: nombre.value,
@@ -38,7 +38,7 @@ const validarRegister = async (event) => {
     }
     notifier.success("Registro completado con exito");
     await registrar(data);
-    
+
 }
 
 const registrar = async (datos) => {
@@ -48,17 +48,17 @@ const registrar = async (datos) => {
         body: JSON.stringify(datos)
     });
     const data = await response.json();
-    if(response.status == 400){
+    if (response.status == 400) {
         errorRegister.textContent = data.details
         return errorRegister.classList.remove('hidden');
     }
-    if(response.status == 500){
+    if (response.status == 500) {
         errorRegister.textContent = 'Error inesperado, por favor intente registrase en otro momento';
         return errorRegister.classList.remove('hidden');
     }
-    
+
     log(datos.email, datos.password);
-    
+
 }
 
 const log = async (mail, pass) => {
@@ -70,6 +70,7 @@ const log = async (mail, pass) => {
         })
     });
     const data = await response.json();
+    localStorage.setItem('usuario', data.id);
     sessionStorage.setItem('user-token', data.token);
     window.location.href = "./pages/dashboard.html";
 }
@@ -79,9 +80,9 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Awesome Notifications no se ha cargado correctamente.");
     } else {
         console.log("Awesome Notifications cargado correctamente.");
-        
+
         notifier = new AWN();
     }
-  });
+});
 
 formRegister.addEventListener('submit', validarRegister);

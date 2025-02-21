@@ -1,7 +1,5 @@
-//API calls muestras
-
-  // Obtener todas las muestras de un cassette específico
-  export let getAllMuestraByCassette = async (id) => {
+// Obtener todas las muestras de un cassette específico
+export let getAllMuestraByCassette = async (id) => {
     try {
         let response = await fetch(`http://localhost:3000/v1/muestra/${id}`, {
             method: "GET",
@@ -14,10 +12,10 @@
     } catch (error) {
         return false;
     }
-  };
-  
-  // Obtener los detalles de una muestra específica
-  export let getOneMuestra = async (idmuestra) => {
+};
+
+// Obtener los detalles de una muestra específica
+export let getOneMuestra = async (idmuestra) => {
     try {
         let response = await fetch(`http://localhost:3000/v1/muestra/one/${idmuestra}`, {
             method: "GET",
@@ -26,16 +24,16 @@
                 "user-token": sessionStorage.getItem('user-token')
             }
         });
-        
-        
+
+
         return response.json();
     } catch (error) {
         return false;
     }
-  };
-  
-  // Crear una nueva muestra en un cassette
-  export let newMuestra = async (data) => {
+};
+
+// Crear una nueva muestra en un cassette
+export let newMuestra = async (data) => {
     try {
         let response = await fetch(`http://localhost:3000/v1/muestra`, {
             method: "POST",
@@ -49,10 +47,10 @@
     } catch (error) {
         return false;
     }
-  };
-  
-  // Modificar una muestra existente (excepto la imagen)
-  export let updateMuestra = async (data , ide) => {
+};
+
+// Modificar una muestra existente (excepto la imagen)
+export let updateMuestra = async (data, ide) => {
     try {
         let response = await fetch(`http://localhost:3000/v1/muestra/${ide}`, {
             method: "PUT",
@@ -66,10 +64,10 @@
     } catch (error) {
         return false;
     }
-  };
-  
-  // Eliminar una muestra y sus imágenes
-  export let deleteMuestra = async (id) => {
+};
+
+// Eliminar una muestra y sus imágenes
+export let deleteMuestra = async (id) => {
     try {
         let response = await fetch(`http://localhost:3000/v1/muestra/${id}`, {
             method: "DELETE",
@@ -82,13 +80,13 @@
     } catch (error) {
         return false;
     }
-  };
-  
-  // Subir una imagen a una muestra
-  export let createImagen = async (img, id) => {
+};
+
+// Subir una imagen a una muestra
+export let createImagen = async (img, id) => {
     let formData = new FormData();
     formData.append("imagen", img);
-  
+
     try {
         let response = await fetch(`http://localhost:3000/v1/imagen/${id}`, {
             method: "POST",
@@ -101,10 +99,10 @@
     } catch (error) {
         return false;
     }
-  };
-  
-  // Eliminar una imagen de una muestra
-  export let deleteImagen = async (id) => {
+};
+
+// Eliminar una imagen de una muestra
+export let deleteImagen = async (id) => {
     try {
         let response = await fetch(`http://localhost:3000/v1/imagen/${id}`, {
             method: "DELETE",
@@ -117,7 +115,4 @@
     } catch (error) {
         return false;
     }
-  };
-  
-
-
+};

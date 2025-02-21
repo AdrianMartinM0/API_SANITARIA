@@ -80,41 +80,41 @@ close__editAlumno.addEventListener("click", closeModal);
 const cargarSortable = () => {
     const headers = document.querySelectorAll("thead th");
     const tbody = document.querySelector("tbody");
-  
+
     if (!tbody) return;
-  
+
     headers.forEach((header, index) => {
-      // Evita que la última columna vacía sea ordenable
-      if (index === headers.length - 1) return;
-  
-      header.style.cursor = "pointer";
-      header.addEventListener("click", () => {
-        sortTableByColumn(tbody, index);
-      });
+        // Evita que la última columna vacía sea ordenable
+        if (index === headers.length - 1) return;
+
+        header.style.cursor = "pointer";
+        header.addEventListener("click", () => {
+            sortTableByColumn(tbody, index);
+        });
     });
-  
+
     function sortTableByColumn(tbody, columnIndex) {
-      const rows = Array.from(tbody.querySelectorAll("tr"));
-      const isAscending = tbody.getAttribute("data-sort-order") !== "asc";
-      tbody.setAttribute("data-sort-order", isAscending ? "asc" : "desc");
-  
-      rows.sort((rowA, rowB) => {
-        const cellA = rowA.children[columnIndex]?.textContent.trim().toLowerCase() || "";
-        const cellB = rowB.children[columnIndex]?.textContent.trim().toLowerCase() || "";
-  
-        return isAscending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
-      });
-  
-      rows.forEach((row) => tbody.appendChild(row));
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+        const isAscending = tbody.getAttribute("data-sort-order") !== "asc";
+        tbody.setAttribute("data-sort-order", isAscending ? "asc" : "desc");
+
+        rows.sort((rowA, rowB) => {
+            const cellA = rowA.children[columnIndex]?.textContent.trim().toLowerCase() || "";
+            const cellB = rowB.children[columnIndex]?.textContent.trim().toLowerCase() || "";
+
+            return isAscending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+        });
+
+        rows.forEach((row) => tbody.appendChild(row));
     }
-  
+
     // Activar Sortable.js en el tbody para permitir el drag & drop manual de filas
     new Sortable(tbody, {
-      animation: 150,
-      ghostClass: "sortable-ghost",
-      handle: "td",
+        animation: 150,
+        ghostClass: "sortable-ghost",
+        handle: "td",
     });
-  };
-  
-  // Llamar a la función después de que el DOM haya cargado
-  document.addEventListener("DOMContentLoaded", cargarSortable);  
+};
+
+// Llamar a la función después de que el DOM haya cargado
+document.addEventListener("DOMContentLoaded", cargarSortable);  

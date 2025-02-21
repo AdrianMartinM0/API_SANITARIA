@@ -4,7 +4,7 @@ const loginContainer = document.getElementById('loginContainer');
 const solicitudContainer = document.getElementById('solicitudContainer');
 const register = document.getElementById('register');
 const registerContainer = document.getElementById('registerContainer');
-const backToLoginRegister =document.getElementById('backToLoginRegister');
+const backToLoginRegister = document.getElementById('backToLoginRegister');
 const locks = document.querySelectorAll('.lock');
 
 locks.forEach(lock => {
@@ -18,15 +18,15 @@ locks.forEach(lock => {
     });
 });
 
- // Mostrar formulario de solicitud de contraseña y ocultar el login
- forgotPasswordLink.addEventListener('click', () => {
-    loginContainer.classList.add('d-none'); 
-    solicitudContainer.classList.remove('d-none'); 
+// Mostrar formulario de solicitud de contraseña y ocultar el login
+forgotPasswordLink.addEventListener('click', () => {
+    loginContainer.classList.add('d-none');
+    solicitudContainer.classList.remove('d-none');
 });
 
 // Volver al formulario de login
 backToLoginLink.addEventListener('click', () => {
-    solicitudContainer.classList.add('d-none'); 
+    solicitudContainer.classList.add('d-none');
     loginContainer.classList.remove('d-none');
 });
 

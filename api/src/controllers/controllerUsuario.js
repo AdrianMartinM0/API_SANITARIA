@@ -70,7 +70,8 @@ const loginController = async ( req, res, next ) => {
             throw error;
         }
         const token = {
-            token: generateJWT(usu)
+            token: generateJWT(usu),
+            id: usu.id,
         }
         res.status(200).send(token); 
     }catch(error){

@@ -14,11 +14,11 @@ const btnAllImages = document.getElementById('btnDelete__allImagesModal');
 const btnAllAlumnos = document.getElementById('btnDelete__allAlumnosModal');
 
 const cargaUsu = async () => {
-    const response = await fetch('http://localhost:3000/v1/usuario/',{
+    const response = await fetch('http://localhost:3000/v1/usuario/', {
         method: 'GET',
         headers: {
-            "Content-Type" : "application/json",
-            "user-token" : sessionStorage.getItem('user-token'),
+            "Content-Type": "application/json",
+            "user-token": sessionStorage.getItem('user-token'),
         }
     });
     const data = await response.json();
@@ -54,7 +54,7 @@ const createTableRow = async (data) => {
 
         const tdRole = document.createElement('td');
         tdRole.className = 'p-1 text-left hidden sm:table-cell';
-        tdRole.textContent = item.admin? 'Admin' : 'Alumno';
+        tdRole.textContent = item.admin ? 'Admin' : 'Alumno';
         tr.appendChild(tdRole);
 
         const tdActions = document.createElement('td');
@@ -72,6 +72,8 @@ const createTableRow = async (data) => {
                 <line x1="10" y1="11" x2="10" y2="17" />
                 <line x1="14" y1="11" x2="14" y2="17" />
             </svg>`;
+        if (localStorage.getItem('usuario') == item.id)
+            deleteButton.classList.add('hidden');
         tdActions.appendChild(deleteButton);
 
         const editButton = document.createElement('button');
@@ -88,7 +90,7 @@ const createTableRow = async (data) => {
             </svg>`;
         tdActions.appendChild(editButton);
 
-        if(!item.admin){
+        if (!item.admin) {
             const increaseButton = document.createElement('button');
             increaseButton.value = item.id;
             increaseButton.id = "rol";
@@ -109,14 +111,14 @@ const createTableRow = async (data) => {
     tbodyUsuarios.innerHTML = '';
     tbodyUsuarios.appendChild(fragment);
 };
-let numUser;
 
+let numUser;
 const deleteOneUser = async () => {
-    await fetch(`http://localhost:3000/v1/usuario/one/${numUser}`,{
+    await fetch(`http://localhost:3000/v1/usuario/one/${numUser}`, {
         method: 'DELETE',
         headers: {
-            "Content-Type" : "application/json",
-            "user-token" : sessionStorage.getItem('user-token'),
+            "Content-Type": "application/json",
+            "user-token": sessionStorage.getItem('user-token'),
         }
     });
     cargaUsu();
@@ -188,7 +190,7 @@ const editOneUser = async (event) => {
         centro: centroUser.value,
         email: correoUser.value,
     };
-  
+
 
     await fetch(`http://localhost:3000/v1/usuario/update/${numUser}`, {
         method: 'PUT',
@@ -199,7 +201,7 @@ const editOneUser = async (event) => {
         body: JSON.stringify(userData)
     });
 
-    await cargaUsu(); 
+    await cargaUsu();
 }
 
 const promocionar = async (event) => {
@@ -216,30 +218,30 @@ const promocionar = async (event) => {
 }
 
 const acciones = (event) => {
-    if(event.target.parentElement.nodeName == 'BUTTON'){
+    if (event.target.parentElement.nodeName == 'BUTTON') {
         numUser = event.target.parentElement.value;
-        if(event.target.parentElement.id == 'delete')
+        if (event.target.parentElement.id == 'delete')
             document.getElementById('delete__alumnoModal').classList.remove('d-none')
-        if(event.target.parentElement.id == 'edit')
+        if (event.target.parentElement.id == 'edit')
             document.getElementById('edit__alumnoModal').classList.remove('d-none')
 
-        if(event.target.parentElement.id == 'rol')
+        if (event.target.parentElement.id == 'rol')
             document.getElementById('rol__alumnoModal').classList.remove('d-none')
     }
 
-    if(event.target.parentElement.id == 'edit'){
-console.log(event.target.parentElement.value)
-console.log (numUser)
-putvalue(event.target.parentElement.value)
+    if (event.target.parentElement.id == 'edit') {
+        console.log(event.target.parentElement.value)
+        console.log(numUser)
+        putvalue(event.target.parentElement.value)
     }
-        
-    
+
+
 }
 
 const eliminarAllCassettes = async (event) => {
     event.preventDefault();
     document.getElementById('delete__allCassettesModal').classList.add('d-none')
-    await fetch('http://localhost:3000/v1/cassette',{
+    await fetch('http://localhost:3000/v1/cassette', {
         method: 'DELETE',
         headers: {
             "Content-Type": "application/json",
@@ -248,10 +250,10 @@ const eliminarAllCassettes = async (event) => {
     });
 }
 
-const eliminarAllMuestras = async (event)  => {
+const eliminarAllMuestras = async (event) => {
     event.preventDefault();
     document.getElementById('delete__allMuestrasModal').classList.add('d-none')
-    await fetch('http://localhost:3000/v1/muestra',{
+    await fetch('http://localhost:3000/v1/muestra', {
         method: 'DELETE',
         headers: {
             "Content-Type": "application/json",
@@ -263,7 +265,7 @@ const eliminarAllMuestras = async (event)  => {
 const eliminarAllImages = async (event) => {
     event.preventDefault();
     document.getElementById('delete__allImagesModal').classList.add('d-none')
-    await fetch('http://localhost:3000/v1/imagen/all',{
+    await fetch('http://localhost:3000/v1/imagen/all', {
         method: 'DELETE',
         headers: {
             "Content-Type": "application/json",
@@ -275,7 +277,7 @@ const eliminarAllImages = async (event) => {
 const eliminarAllAlumnos = async (event) => {
     event.preventDefault();
     document.getElementById('delete__allAlumnosModal').classList.add('d-none')
-    await fetch('http://localhost:3000/v1/usuario/',{
+    await fetch('http://localhost:3000/v1/usuario/', {
         method: 'DELETE',
         headers: {
             "Content-Type": "application/json",
@@ -285,25 +287,25 @@ const eliminarAllAlumnos = async (event) => {
     await cargaUsu();
 }
 
-const putvalue = async(id) =>{
-    const response = await fetch(`http://localhost:3000/v1/usuario/id/${id}`,{
+const putvalue = async (id) => {
+    const response = await fetch(`http://localhost:3000/v1/usuario/id/${id}`, {
         method: 'GET',
         headers: {
-            "Content-Type" : "application/json",
-            "user-token" : sessionStorage.getItem('user-token'),
+            "Content-Type": "application/json",
+            "user-token": sessionStorage.getItem('user-token'),
         }
     });
-    console.log (response);
-  
-    let  data = await response.json();
+    console.log(response);
+
+    let data = await response.json();
     nombreUser.value = data.nombre,
-    apellidosUser.value = data.apellidos,
-    centroUser.value = data.centro,
-    correoUser.value = data.email
+        apellidosUser.value = data.apellidos,
+        centroUser.value = data.centro,
+        correoUser.value = data.email
 }
 
 //LISTENER
-returnDahsboard.addEventListener('click', () => location.href="./dashboard.html");
+returnDahsboard.addEventListener('click', () => location.href = "./dashboard.html");
 logOutAdmin.addEventListener('click', () => {
     sessionStorage.removeItem('user-token')
     location.reload();

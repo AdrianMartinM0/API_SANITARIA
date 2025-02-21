@@ -1,11 +1,11 @@
 let createCassette = document.getElementById("createCassette");
 let descripcion = document.getElementById("descripcion");
 let fecha = document.getElementById("fecha");
-let organo= document.getElementById("organo");
+let organo = document.getElementById("organo");
 let caracteristicas = document.getElementById("caracteristicas");
 let observaciones = document.getElementById("observaciones");
 let identificador_cassette = document.getElementById("identificador_cassette");
-let tbodycassetes = document.getElementById("tbodycassetes"); 
+let tbodycassetes = document.getElementById("tbodycassetes");
 let org = document.getElementById("org");
 let fech = document.getElementById("fech");
 let iden = document.getElementById("iden");
@@ -16,14 +16,14 @@ let deletebutton = document.getElementById("deletebutton");
 const user_token = sessionStorage.getItem('user-token');
 let observaciones_edit = document.getElementById("observaciones_edit");
 let caracteristicas_edit = document.getElementById("caracteristicas_edit");
-let organo_edit  = document.getElementById("organo_edit");
+let organo_edit = document.getElementById("organo_edit");
 let fecha_edit = document.getElementById("fecha_edit");
-let identificador_edit  = document.getElementById("identificador_edit");
-let descripcion_edit  = document.getElementById("descripcion_edit");
+let identificador_edit = document.getElementById("identificador_edit");
+let descripcion_edit = document.getElementById("descripcion_edit");
 let editform = document.getElementById("editform");
 const logout = document.getElementById('logOut');
 
-import {postCassette , GetallCassetesFromUser , GetOneCassetteById  , EditCasseteById,  DeleteCasseteById} from "./dashboardApis.js"
+import { postCassette, GetallCassetesFromUser, GetOneCassetteById, EditCasseteById, DeleteCasseteById } from "./dashboardApis.js"
 import { printMuestras } from "./dashboardMuestra.js";
 
 
@@ -125,19 +125,18 @@ editform.addEventListener("submit", (event) => {
 });
 
 //INSERT
-
-let insertnewCassete =  async (event)=>{
+let insertnewCassete = async (event) => {
     let data = {
-        descripcion : descripcion.value,
-        fecha : fecha.value , 
-        organo : organo.value ,
-        caracteristicas : caracteristicas.value , 
-        observaciones : observaciones.value , 
-        identificador_cassette :  identificador_cassette.value ,
+        descripcion: descripcion.value,
+        fecha: fecha.value,
+        organo: organo.value,
+        caracteristicas: caracteristicas.value,
+        observaciones: observaciones.value,
+        identificador_cassette: identificador_cassette.value,
     }
 
     let response = await postCassette(data);
-    if (response){
+    if (response) {
         document.getElementById('new__cassetteModal').classList.add('d-none');
         descripcion.value = '';
         fecha.value = '';
@@ -149,9 +148,8 @@ let insertnewCassete =  async (event)=>{
     }
 }
 
-
 let printAllCassetes = async () => {
-    tbodycassetes.innerHTML = ""; 
+    tbodycassetes.innerHTML = "";
     let array = await GetallCassetesFromUser();
     const cassettesList = await array;
     cassettesList.forEach(element => {
@@ -162,7 +160,7 @@ let printAllCassetes = async () => {
         tr.classList.add("border-b", "hover:bg-blue-50", "dark:hover:bg-gray-700");
 
         let fecha = element.fecha.split("T")[0];
-        
+
         let td1 = document.createElement("td");
         td1.textContent = fecha;
         td1.classList.add("p-1", "text-left", "w-1/6");
@@ -183,7 +181,7 @@ let printAllCassetes = async () => {
         button.innerHTML = svg;
         button.value = element.id;
         button.id = "button_details";
-        
+
         td4.appendChild(button);
 
         tr.appendChild(td1);
@@ -199,7 +197,7 @@ let printAllCassetes = async () => {
 const printFilteredCassetesByOrgano = async (organo) => {
     tbodycassetes.innerHTML = "";
     const array = await GetallCassetesFromUser();
-    
+
     const filteredArray = organo === "*" ? array : array.filter(cassette => cassette.organo === organo);
 
     renderCassetes(filteredArray);
@@ -234,7 +232,7 @@ const renderCassetes = (array) => {
         tr.classList.add("border-b", "hover:bg-blue-50", "dark:hover:bg-gray-700");
 
         let fecha = element.fecha.split("T")[0];
-        
+
         let td1 = document.createElement("td");
         td1.textContent = fecha;
         td1.classList.add("p-1", "text-left", "w-1/6");
@@ -255,7 +253,7 @@ const renderCassetes = (array) => {
         button.innerHTML = svg;
         button.value = element.id;
         button.id = "button_details";
-        
+
         td4.appendChild(button);
 
         tr.appendChild(td1);
@@ -320,33 +318,32 @@ let create_svg = () => {
 }
 
 
-let printDetailsCassette = async (event)=>{
+let printDetailsCassette = async (event) => {
     if (event.target.parentElement.parentElement.tagName == "BUTTON") {
-        
-        let num = event.target.parentElement.parentElement.getAttribute("value"); 
+
+        let num = event.target.parentElement.parentElement.getAttribute("value");
         localStorage.setItem('cassette', num);
         printMuestras();
-     await imprimirdetalles(num);
+        await imprimirdetalles(num);
     }
 
-} ; 
+};
 
-// let cassete = localStorage.getItem('cassette');
-let imprimirdetalles = async (id)=>{
-    localStorage.setItem ('cassette', id);
+let imprimirdetalles = async (id) => {
+    localStorage.setItem('cassette', id);
     org.textContent = "";
     fech.textContent = "";
     iden.textContent = "";
     carac.textContent = "";
     obs.textContent = "";
     desc.textContent = "";
-    
+
     observaciones_edit.value = "";
     caracteristicas_edit.value = "";
-    organo_edit.value  ="";
+    organo_edit.value = "";
     fecha_edit.value = "";
-    identificador_edit.value  = "";
-    descripcion_edit.value  = "";
+    identificador_edit.value = "";
+    descripcion_edit.value = "";
     let element = await GetOneCassetteById(id)
     org.textContent = element.organo;
     fech.textContent = element.fecha.split("T")[0];
@@ -354,19 +351,19 @@ let imprimirdetalles = async (id)=>{
     carac.textContent = element.caracteristicas;
     obs.textContent = element.observaciones;
     desc.textContent = element.descripcion;
-    
+
     observaciones_edit.value = element.observaciones;
     caracteristicas_edit.value = element.caracteristicas;
-    organo_edit.value  = element.organo;
-    fecha_edit.value =  element.fecha.split("T")[0];
-    identificador_edit.value  = element.identificador_cassette;
-    descripcion_edit.value  =  element.descripcion;
+    organo_edit.value = element.organo;
+    fecha_edit.value = element.fecha.split("T")[0];
+    identificador_edit.value = element.identificador_cassette;
+    descripcion_edit.value = element.descripcion;
 }
 
-let DeleteCassete = async ()=>{
-   
+let DeleteCassete = async () => {
+
     let response = await DeleteCasseteById(localStorage.getItem('cassette'));
-    if (response) 
+    if (response)
         document.getElementById('delete__cassetteModal').classList.add('d-none');
     org.textContent = "";
     fech.textContent = "";
@@ -379,23 +376,21 @@ let DeleteCassete = async ()=>{
     printMuestras();
 }
 
+let EditCassette = async (event) => {
+    event.preventDefault();
 
-
-let  EditCassette = async (event)=>{
-    event.preventDefault(); 
-   
     let data = {
-        observaciones : observaciones_edit.value ,
-        caracteristicas :  caracteristicas_edit.value,
-        organo :  organo_edit.value  ,
-        fecha :  fecha_edit.value ,
-        identificador_cassette :  identificador_edit.value,  
-        descripcion : descripcion_edit.value ,
+        observaciones: observaciones_edit.value,
+        caracteristicas: caracteristicas_edit.value,
+        organo: organo_edit.value,
+        fecha: fecha_edit.value,
+        identificador_cassette: identificador_edit.value,
+        descripcion: descripcion_edit.value,
     }
     let cassete = localStorage.getItem('cassette')
-    
-    let response = await EditCasseteById( cassete, data );
-    if(response){
+
+    let response = await EditCasseteById(cassete, data);
+    if (response) {
         document.getElementById('edit__cassetteModal').classList.add('d-none');
         printAllCassetes()
         imprimirdetalles(cassete)
@@ -408,7 +403,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 logout.addEventListener("click", logOut);
-deletebutton.addEventListener("click" , DeleteCassete);
-tbodycassetes.addEventListener("click" , printDetailsCassette);
-editform.addEventListener("submit" ,EditCassette );
-// createCassette.addEventListener("submit" , insertnewCassete);
+deletebutton.addEventListener("click", DeleteCassete);
+tbodycassetes.addEventListener("click", printDetailsCassette);
+editform.addEventListener("submit", EditCassette);

@@ -156,6 +156,7 @@ export let printMuestras = async () => {
         });
     }
 };
+
 let create_svg = () => {
     let svg = ` <svg class="h-5 w-11 text-blue-400 hover:text-blue-900" stroke-width="5" viewBox="0 0 23 23" fill="none"
     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -186,9 +187,6 @@ let muestras = async (event) => {
 }
 
 
-
-
-
 const boton_qr = document.getElementById("boton_qr");
 let mostrarDetalles = async (idmuestra) => {
 
@@ -205,7 +203,7 @@ let mostrarDetalles = async (idmuestra) => {
     confirm_delete.setAttribute("value", element.id);
     idmuestra = element.id;
 
-    boton_qr.value=element.qr_muestra;
+    boton_qr.value = element.qr_muestra;
 
     descripcion_edit_muestra.value = element.descripcion;
     fecha_edit_muestra.value = element.fecha.split("T")[0]
@@ -213,9 +211,6 @@ let mostrarDetalles = async (idmuestra) => {
     observacion_edit_muestra.value = element.observaciones;
     printMuestras()
 }
-
-
-
 
 // Editar una muestra
 const editarMuestra = async (event) => {
@@ -266,9 +261,6 @@ let showimagesmuestra = async () => {
     images_muestra.innerHTML = "";
 
     // Crear y mostrar las imágenes en el cuerpo del documento
-
-
-
     if (images.length == 0) {
         tdbody_muestra.innerHTML = "";
         let msg = "No se han insertado imagenes . "
@@ -296,7 +288,6 @@ let showimagesmuestra = async () => {
     }
     printMuestras()
 }
-
 
 // Eliminar una muestra
 const borrarMuestra = async (event) => {
@@ -522,39 +513,39 @@ const validarImagen = (event) => {
 const cargarSortableCassette = () => {
     const headers = document.querySelectorAll("thead th");
     const tbody = document.querySelector("#tbodycassetes");
-  
-    if (!tbody) return;
-  
-    headers.forEach((header, index) => {
-      header.style.cursor = "pointer";
-      header.addEventListener("click", () => {
-        sortTableByColumn(tbody, index);
-      });
-    });
-  
-    function sortTableByColumn(tbody, columnIndex) {
-      const rows = Array.from(tbody.querySelectorAll("tr"));
-      const isAscending = tbody.getAttribute("data-sort-order") !== "asc";
-      tbody.setAttribute("data-sort-order", isAscending ? "asc" : "desc");
-  
-      rows.sort((rowA, rowB) => {
-        const cellA = rowA.children[columnIndex]?.textContent.trim().toLowerCase() || "";
-        const cellB = rowB.children[columnIndex]?.textContent.trim().toLowerCase() || "";
-  
-        return isAscending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
-      });
-  
-      rows.forEach((row) => tbody.appendChild(row));
-    }
-  
-    new Sortable(tbody, {
-      animation: 150,
-      ghostClass: "sortable-ghost",
-      handle: "td",
-    });
-  };
 
-  document.addEventListener("DOMContentLoaded", function () {
+    if (!tbody) return;
+
+    headers.forEach((header, index) => {
+        header.style.cursor = "pointer";
+        header.addEventListener("click", () => {
+            sortTableByColumn(tbody, index);
+        });
+    });
+
+    function sortTableByColumn(tbody, columnIndex) {
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+        const isAscending = tbody.getAttribute("data-sort-order") !== "asc";
+        tbody.setAttribute("data-sort-order", isAscending ? "asc" : "desc");
+
+        rows.sort((rowA, rowB) => {
+            const cellA = rowA.children[columnIndex]?.textContent.trim().toLowerCase() || "";
+            const cellB = rowB.children[columnIndex]?.textContent.trim().toLowerCase() || "";
+
+            return isAscending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+        });
+
+        rows.forEach((row) => tbody.appendChild(row));
+    }
+
+    new Sortable(tbody, {
+        animation: 150,
+        ghostClass: "sortable-ghost",
+        handle: "td",
+    });
+};
+
+document.addEventListener("DOMContentLoaded", function () {
     const table = document.querySelector("table");
     const headers = table.querySelectorAll("th");
     const tbody = table.querySelector("tbody");
@@ -590,7 +581,7 @@ const cargarSortableCassette = () => {
     }
 });
 
-const errorCassette = ()=>{
+const errorCassette = () => {
     if (localStorage.getItem('cassette') == null) {
         notifier.warning("Selecciona antes un cassette");
     }
@@ -601,10 +592,10 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Awesome Notifications no se ha cargado correctamente.");
     } else {
         console.log("Awesome Notifications cargado correctamente.");
-        
+
         notifier = new AWN();
     }
-  });
+});
 
 //LISTENER
 document.addEventListener("DOMContentLoaded", cargarSortableCassette);
