@@ -27,8 +27,9 @@ const edit__muestraModal = document.getElementById ("edit__muestraModal");
 const close__btn__editMuestra = document.getElementById ("close__btn__editMuestra");
 
 const showModal = (event) => {
-    if(event.target.id == "delete__cassette" || event.target.id == "edit__cassette"){
-        if(event.target.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild.textContent == "")
+    if(event.target.id == "delete__cassette" || event.target.id == "edit__cassette" || event.target.id == "new__muestra"){
+        errorCassette();
+        if(!localStorage.getItem("cassette"))
             return;
     }
     const modalId = event.target.id + "Modal";
@@ -60,3 +61,19 @@ close__btn__deleteMuestra.addEventListener("click", closeModal);
 
 edit__muestra.addEventListener("click", showModal);
 close__btn__editMuestra.addEventListener("click", closeModal);
+
+const errorCassette = ()=>{
+    if (localStorage.getItem('cassette') == null) {
+        notifier.warning("Selecciona antes un cassette");
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    if (typeof AWN === "undefined") {
+        console.error("Awesome Notifications no se ha cargado correctamente.");
+    } else {
+        console.log("Awesome Notifications cargado correctamente.");
+        
+        notifier = new AWN();   
+    }
+  });

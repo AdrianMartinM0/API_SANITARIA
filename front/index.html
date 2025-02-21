@@ -23,6 +23,8 @@
           darkMode: 'class', // Esto permite que 'dark:' responda a la clase 'dark' en <html>
         };
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/awesome-notifications@latest/dist/index.var.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/awesome-notifications@latest/dist/style.css">
 </head>
 
 <body class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900" x-data="{ darkMode: false }" x-init="
@@ -78,7 +80,7 @@
             <small class="text-red-500 hidden" id="error-email">Ingrese un email válido.</small>
         </div>
         <div class="mb-3 sm:mb-4">
-            <div class="w-full p-2 sm:p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200 flex justify-between sm:space-x-2">
+            <div class="w-full p-2 sm:p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200 flex justify-between items-center sm:space-x-2">
                 <input type="password" id="registerPassword" placeholder="Contraseña" 
                     class="w-full border-none outline-none dark:bg-gray-700 dark:text-gray-200 sm:text-sm">
                 
@@ -98,7 +100,7 @@
             </small>
         </div>
         <div class="mb-3 sm:mb-4">
-            <div class="w-full p-2 sm:p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200 flex justify-between sm:space-x-2">
+            <div class="w-full p-2 sm:p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200 flex justify-between items-center sm:space-x-2">
                 <input type="password" id="registerPassword2" placeholder="Confirmar Contraseña" 
                     class="w-full border-none outline-none dark:bg-gray-700 dark:text-gray-200 sm:text-sm">
                 
@@ -139,9 +141,8 @@
 
         <!-- Campo de contraseña -->
         <div class="mb-4">
-            <div class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200 flex justify-between">
+            <div class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200 flex justify-between items-center">
                 <input type="password" id="loginPassword" placeholder="Contraseña" class="w-full border-none outline-none dark:bg-gray-700 dark:text-gray-200">
-                
                 <div class="flex items-center">
                     <label class="lock-checkbox">
                         <input class="lock" id="lockLogin" type="checkbox">

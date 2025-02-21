@@ -11,6 +11,7 @@ const errorPassRegister = document.getElementById("error-password");
 const errorPass2 = document.getElementById("error-confirm-password");
 const mailRgx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passRegex = /^[A-Za-z\d@$!%*?&]{8,36}$/;
+let notifier;
 
 const hideError = () => {
     errorRegister.classList.add("hidden");
@@ -35,6 +36,7 @@ const validarRegister = async (event) => {
         email: emailRegister.value,
         password: password.value,
     }
+    notifier.success("Registro completado con exito");
     await registrar(data);
     
 }
@@ -71,5 +73,15 @@ const log = async (mail, pass) => {
     sessionStorage.setItem('user-token', data.token);
     window.location.href = "./pages/dashboard.html";
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    if (typeof AWN === "undefined") {
+        console.error("Awesome Notifications no se ha cargado correctamente.");
+    } else {
+        console.log("Awesome Notifications cargado correctamente.");
+        
+        notifier = new AWN();
+    }
+  });
 
 formRegister.addEventListener('submit', validarRegister);

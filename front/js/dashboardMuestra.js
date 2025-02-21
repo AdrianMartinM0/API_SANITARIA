@@ -33,7 +33,8 @@ let delete__imageModal = document.getElementById("delete__imageModal")
 let modal_image_delete = document.getElementById("modal_image_delete")
 let images_muestra = document.getElementById("images_muestra");
 let noconfirm_delete_image = document.getElementById("noconfirm-delete-image");
-let confirm_delete_image = document.getElementById("confirm-delete-image")
+let confirm_delete_image = document.getElementById("confirm-delete-image");
+let notifier;
 import { newMuestra, getAllMuestraByCassette, getOneMuestra, deleteMuestra, updateMuestra } from "./dashboardApisMuestras.js"
 
 import { CreateImage, deleteImage, showallimages } from "./dashboardApisImage.js"
@@ -436,6 +437,7 @@ document.addEventListener("DOMContentLoaded", function () {
     qrButton.addEventListener("click", async () => {
         const id = localStorage.getItem("cassette");
         console.log(id);
+        errorCassette();
         try {
             let response = await fetch(`http://localhost:3000/v1/cassette/${id}`, {
                 method: "GET",
@@ -588,8 +590,22 @@ const cargarSortableCassette = () => {
     }
 });
 
-  
-  
+const errorCassette = ()=>{
+    if (localStorage.getItem('cassette') == null) {
+        notifier.warning("Selecciona antes un cassette");
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    if (typeof AWN === "undefined") {
+        console.error("Awesome Notifications no se ha cargado correctamente.");
+    } else {
+        console.log("Awesome Notifications cargado correctamente.");
+        
+        notifier = new AWN();
+    }
+  });
+
 //LISTENER
 document.addEventListener("DOMContentLoaded", cargarSortableCassette);
 formnewmuestra.addEventListener("submit", validarMuestra);
