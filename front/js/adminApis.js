@@ -30,7 +30,7 @@ const createTableRow = async (data) => {
 
     data.forEach(item => {
         const tr = document.createElement('tr');
-        tr.className = 'border-b hover:bg-blue-50';
+        tr.className = 'border-b hover:bg-blue-50 dark:hover:bg-gray-700';
 
         const tdFirstName = document.createElement('td');
         tdFirstName.className = 'p-1';
