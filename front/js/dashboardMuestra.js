@@ -517,7 +517,7 @@ const validarImagen = (event) => {
     errorMessage.classList.add("hidden");
 };
 
-const cargarSortable = () => {
+const cargarSortableCassette = () => {
     const headers = document.querySelectorAll("thead th");
     const tbody = document.querySelector("#tbodycassetes");
   
@@ -551,10 +551,47 @@ const cargarSortable = () => {
       handle: "td",
     });
   };
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const table = document.querySelector("table");
+    const headers = table.querySelectorAll("th");
+    const tbody = table.querySelector("tbody");
+
+    headers.forEach((header, index) => {
+        header.addEventListener("click", () => {
+            const rows = Array.from(tbody.querySelectorAll("tr"));
+            const isAscending = header.dataset.order === "asc";
+            const type = header.textContent.trim() === "Fecha" ? "date" : "text";
+
+            rows.sort((rowA, rowB) => {
+                const cellA = rowA.children[index].textContent.trim();
+                const cellB = rowB.children[index].textContent.trim();
+
+                return type === "date"
+                    ? compareDates(cellA, cellB, isAscending)
+                    : compareText(cellA, cellB, isAscending);
+            });
+
+            header.dataset.order = isAscending ? "desc" : "asc";
+            tbody.append(...rows);
+        });
+    });
+
+    function compareText(a, b, isAscending) {
+        return isAscending ? a.localeCompare(b) : b.localeCompare(a);
+    }
+
+    function compareDates(a, b, isAscending) {
+        const dateA = new Date(a.split("/").reverse().join("-"));
+        const dateB = new Date(b.split("/").reverse().join("-"));
+        return isAscending ? dateA - dateB : dateB - dateA;
+    }
+});
+
   
   
-  //LISTENER
-  document.addEventListener("DOMContentLoaded", cargarSortable);
+//LISTENER
+document.addEventListener("DOMContentLoaded", cargarSortableCassette);
 formnewmuestra.addEventListener("submit", validarMuestra);
 imagen_detail_muestra.addEventListener("change", validarImagen);
 imagenInput.addEventListener("change", addimageDetail);
