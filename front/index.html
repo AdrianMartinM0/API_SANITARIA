@@ -29,6 +29,7 @@
     darkMode = localStorage.getItem('darkMode') === 'true';
     if (darkMode) document.documentElement.classList.add('dark');
 ">
+<!-- TOGGLE PARA EL MODO DE TEMA (CLARO U OSCURO) -->
     <label class="absolute bottom-12 inline-flex items-center cursor-pointer" x-data="{ checked: false }" x-init="
         checked = localStorage.getItem('darkMode') === 'true';
         if (checked) document.documentElement.classList.add('dark');
