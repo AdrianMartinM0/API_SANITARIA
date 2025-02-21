@@ -16,7 +16,8 @@
   <title>Dashboard Admin</title>
 </head>
 
-<body class="bg-gray-100 min-h-screen overflow-y-auto flex flex-col justify-start items-center dark:bg-gray-900" x-data="{ darkMode: false }" x-init="
+<body class="bg-gray-100 min-h-screen overflow-y-auto flex flex-col justify-start items-center dark:bg-gray-900"
+  x-data="{ darkMode: false }" x-init="
 darkMode = localStorage.getItem('darkMode') === 'true';
 if (darkMode) document.documentElement.classList.add('dark');
 ">
@@ -26,26 +27,26 @@ if (darkMode) document.documentElement.classList.add('dark');
   checked = localStorage.getItem('darkMode') === 'true';
   if (checked) document.documentElement.classList.add('dark');
   ">
-  <input type="checkbox" class="sr-only" x-model="checked" @change="
+    <input type="checkbox" class="sr-only" x-model="checked" @change="
       document.documentElement.classList.toggle('dark', checked);
       localStorage.setItem('darkMode', checked);
   " />
-  <div
+    <div
       class="w-20 h-10 rounded-full bg-gradient-to-r from-yellow-300 to-orange-400 transition-all duration-500 border-2 border-gray-500"
-      :class="{ 'from-blue-400 to-indigo-500': checked }"
-  >
-      <div class="absolute top-1 left-1 bg-white rounded-full h-8 w-8 flex items-center justify-center transition-all duration-500 transform"
-          :class="{ 'translate-x-10': checked }">
-          <span x-show="!checked">☀️</span>
-          <span x-show="checked">🌙</span>
+      :class="{ 'from-blue-400 to-indigo-500': checked }">
+      <div
+        class="absolute top-1 left-1 bg-white rounded-full h-8 w-8 flex items-center justify-center transition-all duration-500 transform"
+        :class="{ 'translate-x-10': checked }">
+        <span x-show="!checked">☀️</span>
+        <span x-show="checked">🌙</span>
       </div>
-  </div>
-  </label>  
+    </div>
+  </label>
 
   <!-- Barra de Filtros -->
   <div class="w-full bg-blue-200 p-4 shadow-md dark:bg-blue-600 ">
-     <!-- Botón de hamburguesa para pantallas pequeñas -->
-     <button id="hamburgerButton" class="lg:hidden text-blue-900 p-2 focus:outline-none">
+    <!-- Botón de hamburguesa para pantallas pequeñas -->
+    <button id="hamburgerButton" class="lg:hidden text-blue-900 p-2 focus:outline-none">
       <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
@@ -106,43 +107,148 @@ if (darkMode) document.documentElement.classList.add('dark');
 
   <div class="w-11/12 max-w-7xl flex flex-col gap-6 py-6 h-3/4">
 
-    
-    <!-- <div class="flex flex-col gap-2 text-sm h-64">
+    <!-- Tabla de Usuarios -->
+    <div class="w-full bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden p-4 text-sm">
+      <div
+        class="px-3 py-1 bg-blue-100 dark:bg-blue-600 dark:text-gray-100 text-blue-900 font-semibold flex items-center justify-between">
+        <p>Usuarios</p>
+        <button>
+          <svg id="delete__allAlumnos"
+            class="h-6 w-6 text-blue-400 hover:text-blue-900 dark:text-gray-100 dark:hover:text-gray-200"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6" />
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+            <line x1="10" y1="11" x2="10" y2="17" />
+            <line x1="14" y1="11" x2="14" y2="17" />
+          </svg>
+        </button>
+      </div>
+      <div class="overflow-y-auto h-[95%]">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr class="bg-blue-200 dark:bg-blue-500 text-blue-900 dark:text-blue-100">
+              <th class="p-2 text-left">
+                <div class="flex justify-between">
+                  <p>
+                    Nombre
+                  </p>
+                  <svg class="mr-6 h-5 w-5 text-blue-900" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <polyline points="3 8 7 4 11 8" />
+                    <line x1="7" y1="4" x2="7" y2="13" />
+                    <polyline points="13 16 17 20 21 16" />
+                    <line x1="17" y1="10" x2="17" y2="20" />
+                  </svg>
+                </div>
+              </th>
+              <th class="p-2 text-left hidden lg:table-cell">
+                <div class="flex justify-between">
+                  <p>
+                    Apelldios
+                  </p>
+                  <svg class="mr-6 h-5 w-5 text-blue-900" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <polyline points="3 8 7 4 11 8" />
+                    <line x1="7" y1="4" x2="7" y2="13" />
+                    <polyline points="13 16 17 20 21 16" />
+                    <line x1="17" y1="10" x2="17" y2="20" />
+                  </svg>
+                </div>
+              </th>
+              <th class="p-2 text-left hidden sm:table-cell">
+                <div class="flex justify-between">
+                  <p>
+                    Correo
+                  </p>
+                  <svg class="mr-6 h-5 w-5 text-blue-900" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <polyline points="3 8 7 4 11 8" />
+                    <line x1="7" y1="4" x2="7" y2="13" />
+                    <polyline points="13 16 17 20 21 16" />
+                    <line x1="17" y1="10" x2="17" y2="20" />
+                  </svg>
+                </div>
+              </th>
+              <th class="p-2 text-left hidden lg:table-cell">
+                <div class="flex justify-between">
+                  <p>
+                    Centro
+                  </p>
+                  <svg class="mr-6 h-5 w-5 text-blue-900" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <polyline points="3 8 7 4 11 8" />
+                    <line x1="7" y1="4" x2="7" y2="13" />
+                    <polyline points="13 16 17 20 21 16" />
+                    <line x1="17" y1="10" x2="17" y2="20" />
+                  </svg>
+                </div>
+              </th>
+              <th class="p-2 text-left hidden sm:table-cell">
+                <div class="flex justify-between">
+                  <p>
+                    rol
+                  </p>
+                  <svg class="mr-6 h-5 w-5 text-blue-900" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <polyline points="3 8 7 4 11 8" />
+                    <line x1="7" y1="4" x2="7" y2="13" />
+                    <polyline points="13 16 17 20 21 16" />
+                    <line x1="17" y1="10" x2="17" y2="20" />
+                  </svg>
+                </div>
+              </th>
+              <th class="p-2 text-left">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyUsuarios" class="text-gray-700 dark:text-gray-200">
+          </tbody>
+        </table>
+      </div>
+
+      <!-- <div class="flex flex-col gap-2 text-sm h-64">
       <div class="flex gap-2"> -->
 
-        <!-- Tabla de Usuarios -->
-        <div class="w-full bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden p-4 text-sm">
-          <div class="px-3 py-1 bg-blue-100 dark:bg-blue-600 dark:text-gray-100 text-blue-900 font-semibold flex items-center justify-between">
-            <p>Usuarios</p>
-            <button>
-              <svg id="delete__allAlumnos" class="h-6 w-6 text-blue-400 hover:text-blue-900 dark:text-gray-100 dark:hover:text-gray-200"
-                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="3 6 5 6 21 6" />
-                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-                <line x1="10" y1="11" x2="10" y2="17" />
-                <line x1="14" y1="11" x2="14" y2="17" />
-              </svg>
-            </button>
-          </div>
-          <div class="overflow-y-auto h-[95%]">
+      <!-- Tabla de Usuarios -->
+      <div class="w-full bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden p-4 text-sm">
+        <div
+          class="px-3 py-1 bg-blue-100 dark:bg-blue-600 dark:text-gray-100 text-blue-900 font-semibold flex items-center justify-between">
+          <p>Usuarios</p>
+          <button>
+            <svg id="delete__allAlumnos"
+              class="h-6 w-6 text-blue-400 hover:text-blue-900 dark:text-gray-100 dark:hover:text-gray-200"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <polyline points="3 6 5 6 21 6" />
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+              <line x1="10" y1="11" x2="10" y2="17" />
+              <line x1="14" y1="11" x2="14" y2="17" />
+            </svg>
+          </button>
+        </div>
+        <div class="overflow-y-auto h-[95%]">
           <table class="w-full border-collapse">
             <thead>
               <tr class="bg-blue-200 dark:bg-blue-500 text-blue-900 dark:text-blue-100">
-              <th class="p-2 text-left">Nombre</th>
-              <th class="p-2 text-left hidden lg:table-cell">Apellidos</th>
-              <th class="p-2 text-left hidden sm:table-cell">Correo</th>
-              <th class="p-2 text-left hidden lg:table-cell">Centro</th>
-              <th class="p-2 text-left hidden sm:table-cell">Rol</th>
-              <th class="p-2 text-left">Acciones</th>
+                <th class="p-2 text-left">Nombre</th>
+                <th class="p-2 text-left hidden lg:table-cell">Apellidos</th>
+                <th class="p-2 text-left hidden sm:table-cell">Correo</th>
+                <th class="p-2 text-left hidden lg:table-cell">Centro</th>
+                <th class="p-2 text-left hidden sm:table-cell">Rol</th>
+                <th class="p-2 text-left">Acciones</th>
               </tr>
             </thead>
-              <tbody id="tbodyUsuarios" class="text-gray-700 dark:text-gray-200">
-              </tbody>
-            </table>
-          </div>
+            <tbody id="tbodyUsuarios" class="text-gray-700 dark:text-gray-200">
+            </tbody>
+          </table>
         </div>
       </div>
-      
+
       <!-- Modal para confirmación de eliminación de todos los cassettes -->
       <div id="delete__allCassettesModal" class="modal d-none">
         <div class="modal-delete">
