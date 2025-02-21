@@ -51,10 +51,9 @@ export let GetOneCassetteById = async (id)=>{
                        "user-token":  sessionStorage.getItem('user-token')
         }    });
       
-          return cassetes.json();
-    
-      
-     
+        const data = await  cassetes.json();
+        return data;
+        
       } catch (error) {
      
         return false;

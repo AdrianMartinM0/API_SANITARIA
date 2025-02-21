@@ -349,7 +349,7 @@ let imprimirdetalles = async (id)=>{
     descripcion_edit.value  = "";
     let element = await GetOneCassetteById(id)
     org.textContent = element.organo;
-    fech.textContent = element.fecha.split("T")[0]
+    fech.textContent = element.fecha && element.fecha.includes('T') ? element.fecha.split("T")[0] : element.fecha || '';
     iden.textContent = element.identificador_cassette;
     carac.textContent = element.caracteristicas;
     obs.textContent = element.observaciones;
@@ -358,7 +358,7 @@ let imprimirdetalles = async (id)=>{
     observaciones_edit.value = element.observaciones;
     caracteristicas_edit.value = element.caracteristicas;
     organo_edit.value  = element.organo;
-    fecha_edit.value = element.fecha.split("T")[0];
+    fecha_edit.value = element.fecha && element.fecha.includes('T') ? element.fecha.split("T")[0] : element.fecha || '';
     identificador_edit.value  = element.identificador_cassette;
     descripcion_edit.value  =  element.descripcion;
 }
@@ -392,12 +392,13 @@ let  EditCassette = async (event)=>{
         identificador_cassette :  identificador_edit.value,  
         descripcion : descripcion_edit.value ,
     }
+    let cassete = localStorage.getItem('cassette')
     
     let response = await EditCasseteById( cassete, data );
     if(response){
         document.getElementById('edit__cassetteModal').classList.add('d-none');
         printAllCassetes()
-        imprimirdetalles()
+        imprimirdetalles(cassete)
     }
 }
 
