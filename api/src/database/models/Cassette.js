@@ -1,4 +1,4 @@
-const sequelize = require("../db");
+const sequelize = require("./../db");
 const { Model, DataTypes } = require("sequelize");
  class Cassette extends Model {}
  Cassette.init (
@@ -10,11 +10,10 @@ const { Model, DataTypes } = require("sequelize");
           }, 
           fecha: {
             type: DataTypes.DATE,
-            primaryKey: true,
             allowNull: false,   
             validate:{
                 notNull: {
-                    msg: 'Este campo  es requerido'
+                    msg: 'El campo fecha es requerido'
                 } , 
                 isDate: {
                     msg: 'Este campo debe ser una fecha valida'
@@ -22,11 +21,11 @@ const { Model, DataTypes } = require("sequelize");
             },
           },
           observaciones: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false,
             validate:{
                 notNull: {
-                    msg: 'Este campo  es requerido'
+                    msg: 'El campo observaciones es requerido'
                 } ,
               
             },
@@ -36,7 +35,7 @@ const { Model, DataTypes } = require("sequelize");
             allowNull: false,
             validate:{
                 notNull: {
-                    msg: 'Este campo  es requerido'
+                    msg: 'El campo descripcion es requerido'
                 } ,
               
             },
@@ -46,7 +45,7 @@ const { Model, DataTypes } = require("sequelize");
             allowNull: false,
             validate:{
                 notNull: {
-                    msg: 'Este campo  es requerido'
+                    msg: 'El campo caracteristicas es requerido'
                 } ,
               
             },
@@ -56,29 +55,38 @@ const { Model, DataTypes } = require("sequelize");
             allowNull: false,
             validate:{
                 notNull: {
-                    msg: 'Este campo  es requerido'
+                    msg: 'El campo órgano es requerido'
                 } ,
               
             },
           },
 
-          qr_casette: {
+          qr_cassette: {
+            type: DataTypes.STRING,
+            
+          },
+          identificador_cassette: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate:{
+             validate:{
                 notNull: {
-                    msg: 'Este campo  es requerido'
-                } ,
-              
-            },
+                    msg: 'El campo identificador_cassette es requerido'
+                }, 
+           },
           },
 
 
     },{
-         sequelize, 
-            modelName: "Cassettes", 
-            freezeTableName: true,
-             timestamps: false 
+        sequelize, 
+        modelName: "Cassettes", 
+        freezeTableName: true,
+        timestamps: false,
+        hooks: {
+            afterCreate: async (cassette) => {
+                cassette.qr_cassette = `C_${cassette.id}`;
+                await cassette.save();
+            }
+        }
     }
  );
  module.exports = Cassette;

@@ -1,17 +1,26 @@
+require('dotenv').config();
+
 const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
+const cors = require("cors"); 
+const { errores } = require("./middleware/middlewareErrores");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors({
+  origin : '*', 
+}))
 
-const apiroutes = require("./src/routes/apiRouter");
+const apiRoutes = require("./routes/v1.0.0/apiRouter");
 
-const sequelize = require("./src/database/db");
-// require("./src/database/associations");
+const sequelize = require("./database/db");
+require("./database/associations")
 
+app.use("/v1", apiRoutes);
 
-app.use("/concesionario", apiroutes);
+// Middleware de errores
+app.use(errores);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
